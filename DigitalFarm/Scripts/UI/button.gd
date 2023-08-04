@@ -8,17 +8,34 @@ const DOUBLE_CLICK_DELAY_SEC: float = 0.5
 @export var h: float
 @export var draw_frame: bool
 @export var draw_debug_frame: bool
+@export var texture: Texture2D
 
+var _hovered: = false
 var _pressed: = false
 var _just_pressed: = false
 var _double_clicked: = false
 var _last_press_at: float = 0
+
+func pressed() -> bool:
+	return _pressed
+
+func just_pressed() -> bool:
+	return _just_pressed
+
+func double_clicked() -> bool:
+	return _double_clicked
+
+func hovered() -> bool:
+	return _hovered
 
 func _ready():
 	if not Engine.is_editor_hint():
 		ButtonUpdater.add_button(self)
 
 func _draw():
+	if texture != null:
+		draw_texture_rect(texture, Rect2(0, 0, w, h), false)
+
 	if draw_frame:
 		draw_rect(Rect2(0, 	-2, w, 2), Color(1, 1, 1), true)
 		draw_rect(Rect2(0, 	h, 	w, 2), Color(1, 1, 1), true)
@@ -35,6 +52,25 @@ func _process(_delta):
 	queue_redraw()
 
 func _update(_delta) -> void:
+	_hover_check()
+	_pressing_check()
+
+func _notification(what):
+	if what == NOTIFICATION_PREDELETE:
+		ButtonUpdater.remove_button(self)
+
+func _hover_check() -> void:
+	_hovered = false
+
+	var mouse_pos = get_global_mouse_position()
+	var mx = mouse_pos.x
+	var my = mouse_pos.y
+	var gx = global_position.x
+	var gy = global_position.y
+	if (mx >= gx - 2 and my >= gy - 2 and mx <= gx + w + 2 and my <= gy + h + 2):
+		_hovered = true
+
+func _pressing_check() -> void:
 	if Input.is_action_just_released("MOUSE_LEFT"):
 		_pressed = false
 	_just_pressed = false
@@ -43,13 +79,7 @@ func _update(_delta) -> void:
 	if not Input.is_action_just_pressed("MOUSE_LEFT"):
 		return
 
-	var mouse_pos = get_global_mouse_position()
-	var mx = mouse_pos.x
-	var my = mouse_pos.y
-	var gx = global_position.x
-	var gy = global_position.y
-
-	if not (mx >= gx - 2 and my >= gy - 2 and mx <= gx + w + 2 and my <= gy + h + 2):
+	if not _hovered:
 		return
 
 	if Time.get_ticks_msec() - _last_press_at <= DOUBLE_CLICK_DELAY_SEC * 1000:
@@ -61,12 +91,3 @@ func _update(_delta) -> void:
 	_pressed = true
 	_just_pressed = true
 	ButtonUpdater.mark_button_pressed()
-
-func pressed() -> bool:
-	return _pressed
-
-func just_pressed() -> bool:
-	return _just_pressed
-
-func double_clicked() -> bool:
-	return _double_clicked

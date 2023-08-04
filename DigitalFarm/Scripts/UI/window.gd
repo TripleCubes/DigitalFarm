@@ -68,6 +68,9 @@ func _process(_delta):
 		_move_window()
 		
 		_set_frame_buttons()
+
+		if $Button_Close.just_pressed():
+			queue_free()
 	
 	queue_redraw()
 

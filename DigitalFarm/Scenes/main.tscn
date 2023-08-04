@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://gp0j4j3vtqmb" path="res://Scenes/icon.tscn" id="4_r5ap7"]
 
 [node name="Main" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_cppfy")
 
 [node name="WindowList" type="Node2D" parent="."]

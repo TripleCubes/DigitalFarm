@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://daxbag8xh0v2q"]
+[gd_scene load_steps=4 format=3 uid="uid://daxbag8xh0v2q"]
 
 [ext_resource type="Script" path="res://Scripts/UI/window.gd" id="1_4pfb5"]
 [ext_resource type="Script" path="res://Scripts/UI/button.gd" id="2_rffpy"]
+[ext_resource type="Texture2D" uid="uid://dqawqkapue0ta" path="res://Assets/Sprites/UI/close_window_button.png" id="3_4sqhn"]
 
 [node name="Window" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_4pfb5")
 w = 150.0
 h = 150.0
@@ -60,3 +62,10 @@ h = 2.0
 script = ExtResource("2_rffpy")
 w = 2.0
 h = 2.0
+
+[node name="Button_Close" type="Node2D" parent="."]
+position = Vector2(131, -20)
+script = ExtResource("2_rffpy")
+w = 14.0
+h = 14.0
+texture = ExtResource("3_4sqhn")
