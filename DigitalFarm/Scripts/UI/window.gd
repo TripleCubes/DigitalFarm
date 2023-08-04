@@ -6,10 +6,13 @@ const BORDER_BUTTON_WIDTH: float = 6
 
 @export var w: float
 @export var h: float
+@export var resizable: bool
 @export var min_w: float
 @export var min_h: float
 @export var max_w: float
 @export var max_h: float
+
+var window_wrapper: Node2D
 
 var _prev_w: float = 0
 var _prev_h: float = 0
@@ -19,6 +22,22 @@ var _prev_mouse_x: float = 0
 var _prev_mouse_y: float = 0
 
 func _ready():
+	self.position.x = 200
+	self.position.y = 200
+	
+	_set_frame_buttons()
+
+	if not resizable:
+		$Button_BorderTop.enabled = false
+		$Button_BorderBottom.enabled = false
+		$Button_BorderLeft.enabled = false
+		$Button_BorderRight.enabled = false
+		$Button_CornerTopLeft.enabled = false
+		$Button_CornerTopRight.enabled = false
+		$Button_CornerBottomLeft.enabled = false
+		$Button_CornerBottomRight.enabled = false
+		return
+
 	if w > max_w:
 		print_stack()
 		print("w > max_w")
@@ -31,8 +50,6 @@ func _ready():
 	if h < min_h:
 		print_stack()
 		print("h < min_h")
-
-	_set_frame_buttons()
 
 	if min_w == 0:
 		min_w = 120
@@ -64,7 +81,8 @@ func _process(_delta):
 			var mouse_pos: = get_global_mouse_position()
 			_prev_mouse_x = mouse_pos.x
 			_prev_mouse_y = mouse_pos.y
-		_resize_window()
+		if resizable:
+			_resize_window()
 		_move_window()
 		
 		_set_frame_buttons()
@@ -73,6 +91,11 @@ func _process(_delta):
 			queue_free()
 	
 	queue_redraw()
+
+func _notification(what):
+	if what == NOTIFICATION_PREDELETE:
+		if window_wrapper != null:
+			window_wrapper.queue_free()
 
 func _set_frame_buttons() -> void:
 	$Button_Bar.w = w

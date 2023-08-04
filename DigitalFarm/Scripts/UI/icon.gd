@@ -1,8 +1,7 @@
 @tool
 extends Node2D
 
-const _window_scene = preload("res://Scenes/window.tscn")
-@onready var _window_list: = get_node("/root/Main/WindowList")
+@export var app_name: AppNames.Name
 
 var _prev_x: float = 0
 var _prev_y: float = 0
@@ -31,9 +30,8 @@ func _move_icon() -> void:
 	self.global_position.y = _prev_y + (mouse_pos.y - _prev_mouse_y)
 
 func _double_click_handle() -> void:
-	if $Button.double_clicked():
-		var window: = _window_scene.instantiate()
-		window.position.x = 200
-		window.position.y = 200
-		_window_list.add_child(window)
+	if app_name == null:
+		return
 
+	if $Button.double_clicked():
+		AppNames.app_list[app_name].run_app()

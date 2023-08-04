@@ -10,6 +10,8 @@ const DOUBLE_CLICK_DELAY_SEC: float = 0.5
 @export var draw_debug_frame: bool
 @export var texture: Texture2D
 
+var enabled: = true
+
 var _hovered: = false
 var _pressed: = false
 var _just_pressed: = false
@@ -33,6 +35,9 @@ func _ready():
 		ButtonUpdater.add_button(self)
 
 func _draw():
+	if not enabled:
+		return
+		
 	if texture != null:
 		draw_texture_rect(texture, Rect2(0, 0, w, h), false)
 
@@ -49,9 +54,15 @@ func _draw():
 		draw_rect(Rect2(w + 2 - 1, 	-2,			1, 		h + 4	), Color("#ff0000"), true)
 
 func _process(_delta):
+	if not enabled:
+		return
+		
 	queue_redraw()
 
 func _update(_delta) -> void:
+	if not enabled:
+		return
+		
 	_hover_check()
 	_pressing_check()
 

@@ -1,19 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dspl26do46lds"]
+[gd_scene load_steps=3 format=3 uid="uid://dspl26do46lds"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_cppfy"]
-[ext_resource type="PackedScene" uid="uid://daxbag8xh0v2q" path="res://Scenes/window.tscn" id="2_xed5u"]
 [ext_resource type="PackedScene" uid="uid://gp0j4j3vtqmb" path="res://Scenes/icon.tscn" id="4_r5ap7"]
 
 [node name="Main" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_cppfy")
 
-[node name="WindowList" type="Node2D" parent="."]
-
-[node name="Window" parent="WindowList" instance=ExtResource("2_xed5u")]
-position = Vector2(50, 50)
-
 [node name="IconList" type="Node2D" parent="."]
 
-[node name="Icon" parent="IconList" instance=ExtResource("4_r5ap7")]
+[node name="Icon_Pot" parent="IconList" instance=ExtResource("4_r5ap7")]
 position = Vector2(290, 40)
