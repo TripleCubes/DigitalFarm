@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://dspl26do46lds"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_cppfy"]
+[ext_resource type="PackedScene" uid="uid://daxbag8xh0v2q" path="res://Scenes/window.tscn" id="2_xed5u"]
+[ext_resource type="Script" path="res://Scripts/button.gd" id="3_3vrqn"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_cppfy")
+
+[node name="Window" parent="." instance=ExtResource("2_xed5u")]
+position = Vector2(50, 50)
+w = 150.0
+h = 150.0
+
+[node name="Button_Bar" type="Node2D" parent="Window"]
+position = Vector2(0, -24)
+script = ExtResource("3_3vrqn")
+w = 120.0
+h = 22.0
+
+[node name="Button_BorderTop" type="Node2D" parent="Window"]
+position = Vector2(0, -26)
+script = ExtResource("3_3vrqn")
+w = 120.0
+h = 2.0
+
+[node name="Button_BorderBottom" type="Node2D" parent="Window"]
+position = Vector2(0, 120)
+script = ExtResource("3_3vrqn")
+w = 120.0
+h = 2.0
+
+[node name="Button_BorderLeft" type="Node2D" parent="Window"]
+position = Vector2(-2, -24)
+script = ExtResource("3_3vrqn")
+w = 2.0
+h = 144.0
+
+[node name="Button_BorderRight" type="Node2D" parent="Window"]
+position = Vector2(120, -24)
+script = ExtResource("3_3vrqn")
+w = 2.0
+h = 144.0
+
+[node name="Button_CornerTopLeft" type="Node2D" parent="Window"]
+position = Vector2(-2, -26)
+script = ExtResource("3_3vrqn")
+w = 2.0
+h = 2.0
+
+[node name="Button_CornerTopRight" type="Node2D" parent="Window"]
+position = Vector2(120, -26)
+script = ExtResource("3_3vrqn")
+w = 2.0
+h = 2.0
+
+[node name="Button_CornerBottomLeft" type="Node2D" parent="Window"]
+position = Vector2(-2, 120)
+script = ExtResource("3_3vrqn")
+w = 2.0
+h = 2.0
+
+[node name="Button_CornerBottomRight" type="Node2D" parent="Window"]
+position = Vector2(120, 120)
+script = ExtResource("3_3vrqn")
+w = 2.0
+h = 2.0
