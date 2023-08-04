@@ -17,28 +17,32 @@ max_h = 400.0
 [node name="Button_Bar" type="Node2D" parent="."]
 position = Vector2(0, -24)
 script = ExtResource("2_rffpy")
+w = 150.0
 h = 22.0
 
 [node name="Button_BorderTop" type="Node2D" parent="."]
 position = Vector2(0, -26)
 script = ExtResource("2_rffpy")
+w = 150.0
 h = 2.0
 
 [node name="Button_BorderBottom" type="Node2D" parent="."]
+position = Vector2(0, 150)
 script = ExtResource("2_rffpy")
+w = 150.0
 h = 2.0
 
 [node name="Button_BorderLeft" type="Node2D" parent="."]
 position = Vector2(-2, -24)
 script = ExtResource("2_rffpy")
 w = 2.0
-h = 24.0
+h = 174.0
 
 [node name="Button_BorderRight" type="Node2D" parent="."]
-position = Vector2(0, -24)
+position = Vector2(150, -24)
 script = ExtResource("2_rffpy")
 w = 2.0
-h = 24.0
+h = 174.0
 
 [node name="Button_CornerTopLeft" type="Node2D" parent="."]
 position = Vector2(-2, -26)
@@ -47,18 +51,19 @@ w = 2.0
 h = 2.0
 
 [node name="Button_CornerTopRight" type="Node2D" parent="."]
-position = Vector2(0, -26)
+position = Vector2(150, -26)
 script = ExtResource("2_rffpy")
 w = 2.0
 h = 2.0
 
 [node name="Button_CornerBottomLeft" type="Node2D" parent="."]
-position = Vector2(-2, 0)
+position = Vector2(-2, 150)
 script = ExtResource("2_rffpy")
 w = 2.0
 h = 2.0
 
 [node name="Button_CornerBottomRight" type="Node2D" parent="."]
+position = Vector2(150, 150)
 script = ExtResource("2_rffpy")
 w = 2.0
 h = 2.0

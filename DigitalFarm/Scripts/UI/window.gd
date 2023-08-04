@@ -120,6 +120,9 @@ func _set_frame_buttons() -> void:
 	$Button_CornerBottomRight.w = true_btn_w
 	$Button_CornerBottomRight.h = true_btn_w
 
+	$Button_Close.position.x = w - 19
+	$Button_Close.position.y = -20
+
 func _resize_window() -> void:
 	if $Button_BorderLeft.pressed():
 		_resize_left()
