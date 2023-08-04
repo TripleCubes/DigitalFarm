@@ -60,16 +60,16 @@ func _ready():
 	if max_h == 0:
 		max_h = 400
 	if w == 0:
-		w = 150
+		w = 120
 	if h == 0:
-		h = 150
+		h = 120
 
 func _draw():
-	draw_rect(Rect2(0, 	- BAR_HEIGHT - 2, 	w, 2				), Color(1, 1, 1), true)
-	draw_rect(Rect2(0, 	-2, 				w, 2				), Color(1, 1, 1), true)
-	draw_rect(Rect2(0, 	h, 					w, 2				), Color(1, 1, 1), true)
-	draw_rect(Rect2(-2, - BAR_HEIGHT, 		2, h + BAR_HEIGHT	), Color(1, 1, 1), true)
-	draw_rect(Rect2(w, 	- BAR_HEIGHT, 		2, h + BAR_HEIGHT	), Color(1, 1, 1), true)
+	draw_rect(Rect2(0, 	- BAR_HEIGHT - 2, 	w, 2				), Consts.COLOR_LINE, true)
+	draw_rect(Rect2(0, 	-2, 				w, 2				), Consts.COLOR_LINE, true)
+	draw_rect(Rect2(0, 	h, 					w, 2				), Consts.COLOR_LINE, true)
+	draw_rect(Rect2(-2, - BAR_HEIGHT, 		2, h + BAR_HEIGHT	), Consts.COLOR_LINE, true)
+	draw_rect(Rect2(w, 	- BAR_HEIGHT, 		2, h + BAR_HEIGHT	), Consts.COLOR_LINE, true)
 
 func _process(_delta):
 	if not Engine.is_editor_hint():

@@ -2,11 +2,15 @@
 extends Node2D
 
 @export var app_name: AppNames.Name
+@export var texture: Texture2D
 
 var _prev_x: float = 0
 var _prev_y: float = 0
 var _prev_mouse_x: float = 0
 var _prev_mouse_y: float = 0
+
+func _ready():
+	$Button.texture = texture
 
 func _process(_delta):
 	if not Engine.is_editor_hint():

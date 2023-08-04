@@ -42,10 +42,10 @@ func _draw():
 		draw_texture_rect(texture, Rect2(0, 0, w, h), false)
 
 	if draw_frame:
-		draw_rect(Rect2(0, 	-2, w, 2), Color(1, 1, 1), true)
-		draw_rect(Rect2(0, 	h, 	w, 2), Color(1, 1, 1), true)
-		draw_rect(Rect2(-2, 0, 	2, h), Color(1, 1, 1), true)
-		draw_rect(Rect2(w, 	0, 	2, h), Color(1, 1, 1), true)
+		draw_rect(Rect2(0, 	-2, w, 2), Consts.COLOR_LINE, true)
+		draw_rect(Rect2(0, 	h, 	w, 2), Consts.COLOR_LINE, true)
+		draw_rect(Rect2(-2, 0, 	2, h), Consts.COLOR_LINE, true)
+		draw_rect(Rect2(w, 	0, 	2, h), Consts.COLOR_LINE, true)
 
 	if draw_debug_frame:
 		draw_rect(Rect2(-2, 		-2, 		w + 4, 	1		), Color("#ff0000"), true)
@@ -67,6 +67,9 @@ func _update(_delta) -> void:
 	_pressing_check()
 
 func _notification(what):
+	if Engine.is_editor_hint():
+		return
+		
 	if what == NOTIFICATION_PREDELETE:
 		ButtonUpdater.remove_button(self)
 

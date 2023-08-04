@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dspl26do46lds"]
+[gd_scene load_steps=6 format=3 uid="uid://dspl26do46lds"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_cppfy"]
+[ext_resource type="Texture2D" uid="uid://1jd6vm0anmbn" path="res://Assets/Sprites/Icons/pot.png" id="3_0ye52"]
+[ext_resource type="Texture2D" uid="uid://n3yimoxiuy4p" path="res://Assets/Sprites/Icons/watering_can.png" id="4_hxmm1"]
 [ext_resource type="PackedScene" uid="uid://gp0j4j3vtqmb" path="res://Scenes/icon.tscn" id="4_r5ap7"]
+[ext_resource type="Texture2D" uid="uid://cfmm6rmr62gd5" path="res://Assets/Sprites/Icons/tap.png" id="5_1g4sm"]
 
 [node name="Main" type="Node2D"]
 texture_filter = 1
@@ -11,3 +14,14 @@ script = ExtResource("1_cppfy")
 
 [node name="Icon_Pot" parent="IconList" instance=ExtResource("4_r5ap7")]
 position = Vector2(290, 40)
+texture = ExtResource("3_0ye52")
+
+[node name="Icon_WateringCan" parent="IconList" instance=ExtResource("4_r5ap7")]
+position = Vector2(160, 90)
+app_name = 1
+texture = ExtResource("4_hxmm1")
+
+[node name="Icon_Tap" parent="IconList" instance=ExtResource("4_r5ap7")]
+position = Vector2(271, 80)
+app_name = 2
+texture = ExtResource("5_1g4sm")

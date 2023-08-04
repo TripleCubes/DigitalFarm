@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ce8ppi2dlon6j"]
+
+[ext_resource type="PackedScene" uid="uid://daxbag8xh0v2q" path="res://Scenes/window.tscn" id="1_h3qa4"]
+[ext_resource type="Script" path="res://Scripts/Apps/Tap/window_tap.gd" id="1_xaepa"]
+[ext_resource type="Texture2D" uid="uid://dx5mhns030tp0" path="res://Assets/Sprites/Apps/Tap/tap.png" id="2_h86aw"]
+
+[node name="Window_Tap" type="Node2D"]
+script = ExtResource("1_xaepa")
+
+[node name="Window" parent="." instance=ExtResource("1_h3qa4")]
+position = Vector2(200, 200)
+w = 120.0
+h = 120.0
+
+[node name="Tap" type="Sprite2D" parent="Window"]
+position = Vector2(60, 80)
+scale = Vector2(2, 2)
+texture = ExtResource("2_h86aw")

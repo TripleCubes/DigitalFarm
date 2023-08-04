@@ -19,8 +19,11 @@ config/icon="res://icon.svg"
 
 ButtonUpdater="*res://Scripts/Singletons/button_updater.gd"
 Settings="*res://Scripts/Singletons/settings.gd"
+Consts="*res://Scripts/Singletons/consts.gd"
 AppNames="*res://Scripts/Apps/app_names.gd"
 App_Pot="*res://Scripts/Apps/Pot/app_pot.gd"
+App_Tap="*res://Scripts/Apps/Tap/app_tap.gd"
+App_WateringCan="*res://Scripts/Apps/WateringCan/app_watering_can.gd"
 
 [input]
 
@@ -49,3 +52,4 @@ KEY_3={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.8, 0.529412, 0.278431, 1)
