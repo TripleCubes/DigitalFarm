@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://gp0j4j3vtqmb"]
+
+[ext_resource type="Script" path="res://Scripts/UI/icon.gd" id="1_3sec2"]
+[ext_resource type="Script" path="res://Scripts/UI/button.gd" id="2_rrax7"]
+
+[node name="Icon" type="Node2D"]
+script = ExtResource("1_3sec2")
+
+[node name="Button" type="Node2D" parent="."]
+script = ExtResource("2_rrax7")
+w = 40.0
+h = 40.0
+draw_frame = true

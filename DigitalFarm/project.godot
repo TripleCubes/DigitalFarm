@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-ButtonUpdater="*res://Scripts/button_updater.gd"
-Settings="*res://Scripts/settings.gd"
+ButtonUpdater="*res://Scripts/Singletons/button_updater.gd"
+Settings="*res://Scripts/Singletons/settings.gd"
 
 [input]
 
