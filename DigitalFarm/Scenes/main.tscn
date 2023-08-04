@@ -11,6 +11,7 @@ texture_filter = 1
 script = ExtResource("1_cppfy")
 
 [node name="IconList" type="Node2D" parent="."]
+z_index = -1
 
 [node name="Icon_Pot" parent="IconList" instance=ExtResource("4_r5ap7")]
 position = Vector2(290, 40)

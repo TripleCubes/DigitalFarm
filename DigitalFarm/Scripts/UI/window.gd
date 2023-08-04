@@ -65,11 +65,12 @@ func _ready():
 		h = 120
 
 func _draw():
-	draw_rect(Rect2(0, 	- BAR_HEIGHT - 2, 	w, 2				), Consts.COLOR_LINE, true)
-	draw_rect(Rect2(0, 	-2, 				w, 2				), Consts.COLOR_LINE, true)
-	draw_rect(Rect2(0, 	h, 					w, 2				), Consts.COLOR_LINE, true)
-	draw_rect(Rect2(-2, - BAR_HEIGHT, 		2, h + BAR_HEIGHT	), Consts.COLOR_LINE, true)
-	draw_rect(Rect2(w, 	- BAR_HEIGHT, 		2, h + BAR_HEIGHT	), Consts.COLOR_LINE, true)
+	draw_rect(Rect2(0,	- BAR_HEIGHT - 2,	w, h + BAR_HEIGHT + 2	), Consts.COLOR_BACKGROUND, true)
+	draw_rect(Rect2(0, 	- BAR_HEIGHT - 2, 	w, 2					), Consts.COLOR_LINE, true)
+	draw_rect(Rect2(0, 	-2, 				w, 2					), Consts.COLOR_LINE, true)
+	draw_rect(Rect2(0, 	h, 					w, 2					), Consts.COLOR_LINE, true)
+	draw_rect(Rect2(-2, - BAR_HEIGHT, 		2, h + BAR_HEIGHT		), Consts.COLOR_LINE, true)
+	draw_rect(Rect2(w, 	- BAR_HEIGHT, 		2, h + BAR_HEIGHT		), Consts.COLOR_LINE, true)
 
 func _process(_delta):
 	if not Engine.is_editor_hint():
