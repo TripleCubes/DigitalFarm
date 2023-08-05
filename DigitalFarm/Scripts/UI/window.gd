@@ -1,8 +1,6 @@
 @tool
 extends Node2D
 
-@onready var _main_window_wrapper_list: Node2D = get_node("/root/Main/WindowWrapperList")
-
 const BAR_HEIGHT: float = 24
 const BORDER_BUTTON_WIDTH: float = 6
 
@@ -30,7 +28,7 @@ func just_released() -> bool:
 	return $Button_Bar.just_released()
 
 func place_on_top() -> void:
-	_main_window_wrapper_list.move_child(window_wrapper, _main_window_wrapper_list.get_child_count() - 1)
+	window_wrapper.move_to_front()
 
 	for button in _button_list:
 		button.place_on_top()

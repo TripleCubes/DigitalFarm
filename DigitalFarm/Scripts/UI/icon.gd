@@ -21,6 +21,8 @@ func _process(_delta):
 			_prev_mouse_x = mouse_pos.x
 			_prev_mouse_y = mouse_pos.y
 
+		if $Button.just_pressed():
+			move_to_front()
 		_move_icon()
 		_double_click_handle()
 
