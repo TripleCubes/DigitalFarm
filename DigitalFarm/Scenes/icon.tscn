@@ -10,3 +10,4 @@ script = ExtResource("1_3sec2")
 script = ExtResource("2_rrax7")
 w = 40.0
 h = 40.0
+z = -1

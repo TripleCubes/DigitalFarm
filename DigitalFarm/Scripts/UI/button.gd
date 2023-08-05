@@ -9,6 +9,7 @@ const DOUBLE_CLICK_DELAY_SEC: float = 0.5
 @export var draw_frame: bool
 @export var draw_debug_frame: bool
 @export var texture: Texture2D
+@export var z: int
 
 var enabled: = true
 
@@ -35,8 +36,7 @@ func hovered() -> bool:
 	return _hovered
 
 func place_on_top() -> void:
-	ButtonUpdater.button_list.erase(self)
-	ButtonUpdater.button_list.push_back(self)
+	ButtonUpdater.place_button_on_top(self)
 
 func _ready():
 	if not Engine.is_editor_hint():

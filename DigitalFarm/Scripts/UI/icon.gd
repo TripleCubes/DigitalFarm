@@ -23,6 +23,7 @@ func _process(_delta):
 
 		if $Button.just_pressed():
 			move_to_front()
+			$Button.place_on_top()
 		_move_icon()
 		_double_click_handle()
 
