@@ -12,6 +12,7 @@ const BORDER_BUTTON_WIDTH: float = 6
 @export var max_w: float
 @export var max_h: float
 
+var app: Node2D
 var window_wrapper: Node2D
 
 var _prev_w: float = 0
@@ -21,7 +22,15 @@ var _prev_y: float = 0
 var _prev_mouse_x: float = 0
 var _prev_mouse_y: float = 0
 
+func just_released() -> bool:
+	return $Button_Bar.just_released()
+
 func _ready():
+	if not Engine.is_editor_hint():
+		window_wrapper = self.get_parent()
+		if window_wrapper != null:
+			app = window_wrapper.get_parent()
+
 	self.position.x = 200
 	self.position.y = 200
 	

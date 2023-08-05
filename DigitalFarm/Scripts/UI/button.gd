@@ -15,6 +15,7 @@ var enabled: = true
 var _hovered: = false
 var _pressed: = false
 var _just_pressed: = false
+var _just_released: = false
 var _double_clicked: = false
 var _last_press_at: float = 0
 
@@ -23,6 +24,9 @@ func pressed() -> bool:
 
 func just_pressed() -> bool:
 	return _just_pressed
+
+func just_released() -> bool:
+	return _just_released
 
 func double_clicked() -> bool:
 	return _double_clicked
@@ -85,8 +89,13 @@ func _hover_check() -> void:
 		_hovered = true
 
 func _pressing_check() -> void:
+	_just_released = false
 	if Input.is_action_just_released("MOUSE_LEFT"):
+		if _hovered:
+			_just_released = true
+
 		_pressed = false
+		
 	_just_pressed = false
 	_double_clicked = false
 
