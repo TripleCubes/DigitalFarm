@@ -15,6 +15,11 @@ min_h = 120.0
 max_w = 400.0
 max_h = 400.0
 
+[node name="Button_Content" type="Node2D" parent="."]
+script = ExtResource("2_rffpy")
+w = 150.0
+h = 150.0
+
 [node name="Button_Bar" type="Node2D" parent="."]
 position = Vector2(0, -24)
 script = ExtResource("2_rffpy")

@@ -1,6 +1,8 @@
 @tool
 extends Node2D
 
+@onready var _main_window_wrapper_list: Node2D = get_node("/root/Main/WindowWrapperList")
+
 const BAR_HEIGHT: float = 24
 const BORDER_BUTTON_WIDTH: float = 6
 
@@ -22,19 +24,29 @@ var _prev_y: float = 0
 var _prev_mouse_x: float = 0
 var _prev_mouse_y: float = 0
 
+var _button_list: = []
+
 func just_released() -> bool:
 	return $Button_Bar.just_released()
+
+func place_on_top() -> void:
+	_main_window_wrapper_list.move_child(window_wrapper, _main_window_wrapper_list.get_child_count() - 1)
+
+	for button in _button_list:
+		button.place_on_top()
 
 func _ready():
 	if not Engine.is_editor_hint():
 		window_wrapper = self.get_parent()
 		if window_wrapper != null:
-			app = window_wrapper.get_parent()
+			app = window_wrapper.app
+
+		_set_button_list()
 
 	self.position.x = 200
 	self.position.y = 200
 	
-	_set_frame_buttons()
+	_set_buttons()
 
 	if not resizable:
 		$Button_BorderTop.enabled = false
@@ -95,10 +107,22 @@ func _process(_delta):
 			_resize_window()
 		_move_window()
 		
-		_set_frame_buttons()
+		_set_buttons()
 
 		if $Button_Close.just_pressed():
 			queue_free()
+
+		if $Button_Bar.just_pressed() \
+		or $Button_Content.just_pressed() \
+		or $Button_BorderTop.just_pressed() \
+		or $Button_BorderBottom.just_pressed() \
+		or $Button_BorderLeft.just_pressed() \
+		or $Button_BorderRight.just_pressed() \
+		or $Button_CornerTopLeft.just_pressed() \
+		or $Button_CornerTopRight.just_pressed() \
+		or $Button_CornerBottomLeft.just_pressed() \
+		or $Button_CornerBottomRight.just_pressed():
+			place_on_top()
 	
 	queue_redraw()
 
@@ -107,9 +131,24 @@ func _notification(what):
 		if window_wrapper != null:
 			window_wrapper.queue_free()
 
-func _set_frame_buttons() -> void:
+func _set_button_list() -> void:
+	_button_search(self)
+
+func _button_search(node: Node2D) -> void:
+	for search in node.get_children():
+		if search is UI_Button:
+			_button_list.append(search)
+			continue
+		
+		if search.get_child_count() > 0:
+			_button_search(search)
+
+func _set_buttons() -> void:
 	$Button_Bar.w = w
 	$Button_Bar.h = BAR_HEIGHT - 2
+
+	$Button_Content.w = w
+	$Button_Content.h = h
 
 	var true_btn_w = BORDER_BUTTON_WIDTH - 4
 

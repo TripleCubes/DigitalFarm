@@ -34,6 +34,10 @@ func double_clicked() -> bool:
 func hovered() -> bool:
 	return _hovered
 
+func place_on_top() -> void:
+	ButtonUpdater.button_list.erase(self)
+	ButtonUpdater.button_list.push_back(self)
+
 func _ready():
 	if not Engine.is_editor_hint():
 		ButtonUpdater.add_button(self)

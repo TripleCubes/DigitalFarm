@@ -1,4 +1,4 @@
-extends Node2D
+extends WindowWrapper
 
 var pouring_water: = false
 

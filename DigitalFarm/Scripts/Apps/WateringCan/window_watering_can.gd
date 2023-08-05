@@ -1,4 +1,4 @@
-extends Node2D
+extends WindowWrapper
 
 var filled: = false:
 	set(val):
