@@ -24,6 +24,16 @@ var _prev_mouse_y: float = 0
 
 var _button_list: = []
 
+func interacted() -> bool:
+	for button in _button_list:
+		if button == $Button_Close:
+			continue
+
+		if button.just_pressed():
+			return true
+	
+	return false
+
 func just_released() -> bool:
 	return $Button_Bar.just_released()
 
@@ -110,16 +120,7 @@ func _process(_delta):
 		if $Button_Close.just_pressed():
 			queue_free()
 
-		if $Button_Bar.just_pressed() \
-		or $Button_Content.just_pressed() \
-		or $Button_BorderTop.just_pressed() \
-		or $Button_BorderBottom.just_pressed() \
-		or $Button_BorderLeft.just_pressed() \
-		or $Button_BorderRight.just_pressed() \
-		or $Button_CornerTopLeft.just_pressed() \
-		or $Button_CornerTopRight.just_pressed() \
-		or $Button_CornerBottomLeft.just_pressed() \
-		or $Button_CornerBottomRight.just_pressed():
+		if interacted():
 			place_on_top()
 	
 	queue_redraw()
