@@ -50,16 +50,16 @@ func _draw():
 		draw_texture_rect(texture, Rect2(0, 0, w, h), false)
 
 	if draw_frame:
-		draw_rect(Rect2(0, 	-2, w, 2), Consts.COLOR_LINE, true)
-		draw_rect(Rect2(0, 	h, 	w, 2), Consts.COLOR_LINE, true)
-		draw_rect(Rect2(-2, 0, 	2, h), Consts.COLOR_LINE, true)
-		draw_rect(Rect2(w, 	0, 	2, h), Consts.COLOR_LINE, true)
+		draw_rect(Rect2(0,  -2, w, 2), Consts.COLOR_LINE, true)
+		draw_rect(Rect2(0,  h,  w, 2), Consts.COLOR_LINE, true)
+		draw_rect(Rect2(-2, 0,  2, h), Consts.COLOR_LINE, true)
+		draw_rect(Rect2(w,  0,  2, h), Consts.COLOR_LINE, true)
 
 	if draw_debug_frame:
-		draw_rect(Rect2(-2, 		-2, 		w + 4, 	1		), Color("#ff0000"), true)
-		draw_rect(Rect2(-2, 		h + 2 - 1, 	w + 4, 	1		), Color("#ff0000"), true)
-		draw_rect(Rect2(-2, 		-2,			1, 		h + 4	), Color("#ff0000"), true)
-		draw_rect(Rect2(w + 2 - 1, 	-2,			1, 		h + 4	), Color("#ff0000"), true)
+		draw_rect(Rect2(-2,        -2,        w + 4, 1    ), Color("#ff0000"), true)
+		draw_rect(Rect2(-2,        h + 2 - 1, w + 4, 1    ), Color("#ff0000"), true)
+		draw_rect(Rect2(-2,        -2,        1,     h + 4), Color("#ff0000"), true)
+		draw_rect(Rect2(w + 2 - 1, -2,        1,     h + 4), Color("#ff0000"), true)
 
 func _process(_delta):
 	if not enabled:
