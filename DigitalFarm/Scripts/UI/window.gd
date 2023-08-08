@@ -47,9 +47,9 @@ func released_on_window() -> Node2D:
 	if not just_released():
 		return null
 
-	for window in get_tree().get_nodes_in_group("Windows"):
-		if GlobalFunctions.windows_overllap(self, window):
-			return window
+	for window_comp in get_tree().get_nodes_in_group("Windows"):
+		if GlobalFunctions.windows_overllap(self, window_comp):
+			return window_comp
 
 	return null
 

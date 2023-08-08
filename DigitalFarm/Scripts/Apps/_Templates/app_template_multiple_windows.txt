@@ -1,7 +1,0 @@
-extends Node2D
-
-const _window_wrapper_scene: = preload()
-
-func run_app() -> void:
-	var window_wraper: = _window_wrapper_scene.instantiate()
-	add_child(window_wraper)

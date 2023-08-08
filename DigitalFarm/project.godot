@@ -25,6 +25,7 @@ AppNames="*res://Scripts/Apps/app_names.gd"
 App_Pot="*res://Scripts/Apps/Pot/app_pot.gd"
 App_Tap="*res://Scripts/Apps/Tap/app_tap.gd"
 App_WateringCan="*res://Scripts/Apps/WateringCan/app_watering_can.gd"
+App_Valley="*res://Scripts/Apps/Valley/app_valley.gd"
 
 [input]
 

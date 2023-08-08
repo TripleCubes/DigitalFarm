@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqx2fcp83t8tq"]
+
+[ext_resource type="PackedScene" uid="uid://daxbag8xh0v2q" path="res://Scenes/window.tscn" id="1_cpaj1"]
+[ext_resource type="Script" path="res://Scripts/Apps/Valley/window_valley.gd" id="1_h2hpe"]
+[ext_resource type="Texture2D" uid="uid://btblp0l82gu2y" path="res://Assets/Sprites/Apps/Valley/smile.png" id="3_tjtij"]
+[ext_resource type="Theme" uid="uid://cs0bo0uq45n3m" path="res://Themes/theme.tres" id="4_nwdv5"]
+[ext_resource type="Script" path="res://Scripts/UI/text.gd" id="4_ul7rr"]
+
+[node name="Window_Valley" type="Node2D"]
+script = ExtResource("1_h2hpe")
+
+[node name="Window" parent="." instance=ExtResource("1_cpaj1")]
+w = 400.0
+h = 160.0
+
+[node name="Smile" type="Sprite2D" parent="Window"]
+position = Vector2(80, 80)
+scale = Vector2(2, 2)
+texture = ExtResource("3_tjtij")
+
+[node name="UI_Text" type="RichTextLabel" parent="Window"]
+offset_left = 160.0
+offset_top = 10.0
+offset_right = 390.0
+offset_bottom = 150.0
+theme = ExtResource("4_nwdv5")
+text = "tThis is a test This is a test This is a test This is a test This is a test This is a test This is a test this"
+scroll_active = false
+script = ExtResource("4_ul7rr")
