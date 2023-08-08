@@ -138,6 +138,7 @@ func _process(_delta):
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE:
 		if window_wrapper != null:
+			app.window_wrapper_list.erase(window_wrapper)
 			window_wrapper.queue_free()
 
 func _set_button_list() -> void:
