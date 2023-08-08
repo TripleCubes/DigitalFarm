@@ -43,6 +43,16 @@ func place_on_top() -> void:
 	for button in _button_list:
 		button.place_on_top()
 
+func released_on_window() -> Node2D:
+	if not just_released():
+		return null
+
+	for window in get_tree().get_nodes_in_group("Windows"):
+		if GlobalFunctions.windows_overllap(self, window):
+			return window
+
+	return null
+
 func _ready():
 	if not Engine.is_editor_hint():
 		window_wrapper = self.get_parent()

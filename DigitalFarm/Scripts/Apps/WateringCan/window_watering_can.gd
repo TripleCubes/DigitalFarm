@@ -12,10 +12,11 @@ var filled: = false:
 			$Window/WateringCanFilled.hide()
 
 func _process(_delta):
-	if $Window.just_released():
-		for window in get_tree().get_nodes_in_group("Windows"):
-			if window.app == null or window.app != App_Pot:
-				continue
+	var released_on_window = $Window.released_on_window()
+	if released_on_window == null:
+		return
 
-			if GlobalFunctions.windows_overllap($Window, window):
-				self.filled = false
+	if released_on_window.window_wrapper.app != App_Pot:
+		return
+
+	filled = false
