@@ -27,6 +27,7 @@ App_Tap="*res://Scripts/Apps/Tap/app_tap.gd"
 App_WateringCan="*res://Scripts/Apps/WateringCan/app_watering_can.gd"
 App_Valley="*res://Scripts/Apps/Valley/app_valley.gd"
 App_Seed="*res://Scripts/Apps/Seed/app_seed.gd"
+App_ShowAllApps="*res://Scripts/Apps/ShowAllApps/app_show_all_apps.gd"
 
 [display]
 

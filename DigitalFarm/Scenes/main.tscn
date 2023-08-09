@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dspl26do46lds"]
+[gd_scene load_steps=9 format=3 uid="uid://dspl26do46lds"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_cppfy"]
 [ext_resource type="Texture2D" uid="uid://1jd6vm0anmbn" path="res://Assets/Sprites/Icons/pot.png" id="3_0ye52"]
+[ext_resource type="Texture2D" uid="uid://bj0ou2fw5oj8m" path="res://Assets/Sprites/Icons/show_all_apps.png" id="3_6o2ql"]
 [ext_resource type="Texture2D" uid="uid://d10d0d7pbntj6" path="res://Assets/Sprites/Icons/valley.png" id="3_m871u"]
 [ext_resource type="Texture2D" uid="uid://n3yimoxiuy4p" path="res://Assets/Sprites/Icons/watering_can.png" id="4_hxmm1"]
 [ext_resource type="PackedScene" uid="uid://gp0j4j3vtqmb" path="res://Scenes/icon.tscn" id="4_r5ap7"]
@@ -14,6 +15,11 @@ script = ExtResource("1_cppfy")
 
 [node name="IconList" type="Node2D" parent="."]
 
+[node name="Icon_ShowAllApps" parent="IconList" instance=ExtResource("4_r5ap7")]
+position = Vector2(10, 10)
+app_name = 5
+texture = ExtResource("3_6o2ql")
+
 [node name="Icon_Valley" parent="IconList" instance=ExtResource("4_r5ap7")]
 position = Vector2(60, 10)
 app_name = 3
@@ -23,19 +29,19 @@ texture = ExtResource("3_m871u")
 position = Vector2(10, 60)
 texture = ExtResource("3_0ye52")
 
-[node name="Icon_WateringCan" parent="IconList" instance=ExtResource("4_r5ap7")]
-position = Vector2(60, 110)
-app_name = 1
-texture = ExtResource("4_hxmm1")
+[node name="Icon_Seed" parent="IconList" instance=ExtResource("4_r5ap7")]
+position = Vector2(60, 60)
+app_name = 4
+texture = ExtResource("7_iyo4b")
 
 [node name="Icon_Tap" parent="IconList" instance=ExtResource("4_r5ap7")]
 position = Vector2(10, 110)
 app_name = 2
 texture = ExtResource("5_1g4sm")
 
-[node name="Icon_Seed" parent="IconList" instance=ExtResource("4_r5ap7")]
-position = Vector2(60, 60)
-app_name = 4
-texture = ExtResource("7_iyo4b")
+[node name="Icon_WateringCan" parent="IconList" instance=ExtResource("4_r5ap7")]
+position = Vector2(60, 110)
+app_name = 1
+texture = ExtResource("4_hxmm1")
 
 [node name="WindowWrapperList" type="Node2D" parent="."]
