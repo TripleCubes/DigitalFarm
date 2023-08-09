@@ -292,8 +292,20 @@ func _resize_bottom() -> void:
 func _move_window() -> void:
 	var mouse_pos: = get_global_mouse_position()
 
-	if not $Button_Bar.pressed():
-		return
+	if $Button_Bar.pressed():
+		self.global_position.x = _prev_x + (mouse_pos.x - _prev_mouse_x)
+		self.global_position.y = _prev_y + (mouse_pos.y - _prev_mouse_y)
 
-	self.global_position.x = _prev_x + (mouse_pos.x - _prev_mouse_x)
-	self.global_position.y = _prev_y + (mouse_pos.y - _prev_mouse_y)
+	if $Button_Bar.just_released():
+		var move_to: = Vector2(self.position.x, self.position.y)
+		if self.position.x + w - 20 < 0:
+			move_to.x = 20
+		if self.position.y - BAR_HEIGHT < 0:
+			move_to.y = 20 + BAR_HEIGHT
+		if self.position.x + 20 > get_viewport().size.x:
+			move_to.x = get_viewport().size.x - w - 20
+		if self.position.y + 20 > get_viewport().size.y:
+			move_to.y = get_viewport().size.y - h - 20
+
+		var _tween: = get_tree().create_tween()
+		_tween.tween_property(self, "position", move_to, Consts.POS_TWEEN_TIME).set_trans(Tween.TRANS_SINE)
