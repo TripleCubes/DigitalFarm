@@ -76,14 +76,14 @@ func _ready():
 	_set_buttons()
 
 	if not resizable:
-		$Button_BorderTop.enabled = false
-		$Button_BorderBottom.enabled = false
-		$Button_BorderLeft.enabled = false
-		$Button_BorderRight.enabled = false
-		$Button_CornerTopLeft.enabled = false
-		$Button_CornerTopRight.enabled = false
-		$Button_CornerBottomLeft.enabled = false
-		$Button_CornerBottomRight.enabled = false
+		$Button_BorderTop.visible = false
+		$Button_BorderBottom.visible = false
+		$Button_BorderLeft.visible = false
+		$Button_BorderRight.visible = false
+		$Button_CornerTopLeft.visible = false
+		$Button_CornerTopRight.visible = false
+		$Button_CornerBottomLeft.visible = false
+		$Button_CornerBottomRight.visible = false
 		return
 
 	if w > max_w:
