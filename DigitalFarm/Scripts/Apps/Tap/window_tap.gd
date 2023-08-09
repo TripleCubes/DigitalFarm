@@ -12,18 +12,28 @@ func _process(_delta):
 
 	if not pouring_water:
 		return
+
+	var window_on_top_of_list = _get_window_on_top_of_list()
+	for window_comp in window_on_top_of_list:
+		if window_comp.app == null:
+			continue
 		
-	for window_comp in get_tree().get_nodes_in_group("Windows"):
-		if window_comp.app == null or window_comp.app != App_WateringCan:
+		if window_comp.app == App_WateringCan:
+			window_comp.window_wrapper.filled = true
 			continue
 
-		if window_comp.window_wrapper.filled:
-			continue
-		
+		if window_comp.app == App_Pot:
+			window_comp.window_wrapper.water()
+
+func _get_window_on_top_of_list() -> Array:
+	var result_arr: = []
+	for window_comp in get_tree().get_nodes_in_group("Windows"):
 		var wx = window_comp.position.x
 		var wy = window_comp.position.y
 		var self_wx = $Window.position.x
 		var self_wy = $Window.position.y
 		if wy > self_wy \
 		and GlobalFunctions.box_collision_check(wx, window_comp.w, self_wx + ($Window.w - 10) / 2, 10):
-			window_comp.window_wrapper.filled = true
+			result_arr.append(window_comp)
+
+	return result_arr

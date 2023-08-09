@@ -1,11 +1,18 @@
 extends WindowWrapper
 
 const WATER_REQUEST_TIME_SEC: float = 25
+const DEBUG_WATER_REQUEST_TIME_SEC: float = 3
 
 var _time_until_need_water_sec: float = 0
 
-func water():
-	_time_until_need_water_sec = WATER_REQUEST_TIME_SEC
+func water() -> void:
+	if pot_status != App_Pot.PotStatus.HAS_SEED:
+		return
+
+	if not Settings.debug_mode:
+		_time_until_need_water_sec = WATER_REQUEST_TIME_SEC
+	else:
+		_time_until_need_water_sec = DEBUG_WATER_REQUEST_TIME_SEC
 	$Window/ProgressBar.paused = false
 
 var pot_status: = App_Pot.PotStatus.EMPTY:
@@ -24,7 +31,10 @@ var pot_status: = App_Pot.PotStatus.EMPTY:
 
 				$Window/ProgressBar.show()
 				$Window/ProgressBar.paused = false
-				_time_until_need_water_sec = WATER_REQUEST_TIME_SEC
+				if not Settings.debug_mode:
+					_time_until_need_water_sec = WATER_REQUEST_TIME_SEC
+				else:
+					_time_until_need_water_sec = DEBUG_WATER_REQUEST_TIME_SEC
 			App_Pot.PotStatus.GROWN:
 				$Window/Sprite_PotEmpty.hide()
 				$Window/Sprite_PotHasSeed.hide()
