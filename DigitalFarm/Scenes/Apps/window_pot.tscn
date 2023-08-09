@@ -48,5 +48,4 @@ color = Color(0.603922, 0.929412, 0.976471, 1)
 fill_time_sec = 60.0
 reverse_fill_time_sec = 5.0
 init_paused = true
-debug_fill_time_sec = 15.0
 debug_reverse_fill_time_sec = 5.0

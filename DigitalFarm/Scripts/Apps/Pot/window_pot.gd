@@ -44,6 +44,10 @@ var pot_status: = App_Pot.PotStatus.EMPTY:
 		pot_status = val
 
 func _process(_delta):
-	_time_until_need_water_sec -= _delta
-	if _time_until_need_water_sec < 0:
-		$Window/ProgressBar.paused = true
+	if pot_status == App_Pot.PotStatus.HAS_SEED:
+		_time_until_need_water_sec -= _delta
+		if _time_until_need_water_sec < 0:
+			$Window/ProgressBar.paused = true
+
+		if $Window/ProgressBar.progress >= 1:
+			pot_status = App_Pot.PotStatus.GROWN
