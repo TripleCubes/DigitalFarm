@@ -24,7 +24,7 @@ func _ready():
 func _draw():
 	var draw_w: = w
 	var draw_h: = h
-	if w == 0 or h == 0:
+	if texture != null and (w == 0 or h == 0):
 		draw_w = texture.get_width() * 2
 		draw_h = texture.get_height() * 2
 

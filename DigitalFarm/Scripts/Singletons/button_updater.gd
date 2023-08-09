@@ -3,7 +3,7 @@ extends Node
 var button_dict: = {}
 var button_z_list: = []
 var _button_pressed: = false
-var _draw_button_debug_frame_enabled: = false
+var draw_button_debug_frame_enabled: = false
 
 func add_button(button: UI_Button) -> void:	
 	if not button_dict.has(button.z):
@@ -39,13 +39,13 @@ func mark_button_pressed() -> void:
 	_button_pressed = true
 
 func toggle_draw_button_debug_frame() -> void:
-	if _draw_button_debug_frame_enabled:
+	if draw_button_debug_frame_enabled:
 		for z in button_z_list:
 			for button in button_dict[z]:
 				button.draw_debug_frame = false
-		_draw_button_debug_frame_enabled = false
+		draw_button_debug_frame_enabled = false
 	else:
 		for z in button_z_list:
 			for button in button_dict[z]:
 				button.draw_debug_frame = true
-		_draw_button_debug_frame_enabled = true
+		draw_button_debug_frame_enabled = true

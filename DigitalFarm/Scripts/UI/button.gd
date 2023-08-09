@@ -41,25 +41,32 @@ func place_on_top() -> void:
 func _ready():
 	if not Engine.is_editor_hint():
 		ButtonUpdater.add_button(self)
+		draw_debug_frame = ButtonUpdater.draw_button_debug_frame_enabled
 
 func _draw():
 	if not enabled:
 		return
+
+	var draw_w: = w
+	var draw_h: = h
+	if texture != null and (w == 0 or h == 0):
+		draw_w = texture.get_width() * 2
+		draw_h = texture.get_height() * 2
 		
 	if texture != null:
-		draw_texture_rect(texture, Rect2(0, 0, w, h), false)
+		draw_texture_rect(texture, Rect2(0, 0, draw_w, draw_h), false)
 
 	if draw_frame:
-		draw_rect(Rect2(0,  -2, w, 2), Consts.COLOR_LINE, true)
-		draw_rect(Rect2(0,  h,  w, 2), Consts.COLOR_LINE, true)
-		draw_rect(Rect2(-2, 0,  2, h), Consts.COLOR_LINE, true)
-		draw_rect(Rect2(w,  0,  2, h), Consts.COLOR_LINE, true)
+		draw_rect(Rect2(0,      -2,     draw_w, 2     ), Consts.COLOR_LINE, true)
+		draw_rect(Rect2(0,      draw_h, draw_w, 2     ), Consts.COLOR_LINE, true)
+		draw_rect(Rect2(-2,     0,      2,      draw_h), Consts.COLOR_LINE, true)
+		draw_rect(Rect2(draw_w, 0,      2,      draw_h), Consts.COLOR_LINE, true)
 
 	if draw_debug_frame:
-		draw_rect(Rect2(-2,        -2,        w + 4, 1    ), Color("#ff0000"), true)
-		draw_rect(Rect2(-2,        h + 2 - 1, w + 4, 1    ), Color("#ff0000"), true)
-		draw_rect(Rect2(-2,        -2,        1,     h + 4), Color("#ff0000"), true)
-		draw_rect(Rect2(w + 2 - 1, -2,        1,     h + 4), Color("#ff0000"), true)
+		draw_rect(Rect2(-2,             -2,             draw_w + 4, 1         ), Color("#ff0000"), true)
+		draw_rect(Rect2(-2,             draw_h + 2 - 1, draw_w + 4, 1         ), Color("#ff0000"), true)
+		draw_rect(Rect2(-2,             -2,             1,          draw_h + 4), Color("#ff0000"), true)
+		draw_rect(Rect2(draw_w + 2 - 1, -2,             1,          draw_h + 4), Color("#ff0000"), true)
 
 func _process(_delta):
 	if not enabled:
@@ -84,12 +91,18 @@ func _notification(what):
 func _hover_check() -> void:
 	_hovered = false
 
+	var check_w: = w
+	var check_h: = h
+	if texture != null and (w == 0 or h == 0):
+		check_w = texture.get_width() * 2
+		check_h = texture.get_height() * 2
+
 	var mouse_pos = get_global_mouse_position()
 	var mx = mouse_pos.x
 	var my = mouse_pos.y
 	var gx = global_position.x
 	var gy = global_position.y
-	if (mx >= gx - 2 and my >= gy - 2 and mx <= gx + w + 2 and my <= gy + h + 2):
+	if (mx >= gx - 2 and my >= gy - 2 and mx <= gx + check_w + 2 and my <= gy + check_h + 2):
 		_hovered = true
 
 func _pressing_check() -> void:
