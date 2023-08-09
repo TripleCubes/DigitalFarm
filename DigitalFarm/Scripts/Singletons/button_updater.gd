@@ -2,7 +2,6 @@ extends Node
 
 var button_dict: = {}
 var button_z_list: = []
-var _button_pressed: = false
 var draw_button_debug_frame_enabled: = false
 
 func add_button(button: UI_Button) -> void:	
@@ -21,9 +20,7 @@ func place_button_on_top(button: UI_Button) -> void:
 	button_dict[button.z].erase(button)
 	button_dict[button.z].push_back(button)
 
-func _update(_delta) -> void:
-	_button_pressed = false
-	
+func _update(_delta) -> void:	
 	for z_list_index in range(button_z_list.size() - 1, -1, -1):
 		var z: int = button_z_list[z_list_index]
 		for i in range(button_dict[z].size() - 1, -1, -1):
@@ -31,12 +28,9 @@ func _update(_delta) -> void:
 				continue
 				
 			button_dict[z][i]._update(_delta)
-
-			if _button_pressed:
+			
+			if button_dict[z][i].pressed():
 				return
-
-func mark_button_pressed() -> void:
-	_button_pressed = true
 
 func toggle_draw_button_debug_frame() -> void:
 	if draw_button_debug_frame_enabled:

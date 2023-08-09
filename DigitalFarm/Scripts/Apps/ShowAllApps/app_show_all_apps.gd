@@ -6,7 +6,6 @@ const PADDING_TOP: float = 10
 const PADDING_BOTTOM: float = 50
 
 const WINDOW_PADDING_LEFT: float = 60
-
 const WINDOW_SPACING_H: float = 5
 const WINDOW_SPACING_V: float = 5
 const APP_SPACING: float = 10
@@ -29,6 +28,9 @@ var _prev_icon_pos_list: = []
 var _scroll_bar: = UI_ScrollBarVertical.new()
 
 func run_app() -> void:
+	if _running:
+		return
+
 	if get_tree().get_nodes_in_group("Windows").size() == 0:
 		return
 
@@ -40,6 +42,9 @@ func run_app() -> void:
 	_running = true
 
 func close_app() -> void:
+	if not _running:
+		return
+		
 	_running = false
 
 func _ready():
