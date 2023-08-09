@@ -7,7 +7,7 @@ const BORDER_BUTTON_WIDTH: float = 6
 @export var w: float:
 	set(val):
 		w = val
-		if Engine.is_editor_hint():
+		if Engine.is_editor_hint() and has_node("Button_Close"):
 			$Button_Close.position.x = w - 19
 @export var h: float
 @export var resizable: bool

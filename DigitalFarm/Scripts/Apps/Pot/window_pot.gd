@@ -13,7 +13,9 @@ func water() -> void:
 		_time_until_need_water_sec = WATER_REQUEST_TIME_SEC
 	else:
 		_time_until_need_water_sec = DEBUG_WATER_REQUEST_TIME_SEC
+
 	$Window/ProgressBar.paused = false
+	$Window/Bubble_NeedWater.hide()
 
 var pot_status: = App_Pot.PotStatus.EMPTY:
 	set(val):
@@ -58,6 +60,7 @@ func _process(_delta):
 		_time_until_need_water_sec -= _delta
 		if _time_until_need_water_sec < 0:
 			$Window/ProgressBar.paused = true
+			$Window/Bubble_NeedWater.show()
 
 		if $Window/ProgressBar.progress >= 1:
 			pot_status = App_Pot.PotStatus.GROWN

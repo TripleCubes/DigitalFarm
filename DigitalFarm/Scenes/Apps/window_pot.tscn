@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bj4sm1n35gcij"]
+[gd_scene load_steps=10 format=3 uid="uid://bj4sm1n35gcij"]
 
 [ext_resource type="Script" path="res://Scripts/Apps/Pot/window_pot.gd" id="1_0hcx8"]
 [ext_resource type="PackedScene" uid="uid://daxbag8xh0v2q" path="res://Scenes/window.tscn" id="1_wb7pp"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://b1vgl7u44idh2" path="res://Assets/Sprites/Apps/Pot/pot_grown.png" id="5_2cqq5"]
 [ext_resource type="Texture2D" uid="uid://mt371jlgp5eo" path="res://Assets/Sprites/Apps/Pot/pot_dead.png" id="6_ewl2i"]
 [ext_resource type="Script" path="res://Scripts/UI/progress_bar_horizontal.gd" id="7_mynkk"]
+[ext_resource type="Script" path="res://Scripts/UI/bubble.gd" id="8_gj2by"]
+[ext_resource type="Texture2D" uid="uid://c3bi0k2goi0ql" path="res://Assets/Sprites/Apps/Pot/water_drop.png" id="9_xiiec"]
 
 [node name="Window_Pot" type="Node2D"]
 texture_filter = 1
@@ -48,4 +50,12 @@ color = Color(0.603922, 0.929412, 0.976471, 1)
 fill_time_sec = 60.0
 reverse_fill_time_sec = 5.0
 init_paused = true
+debug_fill_time_sec = 5.0
 debug_reverse_fill_time_sec = 5.0
+
+[node name="Bubble_NeedWater" type="Node2D" parent="Window"]
+visible = false
+position = Vector2(72, 32)
+script = ExtResource("8_gj2by")
+init_texture = ExtResource("9_xiiec")
+init_dir = 2
