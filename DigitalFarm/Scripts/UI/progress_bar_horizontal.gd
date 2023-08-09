@@ -11,6 +11,9 @@ extends Node2D
 @export var reverse_when_full: bool
 @export var init_paused: bool
 
+@export var debug_fill_time_sec: float
+@export var debug_reverse_fill_time_sec: float
+
 var progress: float = 0
 var reversed: = false
 var paused: = false
@@ -24,6 +27,11 @@ func _ready():
 		fill_time_sec = 5
 	if reverse_fill_time_sec == 0: 
 		reverse_fill_time_sec = 5
+
+	if debug_fill_time_sec == 0: 
+		debug_fill_time_sec = 5
+	if debug_reverse_fill_time_sec == 0: 
+		debug_reverse_fill_time_sec = 5
 
 	reversed = init_reversed
 	paused = init_paused
@@ -46,8 +54,14 @@ func _progress_process(_delta: float) -> void:
 	if paused:
 		return
 
+	var selected_fill_time: float = fill_time_sec
+	var selected_reverse_fill_time: float = reverse_fill_time_sec
+	if Settings.debug_mode:
+		selected_fill_time = debug_fill_time_sec
+		selected_reverse_fill_time = debug_reverse_fill_time_sec
+
 	if not reversed:
-		progress += _delta / fill_time_sec
+		progress += _delta / selected_fill_time
 		if progress <= 1:
 			return
 
@@ -56,7 +70,7 @@ func _progress_process(_delta: float) -> void:
 			reversed = true
 		return
 
-	progress -= _delta / reverse_fill_time_sec
+	progress -= _delta / selected_reverse_fill_time
 	if progress >= 0:
 		return
 		
