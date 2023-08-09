@@ -298,14 +298,14 @@ func _move_window() -> void:
 
 	if $Button_Bar.just_released():
 		var move_to: = Vector2(self.position.x, self.position.y)
-		if self.position.x + w - 20 < 0:
-			move_to.x = 20
+		if self.position.x + w - 40 < 0:
+			move_to.x = 40 - w
 		if self.position.y - BAR_HEIGHT < 0:
-			move_to.y = 20 + BAR_HEIGHT
+			move_to.y = BAR_HEIGHT
 		if self.position.x + 20 > get_viewport().size.x:
-			move_to.x = get_viewport().size.x - w - 20
+			move_to.x = get_viewport().size.x - 20
 		if self.position.y + 20 > get_viewport().size.y:
-			move_to.y = get_viewport().size.y - h - 20
+			move_to.y = get_viewport().size.y - 20
 
 		var _tween: = get_tree().create_tween()
 		_tween.tween_property(self, "position", move_to, Consts.POS_TWEEN_TIME).set_trans(Tween.TRANS_SINE)
