@@ -4,14 +4,12 @@ extends Node2D
 const BAR_HEIGHT: float = 24
 const BORDER_BUTTON_WIDTH: float = 6
 
-@export var w: float
-	# set(val):
-	# 	w = val
-	# 	_set_buttons()
+@export var w: float:
+	set(val):
+		w = val
+		if Engine.is_editor_hint():
+			$Button_Close.position.x = w - 19
 @export var h: float
-	# set(val):
-	# 	h = val
-	# 	_set_buttons()
 @export var resizable: bool
 @export var min_w: float
 @export var min_h: float
