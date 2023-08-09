@@ -51,7 +51,12 @@ func released_on_window() -> Node2D:
 	if not just_released():
 		return null
 
-	for window_comp in get_tree().get_nodes_in_group("Windows"):
+	var window_list = get_tree().get_nodes_in_group("Windows")
+	for i in range(window_list.size() - 1, -1, -1):
+		var window_comp: Node2D = window_list[i]
+		if window_comp == self:
+			continue
+			
 		if GlobalFunctions.windows_overllap(self, window_comp):
 			return window_comp
 
