@@ -22,8 +22,8 @@ func _process(_delta):
 		
 		var wx = window_comp.position.x
 		var wy = window_comp.position.y
-		var self_wx = $Window_comp.position.x
-		var self_wy = $Window_comp.position.y
+		var self_wx = $Window.position.x
+		var self_wy = $Window.position.y
 		if wy > self_wy \
-		and GlobalFunctions.box_collision_check(wx, window_comp.w, self_wx + ($Window_comp.w - 10) / 2, 10):
+		and GlobalFunctions.box_collision_check(wx, window_comp.w, self_wx + ($Window.w - 10) / 2, 10):
 			window_comp.window_wrapper.filled = true

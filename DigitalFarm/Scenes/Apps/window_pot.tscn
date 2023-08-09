@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bj4sm1n35gcij"]
+[gd_scene load_steps=8 format=3 uid="uid://bj4sm1n35gcij"]
 
 [ext_resource type="Script" path="res://Scripts/Apps/Pot/window_pot.gd" id="1_0hcx8"]
 [ext_resource type="PackedScene" uid="uid://daxbag8xh0v2q" path="res://Scenes/window.tscn" id="1_wb7pp"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bkhaq3bnaq1q3" path="res://Assets/Sprites/Apps/Pot/pot_has_seed.png" id="4_8prkn"]
 [ext_resource type="Texture2D" uid="uid://b1vgl7u44idh2" path="res://Assets/Sprites/Apps/Pot/pot_grown.png" id="5_2cqq5"]
 [ext_resource type="Texture2D" uid="uid://mt371jlgp5eo" path="res://Assets/Sprites/Apps/Pot/pot_dead.png" id="6_ewl2i"]
+[ext_resource type="Script" path="res://Scripts/UI/progress_bar_horizontal.gd" id="7_mynkk"]
 
 [node name="Window_Pot" type="Node2D"]
 texture_filter = 1
@@ -37,3 +38,13 @@ visible = false
 position = Vector2(60, 105)
 scale = Vector2(2, 2)
 texture = ExtResource("6_ewl2i")
+
+[node name="ProgressBar" type="Node2D" parent="Window"]
+visible = false
+position = Vector2(10, 10)
+script = ExtResource("7_mynkk")
+length = 100.0
+color = Color(0.603922, 0.929412, 0.976471, 1)
+fill_time_sec = 60.0
+reverse_fill_time_sec = 5.0
+init_paused = true
