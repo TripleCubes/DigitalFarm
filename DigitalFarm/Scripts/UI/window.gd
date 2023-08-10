@@ -2,7 +2,6 @@
 extends Node2D
 
 const BAR_HEIGHT: float = 24
-const BORDER_BUTTON_WIDTH: float = 6
 
 @export var w: float:
 	set(val):
@@ -218,7 +217,7 @@ func _set_buttons() -> void:
 	$Button_Content.w = w
 	$Button_Content.h = h
 
-	var true_btn_w = BORDER_BUTTON_WIDTH - 4
+	var true_btn_w = Consts.BORDER_BUTTON_WIDTH - 4
 
 	$Button_BorderTop.position.x = 0
 	$Button_BorderTop.position.y = -25 - true_btn_w / 2

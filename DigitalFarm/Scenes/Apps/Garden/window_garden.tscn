@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dflmolhmg6eqq"]
+[gd_scene load_steps=5 format=3 uid="uid://dflmolhmg6eqq"]
 
 [ext_resource type="Script" path="res://Scripts/Apps/Garden/window_garden.gd" id="1_4l2wq"]
 [ext_resource type="PackedScene" uid="uid://daxbag8xh0v2q" path="res://Scenes/window.tscn" id="2_pk1qc"]
 [ext_resource type="Script" path="res://Scripts/UI/window_clip.gd" id="3_bakkh"]
+[ext_resource type="Script" path="res://Scripts/UI/button.gd" id="4_h366e"]
 
 [node name="Window_Garden" type="Node2D"]
 script = ExtResource("1_4l2wq")
@@ -21,3 +22,19 @@ clip_contents = false
 offset_right = 200.0
 offset_bottom = 200.0
 script = ExtResource("3_bakkh")
+
+[node name="UI_Button" type="Node2D" parent="Window/UI_WindowClip" node_paths=PackedStringArray("window_clip")]
+position = Vector2(180, 160)
+script = ExtResource("4_h366e")
+w = 100.0
+h = 100.0
+draw_debug_frame = true
+window_clip = NodePath("..")
+
+[node name="UI_Button2" type="Node2D" parent="Window/UI_WindowClip" node_paths=PackedStringArray("window_clip")]
+position = Vector2(90, -20)
+script = ExtResource("4_h366e")
+w = 50.0
+h = 40.0
+draw_debug_frame = true
+window_clip = NodePath("..")

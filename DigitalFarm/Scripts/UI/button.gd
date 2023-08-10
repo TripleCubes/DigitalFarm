@@ -10,6 +10,7 @@ const DOUBLE_CLICK_DELAY_SEC: float = 0.5
 @export var draw_debug_frame: bool
 @export var texture: Texture2D
 @export var z: int
+@export var window_clip: UI_WindowClip
 
 var _hovered: = false
 var _pressed: = false
@@ -37,9 +38,11 @@ func place_on_top() -> void:
 	ButtonUpdater.place_button_on_top(self)
 
 func _ready():
-	if not Engine.is_editor_hint():
-		ButtonUpdater.add_button(self)
-		draw_debug_frame = ButtonUpdater.draw_button_debug_frame_enabled
+	if Engine.is_editor_hint():
+		return
+
+	ButtonUpdater.add_button(self)
+	draw_debug_frame = ButtonUpdater.draw_button_debug_frame_enabled
 
 func _draw():
 	if not visible:
@@ -97,12 +100,25 @@ func _hover_check() -> void:
 		check_w = texture.get_width() * 2
 		check_h = texture.get_height() * 2
 
+	var clip_x0: float = 0
+	var clip_y0: float = 0
+	var clip_x1: float = get_viewport().size.x
+	var clip_y1: float = get_viewport().size.y
+	if window_clip != null:
+		clip_x0 = window_clip.global_position.x                      + Consts.BORDER_BUTTON_WIDTH / 2
+		clip_y0 = window_clip.global_position.y
+		clip_x1 = window_clip.global_position.x + window_clip.size.x - Consts.BORDER_BUTTON_WIDTH / 2
+		clip_y1 = window_clip.global_position.y + window_clip.size.y - Consts.BORDER_BUTTON_WIDTH / 2
+
+	var x0 = max(global_position.x - 2, clip_x0)
+	var y0 = max(global_position.y - 2, clip_y0)
+	var x1 = min(global_position.x + check_w + 2, clip_x1)
+	var y1 = min(global_position.y + check_h + 2, clip_y1)
+
 	var mouse_pos = get_global_mouse_position()
 	var mx = mouse_pos.x
 	var my = mouse_pos.y
-	var gx = global_position.x
-	var gy = global_position.y
-	if (mx >= gx - 2 and my >= gy - 2 and mx <= gx + check_w + 2 and my <= gy + check_h + 2):
+	if mx >= x0 and my >= y0 and mx <= x1 and my <= y1:
 		_hovered = true
 
 func _pressing_check() -> void:
