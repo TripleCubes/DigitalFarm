@@ -1,7 +1,7 @@
 extends App
 
 const PADDING_LEFT: float = 10
-const PADDING_RIGHT: float = 10
+const PADDING_RIGHT: float = 30
 const PADDING_TOP: float = 10
 const PADDING_BOTTOM: float = 50
 
@@ -35,7 +35,7 @@ func run_app() -> void:
 		return
 
 	_update_prev_pos_lists()
-	var _cursor_y = _move_icon_and_windows(true)
+	var _cursor_y = _move_icons_and_windows(true)
 	_scroll_bar.show()
 	_scroll_bar.set_page_length(_cursor_y + PADDING_BOTTOM, get_viewport().size.y)
 
@@ -45,21 +45,8 @@ func close_app() -> void:
 	if not _running:
 		return
 
-	for window_pos in _prev_window_pos_list:
-		if not is_instance_valid(window_pos.window):
-			continue
-			
-		var tween_0: = get_tree().create_tween()
-		tween_0.tween_property(window_pos.window, "position", window_pos.pos, Consts.TWEEN_TIME_SEC) \
-								.set_trans(Tween.TRANS_SINE)
-		var tween_1: = get_tree().create_tween()
-		tween_1.tween_property(window_pos.window, "scale", Vector2(1, 1), Consts.TWEEN_TIME_SEC) \
-								.set_trans(Tween.TRANS_SINE)
-
-	for icon_pos in _prev_icon_pos_list:
-		var tween: = get_tree().create_tween()
-		tween.tween_property(icon_pos.icon, "position", icon_pos.pos, Consts.TWEEN_TIME_SEC) \
-								.set_trans(Tween.TRANS_SINE)
+	_return_icons_and_windows()
+	_scroll_bar.hide()
 		
 	_running = false
 
@@ -78,7 +65,7 @@ func _process(_delta):
 		return
 
 	if _scroll_bar.scrolling():
-		_move_icon_and_windows(false)
+		_move_icons_and_windows(false)
 
 	_windows_pressing_check()
 
@@ -97,9 +84,10 @@ func _update_prev_pos_lists() -> void:
 			pos = Vector2(icon.position.x, icon.position.y),
 		})
 
-func _move_icon_and_windows(tween: bool) -> float:
+func _move_icons_and_windows(tween: bool) -> float:
+	var scrolled_pixel: = _scroll_bar.get_scrolled_pixel()
 	var _cursor_x: float = WINDOW_PADDING_LEFT
-	var _cursor_y: float = PADDING_TOP + _scroll_bar.get_scrolled_pixel()
+	var _cursor_y: float = PADDING_TOP + scrolled_pixel
 
 	for icon in _initial_icon_order:
 		if tween:
@@ -148,7 +136,7 @@ func _move_icon_and_windows(tween: bool) -> float:
 		else:
 			_cursor_y += APP_SPACING_EMPTY
 	
-	return _cursor_y
+	return _cursor_y - scrolled_pixel
 
 func _windows_pressing_check():
 	for window_pos in _prev_window_pos_list:
@@ -159,7 +147,7 @@ func _windows_pressing_check():
 
 		if window.close_button_pressed():
 			window.queue_free()
-			_move_icon_and_windows(true)
+			_move_icons_and_windows(true)
 			return
 
 		if window.interacted():
@@ -174,3 +162,20 @@ func _windows_pressing_check():
 			_tween_1.tween_property(window, "scale", Vector2(1, 1), 
 										Consts.TWEEN_TIME_SEC).set_trans(Tween.TRANS_SINE)
 			return
+
+func _return_icons_and_windows() -> void:
+	for window_pos in _prev_window_pos_list:
+		if not is_instance_valid(window_pos.window):
+			continue
+			
+		var tween_0: = get_tree().create_tween()
+		tween_0.tween_property(window_pos.window, "position", window_pos.pos, Consts.TWEEN_TIME_SEC) \
+								.set_trans(Tween.TRANS_SINE)
+		var tween_1: = get_tree().create_tween()
+		tween_1.tween_property(window_pos.window, "scale", Vector2(1, 1), Consts.TWEEN_TIME_SEC) \
+								.set_trans(Tween.TRANS_SINE)
+
+	for icon_pos in _prev_icon_pos_list:
+		var tween: = get_tree().create_tween()
+		tween.tween_property(icon_pos.icon, "position", icon_pos.pos, Consts.TWEEN_TIME_SEC) \
+								.set_trans(Tween.TRANS_SINE)
