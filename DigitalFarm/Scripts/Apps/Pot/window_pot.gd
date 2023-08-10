@@ -5,6 +5,10 @@ const DEBUG_WATER_REQUEST_TIME_SEC: float = 3
 
 var _time_until_need_water_sec: float = 0
 
+func requesting_water():
+	return pot_status == App_Pot.PotStatus.HAS_SEED \
+			and _time_until_need_water_sec < 0
+
 func water() -> void:
 	if pot_status != App_Pot.PotStatus.HAS_SEED:
 		return

@@ -13,19 +13,24 @@ func _ready():
 	$Button.texture = texture
 
 func _process(_delta):
-	if not Engine.is_editor_hint():
-		if Input.is_action_just_pressed("MOUSE_LEFT"):
-			_prev_x = self.global_position.x
-			_prev_y = self.global_position.y
-			var mouse_pos: = get_global_mouse_position()
-			_prev_mouse_x = mouse_pos.x
-			_prev_mouse_y = mouse_pos.y
+	if Engine.is_editor_hint():
+		return
 
-		if $Button.just_pressed():
-			move_to_front()
-			$Button.place_on_top()
-		_move_icon()
-		_double_click_handle()
+	if App_ShowAllApps.running:
+		return
+
+	if Input.is_action_just_pressed("MOUSE_LEFT"):
+		_prev_x = self.global_position.x
+		_prev_y = self.global_position.y
+		var mouse_pos: = get_global_mouse_position()
+		_prev_mouse_x = mouse_pos.x
+		_prev_mouse_y = mouse_pos.y
+
+	if $Button.just_pressed():
+		move_to_front()
+		$Button.place_on_top()
+	_move_icon()
+	_double_click_handle()
 
 func _move_icon() -> void:
 	var mouse_pos: = get_global_mouse_position()

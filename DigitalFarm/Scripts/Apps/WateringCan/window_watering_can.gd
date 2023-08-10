@@ -18,7 +18,13 @@ func _process(_delta):
 	if released_on_window == null:
 		return
 
-	if released_on_window.window_wrapper.app != App_Pot:
+	if released_on_window.app != App_Pot:
+		return
+
+	if released_on_window.app != App_Pot:
+		return
+
+	if not released_on_window.window_wrapper.requesting_water():
 		return
 
 	released_on_window.window_wrapper.water()
