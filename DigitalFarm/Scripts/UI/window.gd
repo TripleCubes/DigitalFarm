@@ -88,14 +88,6 @@ func _ready():
 	$Button_ShowAllAppsCover.position.y = - BAR_HEIGHT
 
 	if not resizable:
-		$Button_BorderTop.visible = false
-		$Button_BorderBottom.visible = false
-		$Button_BorderLeft.visible = false
-		$Button_BorderRight.visible = false
-		$Button_CornerTopLeft.visible = false
-		$Button_CornerTopRight.visible = false
-		$Button_CornerBottomLeft.visible = false
-		$Button_CornerBottomRight.visible = false
 		return
 
 	if w > max_w:
@@ -129,10 +121,35 @@ func _draw():
 	draw_rect(Rect2(w,  - BAR_HEIGHT,     2, h + BAR_HEIGHT    ), Consts.COLOR_LINE, true)
 
 func _process(_delta):
+	if $Button_Bar.hovered() and Input.is_action_just_pressed("KEY_2"):
+		print("Window size: " + str(w) + " " + str(h))
+
+	_show_hide_resize_buttons()
 	_pressing_process()
 	queue_redraw()
 
-func _pressing_process():
+func _show_hide_resize_buttons() -> void:
+	if not resizable:
+		$Button_BorderTop.visible = false
+		$Button_BorderBottom.visible = false
+		$Button_BorderLeft.visible = false
+		$Button_BorderRight.visible = false
+		$Button_CornerTopLeft.visible = false
+		$Button_CornerTopRight.visible = false
+		$Button_CornerBottomLeft.visible = false
+		$Button_CornerBottomRight.visible = false
+		return
+
+	$Button_BorderTop.visible = true
+	$Button_BorderBottom.visible = true
+	$Button_BorderLeft.visible = true
+	$Button_BorderRight.visible = true
+	$Button_CornerTopLeft.visible = true
+	$Button_CornerTopRight.visible = true
+	$Button_CornerBottomLeft.visible = true
+	$Button_CornerBottomRight.visible = true
+
+func _pressing_process() -> void:
 	if Engine.is_editor_hint():
 		return
 
@@ -173,7 +190,7 @@ func _notification(what):
 func _set_button_list() -> void:
 	_button_search(self)
 
-func _button_search(node: Node2D) -> void:
+func _button_search(node: Node) -> void:
 	for search in node.get_children():
 		if search is UI_Button:
 			_button_list.append(search)

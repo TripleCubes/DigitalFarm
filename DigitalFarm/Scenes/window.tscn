@@ -6,7 +6,7 @@
 
 [node name="Window" type="Node2D" groups=["Windows"]]
 texture_filter = 1
-position = Vector2(200, 200)
+position = Vector2(-169.197, -122.759)
 script = ExtResource("1_4pfb5")
 w = 150.0
 h = 150.0

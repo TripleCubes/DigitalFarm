@@ -15,7 +15,7 @@ texture_filter = 1
 script = ExtResource("1_0hcx8")
 
 [node name="Window" parent="." instance=ExtResource("1_wb7pp")]
-position = Vector2(339.517, 168.004)
+position = Vector2(406.857, 169.698)
 w = 120.0
 h = 180.0
 
