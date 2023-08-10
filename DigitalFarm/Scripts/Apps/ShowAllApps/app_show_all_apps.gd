@@ -47,7 +47,10 @@ func close_app() -> void:
 		return
 
 	_return_icons_and_windows()
-	_enable_window_buttons()
+	var timer: = get_tree().create_timer(Consts.TWEEN_TIME_SEC)
+	timer.timeout.connect(func():
+		_enable_window_buttons()
+	)
 	_scroll_bar.hide()
 		
 	_running = false
@@ -175,7 +178,6 @@ func _windows_pressing_check():
 			return
 
 		if clicked.call(window):
-			ButtonUpdater.mark_button_pressed()
 			close_app()
 			window.place_on_top()
 			var move_to: = Vector2((get_viewport().size.x - window.w) / 2 + randf_range(-50, 50), \

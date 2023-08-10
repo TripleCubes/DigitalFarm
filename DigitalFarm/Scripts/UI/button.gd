@@ -130,4 +130,3 @@ func _pressing_check() -> void:
 
 	_pressed = true
 	_just_pressed = true
-	ButtonUpdater.mark_button_pressed()
