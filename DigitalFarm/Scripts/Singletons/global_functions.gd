@@ -34,3 +34,10 @@ func cursor_inside_of_window(ignore_window: Node2D = null) -> Node2D:
 			return window
 
 	return null
+
+func cursor_on_draw_window_in(window_check: Node2D, draw_window_in_list_name: String) -> UI_DragWindowIn:
+	for draw_window_in in window_check.window_wrapper[draw_window_in_list_name]:
+		if draw_window_in.hovered():
+			return draw_window_in
+	
+	return null

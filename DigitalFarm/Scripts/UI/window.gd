@@ -81,6 +81,14 @@ func set_button_list() -> void:
 	_button_list.clear()
 	_button_search(self)
 
+func window_dragged_into_app(app_comp: App) -> bool:
+	var window_check = GlobalFunctions.cursor_inside_of_window(self)
+
+	if self.holding_bar() and window_check != null and window_check.app == app_comp:
+		return true
+
+	return false
+
 func _ready():
 	if not Engine.is_editor_hint():
 		window_wrapper = self.get_parent()
