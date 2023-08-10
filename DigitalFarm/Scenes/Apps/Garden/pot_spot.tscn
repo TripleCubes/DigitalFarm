@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0nixgofbknb3"]
+
+[ext_resource type="Script" path="res://Scripts/Apps/Garden/pot_spot.gd" id="1_3taro"]
+[ext_resource type="Texture2D" uid="uid://bvh06akk7hyxv" path="res://Assets/Sprites/Apps/Pot/pot_mini.png" id="2_vsd82"]
+
+[node name="PotSpot" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_3taro")
+w = 20.0
+h = 20.0
+draw_debug_frame = true
+
+[node name="PotMini" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(10, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vsd82")

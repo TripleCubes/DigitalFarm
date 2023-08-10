@@ -1,30 +1,30 @@
 [gd_scene load_steps=7 format=3 uid="uid://ce8ppi2dlon6j"]
 
-[ext_resource type="PackedScene" uid="uid://daxbag8xh0v2q" path="res://Scenes/window.tscn" id="1_h3qa4"]
-[ext_resource type="Script" path="res://Scripts/Apps/Tap/window_tap.gd" id="1_xaepa"]
-[ext_resource type="Texture2D" uid="uid://dx5mhns030tp0" path="res://Assets/Sprites/Apps/Tap/tap.png" id="2_h86aw"]
-[ext_resource type="Script" path="res://Scripts/UI/button.gd" id="4_d816g"]
-[ext_resource type="Texture2D" uid="uid://4753eonmjxqd" path="res://Assets/Sprites/Apps/Tap/water_top.png" id="5_itdq2"]
-[ext_resource type="Texture2D" uid="uid://bqusns5tmvygs" path="res://Assets/Sprites/Apps/Tap/water.png" id="6_757tu"]
+[ext_resource type="Script" path="res://Scripts/Apps/Tap/window_tap.gd" id="1_jgln1"]
+[ext_resource type="PackedScene" uid="uid://daxbag8xh0v2q" path="res://Scenes/window.tscn" id="2_q7npc"]
+[ext_resource type="Script" path="res://Scripts/UI/button.gd" id="3_hg8fl"]
+[ext_resource type="Texture2D" uid="uid://dx5mhns030tp0" path="res://Assets/Sprites/Apps/Tap/tap.png" id="4_wqn32"]
+[ext_resource type="Texture2D" uid="uid://4753eonmjxqd" path="res://Assets/Sprites/Apps/Tap/water_top.png" id="5_bujeq"]
+[ext_resource type="Texture2D" uid="uid://bqusns5tmvygs" path="res://Assets/Sprites/Apps/Tap/water.png" id="6_0mlx4"]
 
 [node name="Window_Tap" type="Node2D"]
 texture_filter = 1
-script = ExtResource("1_xaepa")
+script = ExtResource("1_jgln1")
 
-[node name="Window" parent="." instance=ExtResource("1_h3qa4")]
+[node name="Window" parent="." instance=ExtResource("2_q7npc")]
 w = 120.0
 h = 120.0
 
 [node name="Button_Tap" type="Node2D" parent="Window"]
 position = Vector2(39, 39)
-script = ExtResource("4_d816g")
+script = ExtResource("3_hg8fl")
 w = 20.0
 h = 20.0
 
 [node name="Tap" type="Sprite2D" parent="Window"]
 position = Vector2(50, 80)
 scale = Vector2(2, 2)
-texture = ExtResource("2_h86aw")
+texture = ExtResource("4_wqn32")
 
 [node name="Water" type="Node2D" parent="Window"]
 visible = false
@@ -32,24 +32,24 @@ visible = false
 [node name="WaterTop" type="Sprite2D" parent="Window/Water"]
 position = Vector2(63, 90)
 scale = Vector2(2, 2)
-texture = ExtResource("5_itdq2")
+texture = ExtResource("5_bujeq")
 
 [node name="Water" type="Sprite2D" parent="Window/Water"]
 position = Vector2(63, 200)
 scale = Vector2(2, 2)
-texture = ExtResource("6_757tu")
+texture = ExtResource("6_0mlx4")
 
 [node name="Water2" type="Sprite2D" parent="Window/Water"]
 position = Vector2(63, 400)
 scale = Vector2(2, 2)
-texture = ExtResource("6_757tu")
+texture = ExtResource("6_0mlx4")
 
 [node name="Water3" type="Sprite2D" parent="Window/Water"]
 position = Vector2(63, 600)
 scale = Vector2(2, 2)
-texture = ExtResource("6_757tu")
+texture = ExtResource("6_0mlx4")
 
 [node name="Water4" type="Sprite2D" parent="Window/Water"]
 position = Vector2(63, 800)
 scale = Vector2(2, 2)
-texture = ExtResource("6_757tu")
+texture = ExtResource("6_0mlx4")

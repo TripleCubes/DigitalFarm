@@ -77,13 +77,17 @@ func disable_buttons() -> void:
 	for button in _button_list:
 		button.hide()
 
+func set_button_list() -> void:
+	_button_list.clear()
+	_button_search(self)
+
 func _ready():
 	if not Engine.is_editor_hint():
 		window_wrapper = self.get_parent()
 		if window_wrapper != null:
 			app = window_wrapper.app
 
-		_set_button_list()
+		set_button_list()
 
 		self.position.x = (get_viewport().size.x - w) / 2 + randf_range(-100, 100)
 		self.position.y = (get_viewport().size.y - h) / 2 + randf_range(-100, 100)
@@ -189,9 +193,6 @@ func _notification(what):
 		if window_wrapper != null:
 			app.window_wrapper_list.erase(window_wrapper)
 			window_wrapper.queue_free()
-
-func _set_button_list() -> void:
-	_button_search(self)
 
 func _button_search(node: Node) -> void:
 	for search in node.get_children():

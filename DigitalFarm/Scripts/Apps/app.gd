@@ -8,7 +8,7 @@ var _window_wrapper_scene: PackedScene
 var window_wrapper_list: = []
 var max_num_windows: int = 999999
 
-func run_app() -> void:
+func run_app() -> Node2D:
 	if window_wrapper_list.size() == 1 and max_num_windows == 1:
 		window_wrapper_list[0].window.place_on_top()
 		return
@@ -21,3 +21,5 @@ func run_app() -> void:
 	window_wrapper_list.append(window_wrapper)
 	
 	_main_window_wrapper_list.add_child(window_wrapper)
+
+	return window_wrapper.window

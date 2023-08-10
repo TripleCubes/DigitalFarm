@@ -27,7 +27,7 @@ var _prev_icon_pos_list: = []
 
 var _scroll_bar: = UI_ScrollBarVertical.new()
 
-func run_app() -> void:
+func run_app() -> Node2D:
 	if _running:
 		return
 
@@ -41,6 +41,8 @@ func run_app() -> void:
 	_scroll_bar.set_page_length(_cursor_y + PADDING_BOTTOM, get_viewport().size.y)
 
 	_running = true
+
+	return null
 
 func close_app() -> void:
 	if not _running:

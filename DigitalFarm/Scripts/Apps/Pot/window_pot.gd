@@ -80,11 +80,24 @@ func _garden_handle() -> void:
 	if $Window.holding_bar() and window_check != null and window_check.app == App_Garden:
 		_show_pot_mini = true
 
+	if $Window.just_released() and window_check != null and window_check.app == App_Garden:
+		var pot_spot: = _cursor_on_pot_spot(window_check)
+		if pot_spot != null and not pot_spot.has_pot:
+			pot_spot.put_window($Window)
+			queue_free()
+
 	if window_check == null or window_check.app != App_Garden:
+		_show_pot_mini = false		
+
+	if $Window.just_released():
 		_show_pot_mini = false
 
-	if Input.is_action_just_released("MOUSE_LEFT"):
-		_show_pot_mini = false
+func _cursor_on_pot_spot(window_check: Node2D) -> UI_DragWindowIn:
+	for pot_spot in window_check.window_wrapper.pot_spot_list:
+		if pot_spot.hovered():
+			return pot_spot
+	
+	return null
 
 func _pot_mini_handle() -> void:
 	if not _show_pot_mini:

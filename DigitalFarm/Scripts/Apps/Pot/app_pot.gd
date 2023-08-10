@@ -8,4 +8,4 @@ enum PotStatus {
 }
 
 func _ready():
-	_window_wrapper_scene = preload("res://Scenes/Apps/window_pot.tscn")
+	_window_wrapper_scene = preload("res://Scenes/Apps/Pot/window_pot.tscn")

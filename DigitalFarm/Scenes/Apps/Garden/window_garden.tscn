@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dflmolhmg6eqq"]
+
+[ext_resource type="Script" path="res://Scripts/Apps/Garden/window_garden.gd" id="1_4l2wq"]
+[ext_resource type="PackedScene" uid="uid://daxbag8xh0v2q" path="res://Scenes/window.tscn" id="2_pk1qc"]
+[ext_resource type="Script" path="res://Scripts/UI/window_clip.gd" id="3_bakkh"]
+
+[node name="Window_Garden" type="Node2D"]
+script = ExtResource("1_4l2wq")
+
+[node name="Window" parent="." instance=ExtResource("2_pk1qc")]
+w = 200.0
+h = 200.0
+resizable = true
+min_w = 200.0
+min_h = 200.0
+max_w = 450.0
+max_h = 300.0
+
+[node name="UI_WindowClip" type="ScrollContainer" parent="Window"]
+clip_contents = false
+offset_right = 200.0
+offset_bottom = 200.0
+script = ExtResource("3_bakkh")
