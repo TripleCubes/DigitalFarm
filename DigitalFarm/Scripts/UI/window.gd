@@ -72,9 +72,6 @@ func enable_buttons() -> void:
 
 func disable_buttons() -> void:
 	for button in _button_list:
-		if button == $Button_Close:
-			continue
-		
 		button.hide()
 
 func _ready():
@@ -253,6 +250,8 @@ func _set_buttons() -> void:
 
 	$Button_Close.position.x = w - 19
 	$Button_Close.position.y = -20
+	$Sprite_CloseWindow.position.x = w - 19
+	$Sprite_CloseWindow.position.y = -20
 
 func _resize_window() -> void:
 	if $Button_BorderLeft.pressed():

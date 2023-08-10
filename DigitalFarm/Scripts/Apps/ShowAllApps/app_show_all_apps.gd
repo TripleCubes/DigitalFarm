@@ -146,12 +146,22 @@ func _move_icons_and_windows(tween: bool) -> float:
 
 func _windows_pressing_check():
 	var mouse_pos = get_global_mouse_position()
-	var clicked: = func(window: Node2D):
+
+	var clicked: = func(window: Node2D) -> bool:
 		return Input.is_action_just_pressed("MOUSE_LEFT") and \
 				mouse_pos.x >= window.position.x and \
 				mouse_pos.y >= window.position.y - window.BAR_HEIGHT / 2 and \
 				mouse_pos.x <= window.position.x + window.w / 2 and \
 				mouse_pos.y <= window.position.y + window.h / 2
+
+	var clicked_close: = func(window: Node2D) -> bool:
+		var x: float = window.position.x + (window.w - 19) / 2
+		var y: float = window.position.y - 10
+		return Input.is_action_just_pressed("MOUSE_LEFT") and \
+				mouse_pos.x >= x and \
+				mouse_pos.y >= y and \
+				mouse_pos.x <= x + 7 and \
+				mouse_pos.y <= y + 7
 
 	for window_pos in _prev_window_pos_list:
 		if not is_instance_valid(window_pos.window):
@@ -159,7 +169,7 @@ func _windows_pressing_check():
 			
 		var window: Node2D = window_pos.window
 
-		if window.close_button_pressed():
+		if clicked_close.call(window):
 			window.queue_free()
 			_move_icons_and_windows(true)
 			return
