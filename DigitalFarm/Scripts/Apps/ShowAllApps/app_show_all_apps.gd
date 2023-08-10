@@ -34,6 +34,7 @@ func run_app() -> void:
 	if get_tree().get_nodes_in_group("Windows").size() == 0:
 		return
 
+	_disable_window_buttons()
 	_update_prev_pos_lists()
 	var _cursor_y = _move_icons_and_windows(true)
 	_scroll_bar.show()
@@ -46,6 +47,7 @@ func close_app() -> void:
 		return
 
 	_return_icons_and_windows()
+	_enable_window_buttons()
 	_scroll_bar.hide()
 		
 	_running = false
@@ -143,6 +145,14 @@ func _move_icons_and_windows(tween: bool) -> float:
 	return _cursor_y - scrolled_pixel
 
 func _windows_pressing_check():
+	var mouse_pos = get_global_mouse_position()
+	var clicked: = func(window: Node2D):
+		return Input.is_action_just_pressed("MOUSE_LEFT") and \
+				mouse_pos.x >= window.position.x and \
+				mouse_pos.y >= window.position.y - window.BAR_HEIGHT / 2 and \
+				mouse_pos.x <= window.position.x + window.w / 2 and \
+				mouse_pos.y <= window.position.y + window.h / 2
+
 	for window_pos in _prev_window_pos_list:
 		if not is_instance_valid(window_pos.window):
 			continue
@@ -154,7 +164,8 @@ func _windows_pressing_check():
 			_move_icons_and_windows(true)
 			return
 
-		if window.interacted():
+		if clicked.call(window):
+			ButtonUpdater.mark_button_pressed()
 			close_app()
 			window.place_on_top()
 			var move_to: = Vector2((get_viewport().size.x - window.w) / 2 + randf_range(-50, 50), \
@@ -183,3 +194,11 @@ func _return_icons_and_windows() -> void:
 		var tween: = get_tree().create_tween()
 		tween.tween_property(icon_pos.icon, "position", icon_pos.pos, Consts.TWEEN_TIME_SEC) \
 								.set_trans(Tween.TRANS_SINE)
+
+func _enable_window_buttons() -> void:
+	for window in get_tree().get_nodes_in_group("Windows"):
+		window.enable_buttons()
+
+func _disable_window_buttons() -> void:
+	for window in get_tree().get_nodes_in_group("Windows"):
+		window.disable_buttons()

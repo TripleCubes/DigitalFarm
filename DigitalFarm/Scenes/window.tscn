@@ -6,7 +6,6 @@
 
 [node name="Window" type="Node2D" groups=["Windows"]]
 texture_filter = 1
-position = Vector2(-169.197, -122.759)
 script = ExtResource("1_4pfb5")
 w = 150.0
 h = 150.0
@@ -86,20 +85,3 @@ h = 2.0
 position = Vector2(131, -20)
 script = ExtResource("2_rffpy")
 texture = ExtResource("3_4sqhn")
-
-[node name="Button_ShowAllAppsCover" type="Node2D" parent="."]
-visible = false
-position = Vector2(0, -24)
-script = ExtResource("2_rffpy")
-w = 75.0
-h = 87.0
-draw_debug_frame = true
-z = 1
-
-[node name="Button_ShowAllAppsCover_Close" type="Node2D" parent="."]
-visible = false
-position = Vector2(131, -20)
-script = ExtResource("2_rffpy")
-w = 7.0
-h = 7.0
-z = 1

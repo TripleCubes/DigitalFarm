@@ -67,18 +67,15 @@ func _draw():
 		draw_rect(Rect2(draw_w + 2 - 1, -2,             1,          draw_h + 4), Color("#ff0000"), true)
 
 func _process(_delta):
+	queue_redraw()
+
+func _update(_delta) -> void:
 	if not visible:
 		_hovered = false
 		_pressed = false
 		_just_pressed = false
 		_just_released = false
 		_double_clicked = false
-		return
-		
-	queue_redraw()
-
-func _update(_delta) -> void:
-	if not visible:
 		return
 		
 	_hover_check()

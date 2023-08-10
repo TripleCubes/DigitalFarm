@@ -39,7 +39,7 @@ func interacted() -> bool:
 	return false
 
 func close_button_pressed() -> bool:
-	return $Button_Close.pressed() or $Button_ShowAllAppsCover_Close.pressed()
+	return $Button_Close.pressed()
 
 func just_released() -> bool:
 	return $Button_Bar.just_released()
@@ -65,6 +65,18 @@ func released_on_window() -> Node2D:
 
 	return null
 
+func enable_buttons() -> void:
+	for button in _button_list:
+		button.show()
+		_show_hide_resize_buttons()
+
+func disable_buttons() -> void:
+	for button in _button_list:
+		if button == $Button_Close:
+			continue
+		
+		button.hide()
+
 func _ready():
 	if not Engine.is_editor_hint():
 		window_wrapper = self.get_parent()
@@ -73,8 +85,8 @@ func _ready():
 
 		_set_button_list()
 
-	self.position.x = (get_viewport().size.x - w) / 2 + randf_range(-100, 100)
-	self.position.y = (get_viewport().size.y - h) / 2 + randf_range(-100, 100)
+		self.position.x = (get_viewport().size.x - w) / 2 + randf_range(-100, 100)
+		self.position.y = (get_viewport().size.y - h) / 2 + randf_range(-100, 100)
 	
 	_set_buttons()
 
@@ -82,10 +94,6 @@ func _ready():
 		w = 120
 	if h == 0:
 		h = 120
-
-	$Button_ShowAllAppsCover.w = w / 2
-	$Button_ShowAllAppsCover.h = (h + BAR_HEIGHT) / 2
-	$Button_ShowAllAppsCover.position.y = - BAR_HEIGHT
 
 	if not resizable:
 		return
@@ -129,7 +137,7 @@ func _process(_delta):
 	queue_redraw()
 
 func _show_hide_resize_buttons() -> void:
-	if not resizable:
+	if not resizable or App_ShowAllApps.running:
 		$Button_BorderTop.visible = false
 		$Button_BorderBottom.visible = false
 		$Button_BorderLeft.visible = false
@@ -154,12 +162,7 @@ func _pressing_process() -> void:
 		return
 
 	if App_ShowAllApps.running:
-		$Button_ShowAllAppsCover.show()
-		$Button_ShowAllAppsCover_Close.show()
 		return
-
-	$Button_ShowAllAppsCover.hide()
-	$Button_ShowAllAppsCover_Close.hide()
 
 	if Input.is_action_just_pressed("MOUSE_LEFT"):
 		_prev_x = self.global_position.x
@@ -250,9 +253,6 @@ func _set_buttons() -> void:
 
 	$Button_Close.position.x = w - 19
 	$Button_Close.position.y = -20
-
-	$Button_ShowAllAppsCover_Close.position.x = w - 19
-	$Button_ShowAllAppsCover_Close.position.y = -20
 
 func _resize_window() -> void:
 	if $Button_BorderLeft.pressed():
