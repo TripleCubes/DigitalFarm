@@ -46,7 +46,7 @@ func _move_icon() -> void:
 			move_to.y = get_viewport().size.y - $Button.h
 
 		var _tween: = get_tree().create_tween()
-		_tween.tween_property(self, "position", move_to, Consts.POS_TWEEN_TIME).set_trans(Tween.TRANS_SINE)
+		_tween.tween_property(self, "position", move_to, Consts.TWEEN_TIME_SEC).set_trans(Tween.TRANS_SINE)
 
 func _double_click_handle() -> void:
 	if app_name == null:

@@ -68,6 +68,11 @@ func _draw():
 
 func _process(_delta):
 	if not visible:
+		_hovered = false
+		_pressed = false
+		_just_pressed = false
+		_just_released = false
+		_double_clicked = false
 		return
 		
 	queue_redraw()
@@ -106,7 +111,7 @@ func _hover_check() -> void:
 func _pressing_check() -> void:
 	_just_released = false
 	if Input.is_action_just_released("MOUSE_LEFT"):
-		if _hovered:
+		if _pressed:
 			_just_released = true
 
 		_pressed = false

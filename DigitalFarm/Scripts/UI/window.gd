@@ -38,6 +38,9 @@ func interacted() -> bool:
 	
 	return false
 
+func close_button_pressed() -> bool:
+	return $Button_Close.pressed() or $Button_ShowAllAppsCover_Close.pressed()
+
 func just_released() -> bool:
 	return $Button_Bar.just_released()
 
@@ -70,10 +73,19 @@ func _ready():
 
 		_set_button_list()
 
-	self.position.x = 200
-	self.position.y = 200
+	self.position.x = (get_viewport().size.x - w) / 2 + randf_range(-100, 100)
+	self.position.y = (get_viewport().size.y - h) / 2 + randf_range(-100, 100)
 	
 	_set_buttons()
+
+	if w == 0:
+		w = 120
+	if h == 0:
+		h = 120
+
+	$Button_ShowAllAppsCover.w = w / 2
+	$Button_ShowAllAppsCover.h = (h + BAR_HEIGHT) / 2
+	$Button_ShowAllAppsCover.position.y = - BAR_HEIGHT
 
 	if not resizable:
 		$Button_BorderTop.visible = false
@@ -107,10 +119,6 @@ func _ready():
 		max_w = 400
 	if max_h == 0:
 		max_h = 400
-	if w == 0:
-		w = 120
-	if h == 0:
-		h = 120
 
 func _draw():
 	draw_rect(Rect2(0,  - BAR_HEIGHT - 2, w, h + BAR_HEIGHT + 2), Consts.COLOR_BACKGROUND, true)
@@ -121,28 +129,40 @@ func _draw():
 	draw_rect(Rect2(w,  - BAR_HEIGHT,     2, h + BAR_HEIGHT    ), Consts.COLOR_LINE, true)
 
 func _process(_delta):
-	if not Engine.is_editor_hint():
-		if Input.is_action_just_pressed("MOUSE_LEFT"):
-			_prev_x = self.global_position.x
-			_prev_y = self.global_position.y
-			_prev_w = w
-			_prev_h = h
-			var mouse_pos: = get_global_mouse_position()
-			_prev_mouse_x = mouse_pos.x
-			_prev_mouse_y = mouse_pos.y
-		if resizable:
-			_resize_window()
-		_move_window()
-		
-		_set_buttons()
-
-		if $Button_Close.just_pressed():
-			queue_free()
-
-		if interacted():
-			place_on_top()
-	
+	_pressing_process()
 	queue_redraw()
+
+func _pressing_process():
+	if Engine.is_editor_hint():
+		return
+
+	if App_ShowAllApps.running:
+		$Button_ShowAllAppsCover.show()
+		$Button_ShowAllAppsCover_Close.show()
+		return
+
+	$Button_ShowAllAppsCover.hide()
+	$Button_ShowAllAppsCover_Close.hide()
+
+	if Input.is_action_just_pressed("MOUSE_LEFT"):
+		_prev_x = self.global_position.x
+		_prev_y = self.global_position.y
+		_prev_w = w
+		_prev_h = h
+		var mouse_pos: = get_global_mouse_position()
+		_prev_mouse_x = mouse_pos.x
+		_prev_mouse_y = mouse_pos.y
+	if resizable:
+		_resize_window()
+	_move_window()
+	
+	_set_buttons()
+
+	if $Button_Close.just_pressed():
+		queue_free()
+
+	if interacted():
+		place_on_top()
 
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE:
@@ -213,6 +233,9 @@ func _set_buttons() -> void:
 
 	$Button_Close.position.x = w - 19
 	$Button_Close.position.y = -20
+
+	$Button_ShowAllAppsCover_Close.position.x = w - 19
+	$Button_ShowAllAppsCover_Close.position.y = -20
 
 func _resize_window() -> void:
 	if $Button_BorderLeft.pressed():
@@ -308,4 +331,4 @@ func _move_window() -> void:
 			move_to.y = get_viewport().size.y - 20
 
 		var _tween: = get_tree().create_tween()
-		_tween.tween_property(self, "position", move_to, Consts.POS_TWEEN_TIME).set_trans(Tween.TRANS_SINE)
+		_tween.tween_property(self, "position", move_to, Consts.TWEEN_TIME_SEC).set_trans(Tween.TRANS_SINE)

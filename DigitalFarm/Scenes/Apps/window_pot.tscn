@@ -16,7 +16,7 @@ script = ExtResource("1_0hcx8")
 
 [node name="Window" parent="." instance=ExtResource("1_wb7pp")]
 w = 120.0
-h = 1000.0
+h = 180.0
 
 [node name="Sprite_PotEmpty" type="Sprite2D" parent="Window"]
 position = Vector2(60, 105)

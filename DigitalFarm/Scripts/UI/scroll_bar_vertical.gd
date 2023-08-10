@@ -22,8 +22,6 @@ func scrolling() -> bool:
 	return _button.pressed()
 
 func set_page_length(page_length: float, view_length: float) -> void:
-	print(page_length)
-	print(view_length)
 	if page_length - view_length <= 0:
 		_button.hide()
 		return
