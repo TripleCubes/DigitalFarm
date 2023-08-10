@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bj4sm1n35gcij"]
+[gd_scene load_steps=11 format=3 uid="uid://bj4sm1n35gcij"]
 
 [ext_resource type="Script" path="res://Scripts/Apps/Pot/window_pot.gd" id="1_0hcx8"]
 [ext_resource type="PackedScene" uid="uid://daxbag8xh0v2q" path="res://Scenes/window.tscn" id="1_wb7pp"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/progress_bar_horizontal.gd" id="7_mynkk"]
 [ext_resource type="Script" path="res://Scripts/UI/bubble.gd" id="8_gj2by"]
 [ext_resource type="Texture2D" uid="uid://c3bi0k2goi0ql" path="res://Assets/Sprites/Apps/Pot/water_drop.png" id="9_xiiec"]
+[ext_resource type="Texture2D" uid="uid://bvh06akk7hyxv" path="res://Assets/Sprites/Apps/Pot/pot_mini.png" id="10_cdhet"]
 
 [node name="Window_Pot" type="Node2D"]
 texture_filter = 1
@@ -59,3 +60,9 @@ position = Vector2(72, 32)
 script = ExtResource("8_gj2by")
 init_texture = ExtResource("9_xiiec")
 init_dir = 2
+
+[node name="PotMini" type="Sprite2D" parent="."]
+position = Vector2(-30, -40)
+scale = Vector2(2, 2)
+texture = ExtResource("10_cdhet")
+offset = Vector2(0, -18)

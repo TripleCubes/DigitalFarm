@@ -41,6 +41,9 @@ func interacted() -> bool:
 func close_button_pressed() -> bool:
 	return $Button_Close.pressed()
 
+func holding_bar() -> bool:
+	return $Button_Bar.pressed()
+
 func just_released() -> bool:
 	return $Button_Bar.just_released()
 

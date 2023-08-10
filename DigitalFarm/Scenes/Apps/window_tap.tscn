@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bqusns5tmvygs" path="res://Assets/Sprites/Apps/Tap/water.png" id="6_757tu"]
 
 [node name="Window_Tap" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_xaepa")
 
 [node name="Window" parent="." instance=ExtResource("1_h3qa4")]

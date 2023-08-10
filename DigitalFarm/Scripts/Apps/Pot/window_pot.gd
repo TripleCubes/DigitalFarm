@@ -4,6 +4,7 @@ const WATER_REQUEST_TIME_SEC: float = 25
 const DEBUG_WATER_REQUEST_TIME_SEC: float = 3
 
 var _time_until_need_water_sec: float = 0
+var _show_pot_mini: = false
 
 func requesting_water():
 	return pot_status == App_Pot.PotStatus.HAS_SEED \
@@ -60,6 +61,11 @@ var pot_status: = App_Pot.PotStatus.EMPTY:
 		pot_status = val
 
 func _process(_delta):
+	_pot_status_handle(_delta)
+	_garden_handle()
+	_pot_mini_handle()
+
+func _pot_status_handle(_delta: float) -> void:
 	if pot_status == App_Pot.PotStatus.HAS_SEED:
 		_time_until_need_water_sec -= _delta
 		if _time_until_need_water_sec < 0:
@@ -68,3 +74,27 @@ func _process(_delta):
 
 		if $Window/ProgressBar.progress >= 1:
 			pot_status = App_Pot.PotStatus.GROWN
+
+func _garden_handle() -> void:
+	var window_check = GlobalFunctions.cursor_inside_of_window($Window)
+	if $Window.holding_bar() and window_check != null and window_check.app == App_Garden:
+		_show_pot_mini = true
+
+	if window_check == null or window_check.app != App_Garden:
+		_show_pot_mini = false
+
+	if Input.is_action_just_released("MOUSE_LEFT"):
+		_show_pot_mini = false
+
+func _pot_mini_handle() -> void:
+	if not _show_pot_mini:
+		$PotMini.hide()
+		$Window.show()
+		return
+
+	$PotMini.show()
+	$Window.hide()
+
+	var mouse_pos: = get_global_mouse_position()
+	$PotMini.position.x = mouse_pos.x
+	$PotMini.position.y = mouse_pos.y
