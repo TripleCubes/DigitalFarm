@@ -64,6 +64,10 @@ func _process(_delta):
 	if not running:
 		return
 
+	if get_tree().get_nodes_in_group("Windows").size() == 0:
+		close_app()
+		return
+
 	if _scroll_bar.scrolling():
 		_move_icons_and_windows(false)
 
