@@ -19,6 +19,10 @@ var _prev_btn_y: float = 0
 
 var _scrolled_percentage = 0
 
+func scroll_to_zero() -> void:
+	_button.position.y = 4
+	_scrolled_percentage = 0
+
 func get_scrolled_pixel() -> float:
 	if _button.visible:
 		return - _scrolled_percentage * (_page_length - _view_length)
