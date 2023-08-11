@@ -4,11 +4,12 @@ const _pot_spot_scene: PackedScene = preload("res://Scenes/Apps/Garden/pot_spot.
 var pot_spot_list: = []
 
 func _ready():
-	for x in 3:
-		for y in 3:
+	for x in 6:
+		for y in 6:
 			var pot_spot: = _pot_spot_scene.instantiate()
-			pot_spot.position.x = x * 40
-			pot_spot.position.y = y * 40
+			pot_spot.position.x = 30 + x * 60
+			pot_spot.position.y = 30 + y * 60
+			pot_spot.window_clip = $Window/UI_WindowClip
 			$Window/UI_WindowClip.add_child(pot_spot)
 			pot_spot_list.append(pot_spot)
 

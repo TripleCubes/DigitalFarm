@@ -15,6 +15,10 @@ extends Node2D
 		_button.draw_debug_frame = val
 		draw_debug_frame = val
 
+var window_clip: UI_WindowClip:
+	set(val):
+		_button.window_clip = val
+
 var _button: = UI_Button.new()
 
 func hovered() -> bool:
