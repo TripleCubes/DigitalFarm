@@ -57,11 +57,13 @@ func _draw():
 	if texture != null:
 		draw_texture_rect(texture, Rect2(0, 0, draw_w, draw_h), false)
 
+	var color_line: = Colors.COLOR_LINE_DAY
+
 	if draw_frame:
-		draw_rect(Rect2(0,      -2,     draw_w, 2     ), Consts.COLOR_LINE, true)
-		draw_rect(Rect2(0,      draw_h, draw_w, 2     ), Consts.COLOR_LINE, true)
-		draw_rect(Rect2(-2,     0,      2,      draw_h), Consts.COLOR_LINE, true)
-		draw_rect(Rect2(draw_w, 0,      2,      draw_h), Consts.COLOR_LINE, true)
+		draw_rect(Rect2(0,      -2,     draw_w, 2     ), color_line, true)
+		draw_rect(Rect2(0,      draw_h, draw_w, 2     ), color_line, true)
+		draw_rect(Rect2(-2,     0,      2,      draw_h), color_line, true)
+		draw_rect(Rect2(draw_w, 0,      2,      draw_h), color_line, true)
 
 	if draw_debug_frame:
 		draw_rect(Rect2(-2,             -2,             draw_w + 4, 1         ), Color("#ff0000"), true)
@@ -115,7 +117,7 @@ func _hover_check() -> void:
 	var x1 = min(global_position.x + check_w + 2, clip_x1)
 	var y1 = min(global_position.y + check_h + 2, clip_y1)
 
-	var mouse_pos = get_global_mouse_position()
+	var mouse_pos = GlobalFunctions.get_mouse_pos()
 	var mx = mouse_pos.x
 	var my = mouse_pos.y
 	if mx >= x0 and my >= y0 and mx <= x1 and my <= y1:

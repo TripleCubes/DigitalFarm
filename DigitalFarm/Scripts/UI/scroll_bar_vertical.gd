@@ -43,7 +43,7 @@ func _ready():
 	add_child(_button)
 
 func _process(_delta):
-	var mouse_pos = get_local_mouse_position()
+	var mouse_pos = GlobalFunctions.get_local_mouse_pos(self)
 
 	if _button.just_pressed():
 		_prev_cursor_y = mouse_pos.y

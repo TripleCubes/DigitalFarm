@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://sx4e6l1en6lp"]
+
+[ext_resource type="PackedScene" uid="uid://dspl26do46lds" path="res://Scenes/main.tscn" id="1_3wyw4"]
+[ext_resource type="Script" path="res://Scripts/viewport.gd" id="1_fb2fo"]
+[ext_resource type="Shader" path="res://Shaders/day_night_filter.gdshader" id="2_rkun3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7r603"]
+shader = ExtResource("2_rkun3")
+shader_parameter/day_color_list = null
+shader_parameter/night_color_list = null
+shader_parameter/color_count = 6
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ykxab"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Viewport" type="Node2D"]
+script = ExtResource("1_fb2fo")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1000, 600)
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport"]
+anchor_mode = 0
+
+[node name="Main" parent="SubViewport/Camera2D" instance=ExtResource("1_3wyw4")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_7r603")
+texture = SubResource("ViewportTexture_ykxab")
+centered = false

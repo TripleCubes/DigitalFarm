@@ -39,10 +39,12 @@ func _ready():
 		progress = 1
 
 func _draw():
-	draw_rect(Rect2(2,          0,  length - 4, 2), Consts.COLOR_LINE)
-	draw_rect(Rect2(2,          10, length - 4, 2), Consts.COLOR_LINE)
-	draw_rect(Rect2(0,          2,  2,          8), Consts.COLOR_LINE)
-	draw_rect(Rect2(length - 2, 2,  2,          8), Consts.COLOR_LINE)
+	var color_line: = Colors.COLOR_LINE_DAY
+
+	draw_rect(Rect2(2,          0,  length - 4, 2), color_line)
+	draw_rect(Rect2(2,          10, length - 4, 2), color_line)
+	draw_rect(Rect2(0,          2,  2,          8), color_line)
+	draw_rect(Rect2(length - 2, 2,  2,          8), color_line)
 	draw_rect(Rect2(4, 4, (length - 8) * progress, 4), color)
 
 func _process(_delta):

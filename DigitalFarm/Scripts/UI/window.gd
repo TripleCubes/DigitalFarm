@@ -132,12 +132,15 @@ func _ready():
 		max_h = 400
 
 func _draw():
-	draw_rect(Rect2(0,  - BAR_HEIGHT - 2, w, h + BAR_HEIGHT + 2), Consts.COLOR_BACKGROUND, true)
-	draw_rect(Rect2(0,  - BAR_HEIGHT - 2, w, 2                 ), Consts.COLOR_LINE, true)
-	draw_rect(Rect2(0,  -2,               w, 2                 ), Consts.COLOR_LINE, true)
-	draw_rect(Rect2(0,  h,                w, 2                 ), Consts.COLOR_LINE, true)
-	draw_rect(Rect2(-2, - BAR_HEIGHT,     2, h + BAR_HEIGHT    ), Consts.COLOR_LINE, true)
-	draw_rect(Rect2(w,  - BAR_HEIGHT,     2, h + BAR_HEIGHT    ), Consts.COLOR_LINE, true)
+	var color_line: = Colors.COLOR_LINE_DAY
+	var color_background: = Colors.COLOR_BACKGROUND_DAY
+
+	draw_rect(Rect2(0,  - BAR_HEIGHT - 2, w, h + BAR_HEIGHT + 2), color_background, true)
+	draw_rect(Rect2(0,  - BAR_HEIGHT - 2, w, 2                 ), color_line, true)
+	draw_rect(Rect2(0,  -2,               w, 2                 ), color_line, true)
+	draw_rect(Rect2(0,  h,                w, 2                 ), color_line, true)
+	draw_rect(Rect2(-2, - BAR_HEIGHT,     2, h + BAR_HEIGHT    ), color_line, true)
+	draw_rect(Rect2(w,  - BAR_HEIGHT,     2, h + BAR_HEIGHT    ), color_line, true)
 
 func _process(_delta):
 	if $Button_Bar.hovered() and Input.is_action_just_pressed("KEY_2"):
@@ -180,7 +183,7 @@ func _pressing_process() -> void:
 		_prev_y = self.global_position.y
 		_prev_w = w
 		_prev_h = h
-		var mouse_pos: = get_global_mouse_position()
+		var mouse_pos: = GlobalFunctions.get_mouse_pos()
 		_prev_mouse_x = mouse_pos.x
 		_prev_mouse_y = mouse_pos.y
 	if resizable:
@@ -294,7 +297,7 @@ func _resize_window() -> void:
 		_resize_right()
 
 func _resize_left() -> void:
-	var mouse_pos: = get_global_mouse_position()
+	var mouse_pos: = GlobalFunctions.get_mouse_pos()
 
 	self.global_position.x = mouse_pos.x + 1
 	w = _prev_w - (mouse_pos.x + 1 - _prev_x)
@@ -307,7 +310,7 @@ func _resize_left() -> void:
 		self.global_position.x = _prev_x + _prev_w - w
 
 func _resize_right() -> void:
-	var mouse_pos: = get_global_mouse_position()
+	var mouse_pos: = GlobalFunctions.get_mouse_pos()
 
 	w = mouse_pos.x + 1 - _prev_x
 
@@ -317,7 +320,7 @@ func _resize_right() -> void:
 		w = min_w
 
 func _resize_top() -> void:
-	var mouse_pos: = get_global_mouse_position()
+	var mouse_pos: = GlobalFunctions.get_mouse_pos()
 
 	self.global_position.y = mouse_pos.y + 1 + BAR_HEIGHT
 	h = _prev_h - (mouse_pos.y + 1 - _prev_y) - BAR_HEIGHT
@@ -330,7 +333,7 @@ func _resize_top() -> void:
 		self.global_position.y = _prev_y + _prev_h - h
 
 func _resize_bottom() -> void:
-	var mouse_pos: = get_global_mouse_position()
+	var mouse_pos: = GlobalFunctions.get_mouse_pos()
 
 	h = mouse_pos.y + 1 - _prev_y
 
@@ -340,7 +343,7 @@ func _resize_bottom() -> void:
 		h = min_h
 
 func _move_window() -> void:
-	var mouse_pos: = get_global_mouse_position()
+	var mouse_pos: = GlobalFunctions.get_mouse_pos()
 
 	if $Button_Bar.pressed():
 		self.global_position.x = _prev_x + (mouse_pos.x - _prev_mouse_x)

@@ -1,7 +1,7 @@
 class_name App
 extends Node2D
 
-@onready var _main_window_wrapper_list: Node2D = get_node("/root/Main/WindowWrapperList")
+@onready var _main_window_wrapper_list: Node2D = get_node(Consts.MAIN_NODE_PATH + "WindowWrapperList")
 
 var _window_wrapper_scene: PackedScene
 

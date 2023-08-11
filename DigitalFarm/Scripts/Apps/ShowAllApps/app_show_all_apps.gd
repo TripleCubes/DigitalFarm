@@ -58,7 +58,7 @@ func close_app() -> void:
 	_running = false
 
 func _ready():
-	for icon in get_node("/root/Main/IconList").get_children():
+	for icon in get_node(Consts.MAIN_NODE_PATH + "IconList").get_children():
 		_initial_icon_order.append(icon)
 
 	_scroll_bar.length = get_viewport().size.y
@@ -150,7 +150,7 @@ func _move_icons_and_windows(tween: bool) -> float:
 	return _cursor_y - scrolled_pixel
 
 func _windows_pressing_check():
-	var mouse_pos = get_global_mouse_position()
+	var mouse_pos = GlobalFunctions.get_mouse_pos()
 
 	var clicked: = func(window: Node2D) -> bool:
 		return Input.is_action_just_pressed("MOUSE_LEFT") and \

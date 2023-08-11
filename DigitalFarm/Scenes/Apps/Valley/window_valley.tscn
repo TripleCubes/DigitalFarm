@@ -19,11 +19,12 @@ scale = Vector2(2, 2)
 texture = ExtResource("3_tjtij")
 
 [node name="UI_Text" type="RichTextLabel" parent="Window"]
-offset_left = 160.0
+offset_left = 164.0
 offset_top = 10.0
 offset_right = 390.0
 offset_bottom = 150.0
 theme = ExtResource("4_nwdv5")
 text = "tThis is a test This is a test This is a test This is a test This is a test This is a test This is a test this"
 scroll_active = false
+visible_characters_behavior = 1
 script = ExtResource("4_ul7rr")

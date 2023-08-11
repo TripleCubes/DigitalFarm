@@ -95,6 +95,6 @@ func _pot_mini_handle() -> void:
 	$PotMini.show()
 	$Window.hide()
 
-	var mouse_pos: = get_global_mouse_position()
+	var mouse_pos: = GlobalFunctions.get_mouse_pos()
 	$PotMini.position.x = mouse_pos.x
 	$PotMini.position.y = mouse_pos.y

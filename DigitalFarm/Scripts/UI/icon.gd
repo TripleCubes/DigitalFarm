@@ -22,7 +22,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("MOUSE_LEFT"):
 		_prev_x = self.global_position.x
 		_prev_y = self.global_position.y
-		var mouse_pos: = get_global_mouse_position()
+		var mouse_pos: = GlobalFunctions.get_mouse_pos()
 		_prev_mouse_x = mouse_pos.x
 		_prev_mouse_y = mouse_pos.y
 
@@ -33,7 +33,7 @@ func _process(_delta):
 	_double_click_handle()
 
 func _move_icon() -> void:
-	var mouse_pos: = get_global_mouse_position()
+	var mouse_pos: = GlobalFunctions.get_mouse_pos()
 
 	if $Button.pressed():
 		self.global_position.x = _prev_x + (mouse_pos.x - _prev_mouse_x)

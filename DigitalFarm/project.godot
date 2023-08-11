@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Digital Farm"
-run/main_scene="res://Scenes/main.tscn"
+run/main_scene="res://Scenes/viewport.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 ButtonUpdater="*res://Scripts/Singletons/button_updater.gd"
 Settings="*res://Scripts/Singletons/settings.gd"
 Consts="*res://Scripts/Singletons/consts.gd"
+Colors="*res://Scripts/Singletons/colors.gd"
 GlobalFunctions="*res://Scripts/Singletons/global_functions.gd"
 AppNames="*res://Scripts/Apps/app_names.gd"
 App_Pot="*res://Scripts/Apps/Pot/app_pot.gd"
