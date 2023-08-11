@@ -65,7 +65,7 @@ func _ready():
 	_scroll_bar.width = 20
 	_scroll_bar.position.x = get_viewport().size.x - 20
 	_scroll_bar.hide()
-	add_child(_scroll_bar)
+	get_node(Consts.MAIN_NODE_PATH).add_child(_scroll_bar)
 
 func _process(_delta):
 	if not running:

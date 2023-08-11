@@ -19,4 +19,5 @@ func put_window(_window: Node2D) -> void:
 func _process(_delta):
 	if just_pressed() and has_pot:
 		var _window = App_Pot.run_app()
+		window.throw_window_out(_window)
 		has_pot = false

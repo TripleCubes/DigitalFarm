@@ -10,6 +10,7 @@ func _ready():
 			pot_spot.position.x = 30 + x * 60
 			pot_spot.position.y = 30 + y * 60
 			pot_spot.window_clip = $Window/UI_WindowClip
+			pot_spot.window = $Window
 			$Window/UI_WindowClip.add_child(pot_spot)
 			pot_spot_list.append(pot_spot)
 

@@ -19,6 +19,8 @@ var window_clip: UI_WindowClip:
 	set(val):
 		_button.window_clip = val
 
+var window: Node2D
+
 var _button: = UI_Button.new()
 
 func hovered() -> bool:

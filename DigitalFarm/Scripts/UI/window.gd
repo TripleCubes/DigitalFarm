@@ -80,6 +80,33 @@ func set_button_list() -> void:
 	_button_list.clear()
 	_button_search(self)
 
+func throw_window_out(window: Node2D) -> void:
+	const THROW_PADDING: float = 20
+
+	place_on_top()
+
+	window.position.x = self.position.x + self.w/2 - window.w/2
+	window.position.y = self.position.y + self.h/2 - window.h/2
+
+	var move_to: = Vector2(0, 0)
+	if get_viewport().size.x - (self.position.x + self.w) > window.w + THROW_PADDING - 20:
+		move_to.x = self.position.x + self.w + THROW_PADDING
+		move_to.y = window.position.y
+	elif get_viewport().size.y - (self.position.y + self.h) > window.h + BAR_HEIGHT + THROW_PADDING - 20:
+		move_to.x = window.position.x
+		move_to.y = self.position.y + BAR_HEIGHT + self.h + THROW_PADDING
+	elif self.position.x > window.w + THROW_PADDING - 20:
+		move_to.x = self.position.x - window.w - THROW_PADDING
+		move_to.y = window.position.y
+	elif self.position.y - BAR_HEIGHT > window.h + THROW_PADDING - 20:
+		move_to.x = window.position.x
+		move_to.y = self.position.y - window.h - THROW_PADDING + BAR_HEIGHT
+
+	move_to += Vector2(randf_range(-10, 10), randf_range(-10, 10))
+
+	var tween_0: = get_tree().create_tween()
+	tween_0.tween_property(window, "position", move_to, Consts.TWEEN_TIME_SEC).set_trans(Tween.TRANS_SINE)
+
 func window_dragged_into_app(app_comp: App) -> bool:
 	var window_check = GlobalFunctions.cursor_inside_of_window(self)
 
