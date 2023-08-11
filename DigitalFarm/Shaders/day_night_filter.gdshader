@@ -3,6 +3,7 @@ shader_type canvas_item;
 uniform vec4 day_color_list[20];
 uniform vec4 night_color_list[20];
 uniform int color_count = 0;
+uniform float at_night_float = 0;
 
 bool color_equals(vec4 color0, vec4 color1) {
 	return abs(color0.r - color1.r) < 0.01
@@ -20,7 +21,7 @@ void fragment() {
 			continue;
 		}
 
-		COLOR = night_color_list[i];
+		COLOR = mix(day_color_list[i], night_color_list[i], at_night_float);
 		break;
 	}
 }

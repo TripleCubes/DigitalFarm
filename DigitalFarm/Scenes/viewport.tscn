@@ -9,6 +9,7 @@ shader = ExtResource("2_rkun3")
 shader_parameter/day_color_list = null
 shader_parameter/night_color_list = null
 shader_parameter/color_count = 6
+shader_parameter/at_night_float = 0.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ykxab"]
 viewport_path = NodePath("SubViewport")

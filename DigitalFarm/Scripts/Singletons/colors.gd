@@ -11,6 +11,7 @@ enum ColorIndex {
 
 	BLUE,
 	GREEN,
+	DARK_GREEN,
 	YELLOW,
 }
 
@@ -23,23 +24,27 @@ func _ready():
 	}
 
 	color_list[ColorIndex.BACKGROUND] = {
-		day = Color("CC8747"),
-		night = Color("6079A0"),
+		day = COLOR_BACKGROUND_DAY,
+		night = Color("605989"),
 	}
 	color_list[ColorIndex.LINE] = {
-		day = Color("FFE59E"),
-		night = Color("E5EDFF"),
+		day = COLOR_LINE_DAY,
+		night = Color("D0CBED"),
 	}
 
 	color_list[ColorIndex.BLUE] = {
 		day = Color("9AEDF9"),
-		night = Color("9AEDF9"),
+		night = Color("8BD6E0"),
 	}
 	color_list[ColorIndex.GREEN] = {
 		day = Color("6AE25A"),
-		night = Color("59FF7F"),
+		night = Color("93D896"),
+	}
+	color_list[ColorIndex.DARK_GREEN] = {
+		day = Color("E0D46D"),
+		night = Color("B5AA58"),
 	}
 	color_list[ColorIndex.YELLOW] = {
 		day = Color("FFD954"),
-		night = Color("FFECA8"),
+		night = Color("F7ECB2"),
 	}
