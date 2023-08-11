@@ -6,9 +6,23 @@ const BAR_HEIGHT: float = 24
 @export var w: float:
 	set(val):
 		w = val
-		if Engine.is_editor_hint() and has_node("Button_Close"):
+		if not Engine.is_editor_hint():
+			return
+		if has_node("Button_Close"):
 			$Button_Close.position.x = w - 19
-@export var h: float
+		if has_node("Sprite_CloseWindow"):
+			$Sprite_CloseWindow.position.x = w - 19
+		if has_node("ScrollBarVertical"):
+			$ScrollBarVertical.position.x = w - 15
+
+@export var h: float:
+	set(val):
+		h = val
+		if not Engine.is_editor_hint():
+			return
+		if has_node("ScrollBarVertical"):
+			$ScrollBarVertical.length = h - $ScrollBarVertical.width
+
 @export var resizable: bool
 @export var min_w: float
 @export var min_h: float
@@ -45,6 +59,16 @@ func holding_bar() -> bool:
 
 func just_released() -> bool:
 	return $Button_Bar.just_released()
+
+func resizing() -> bool:
+	return $Button_BorderTop.pressed() \
+			or $Button_BorderBottom.pressed() \
+			or $Button_BorderLeft.pressed() \
+			or $Button_BorderRight.pressed() \
+			or $Button_CornerTopLeft.pressed() \
+			or $Button_CornerTopRight.pressed() \
+			or $Button_CornerBottomLeft.pressed() \
+			or $Button_CornerBottomRight.pressed()
 
 func place_on_top() -> void:
 	window_wrapper.move_to_front()
@@ -89,6 +113,7 @@ func throw_window_out(window: Node2D) -> void:
 	window.position.y = self.position.y + self.h/2 - window.h/2
 
 	var move_to: = Vector2(0, 0)
+
 	if get_viewport().size.x - (self.position.x + self.w) > window.w + THROW_PADDING - 20:
 		move_to.x = self.position.x + self.w + THROW_PADDING
 		move_to.y = window.position.y
@@ -98,11 +123,11 @@ func throw_window_out(window: Node2D) -> void:
 	elif self.position.x > window.w + THROW_PADDING - 20:
 		move_to.x = self.position.x - window.w - THROW_PADDING
 		move_to.y = window.position.y
-	elif self.position.y - BAR_HEIGHT > window.h + THROW_PADDING - 20:
+	elif self.position.y - BAR_HEIGHT > window.h + THROW_PADDING + 20:
 		move_to.x = window.position.x
-		move_to.y = self.position.y - window.h - THROW_PADDING + BAR_HEIGHT
+		move_to.y = self.position.y - window.h - THROW_PADDING - BAR_HEIGHT
 
-	move_to += Vector2(randf_range(-10, 10), randf_range(-10, 10))
+	move_to += Vector2(randf_range(-20, 20), randf_range(-20, 20))
 
 	var tween_0: = get_tree().create_tween()
 	tween_0.tween_property(window, "position", move_to, Consts.TWEEN_TIME_SEC).set_trans(Tween.TRANS_SINE)
@@ -121,13 +146,41 @@ func _ready():
 		if window_wrapper != null:
 			app = window_wrapper.app
 
+		if resizable:
+			$ScrollBarVertical.show()
+		move_child($ScrollBarVertical, get_child_count() - 1)
+
 		set_button_list()
 
 		self.position.x = (get_viewport().size.x - w) / 2 + randf_range(-100, 100)
 		self.position.y = (get_viewport().size.y - h) / 2 + randf_range(-100, 100)
 	
 	_set_buttons()
+	_set_init_window_sizes()
 
+func _draw():
+	var color_line: = Colors.COLOR_LINE_DAY
+	var color_background: = Colors.COLOR_BACKGROUND_DAY
+
+	draw_rect(Rect2(0,  - BAR_HEIGHT - 2, w, h + BAR_HEIGHT + 2), color_background, true)
+	draw_rect(Rect2(0,  - BAR_HEIGHT - 2, w, 2                 ), color_line, true)
+	draw_rect(Rect2(0,  -2,               w, 2                 ), color_line, true)
+	draw_rect(Rect2(0,  h,                w, 2                 ), color_line, true)
+	draw_rect(Rect2(-2, - BAR_HEIGHT,     2, h + BAR_HEIGHT    ), color_line, true)
+	draw_rect(Rect2(w,  - BAR_HEIGHT,     2, h + BAR_HEIGHT    ), color_line, true)
+
+func _process(_delta):
+	if not Engine.is_editor_hint():
+		if $Button_Bar.hovered() and Input.is_action_just_pressed("KEY_2"):
+			print("Window size: " + str(w) + " " + str(h))
+
+		_show_hide_resize_buttons()
+		_pressing_process()
+		_scroll_window()
+
+	queue_redraw()
+
+func _set_init_window_sizes() -> void:
 	if w == 0:
 		w = 120
 	if h == 0:
@@ -158,25 +211,6 @@ func _ready():
 	if max_h == 0:
 		max_h = 400
 
-func _draw():
-	var color_line: = Colors.COLOR_LINE_DAY
-	var color_background: = Colors.COLOR_BACKGROUND_DAY
-
-	draw_rect(Rect2(0,  - BAR_HEIGHT - 2, w, h + BAR_HEIGHT + 2), color_background, true)
-	draw_rect(Rect2(0,  - BAR_HEIGHT - 2, w, 2                 ), color_line, true)
-	draw_rect(Rect2(0,  -2,               w, 2                 ), color_line, true)
-	draw_rect(Rect2(0,  h,                w, 2                 ), color_line, true)
-	draw_rect(Rect2(-2, - BAR_HEIGHT,     2, h + BAR_HEIGHT    ), color_line, true)
-	draw_rect(Rect2(w,  - BAR_HEIGHT,     2, h + BAR_HEIGHT    ), color_line, true)
-
-func _process(_delta):
-	if $Button_Bar.hovered() and Input.is_action_just_pressed("KEY_2"):
-		print("Window size: " + str(w) + " " + str(h))
-
-	_show_hide_resize_buttons()
-	_pressing_process()
-	queue_redraw()
-
 func _show_hide_resize_buttons() -> void:
 	if not resizable or App_ShowAllApps.running:
 		$Button_BorderTop.visible = false
@@ -199,9 +233,6 @@ func _show_hide_resize_buttons() -> void:
 	$Button_CornerBottomRight.visible = true
 
 func _pressing_process() -> void:
-	if Engine.is_editor_hint():
-		return
-
 	if App_ShowAllApps.running:
 		return
 
@@ -293,6 +324,10 @@ func _set_buttons() -> void:
 	$Button_Close.position.y = -20
 	$Sprite_CloseWindow.position.x = w - 19
 	$Sprite_CloseWindow.position.y = -20
+
+	$ScrollBarVertical.position.x = w - 15
+	$ScrollBarVertical.length = h - $ScrollBarVertical.width
+	$ScrollBarVertical.set_page_length(max_h, h)
 
 func _resize_window() -> void:
 	if $Button_BorderLeft.pressed():
@@ -389,3 +424,9 @@ func _move_window() -> void:
 
 		var _tween: = get_tree().create_tween()
 		_tween.tween_property(self, "position", move_to, Consts.TWEEN_TIME_SEC).set_trans(Tween.TRANS_SINE)
+
+func _scroll_window():
+	if not has_node("WindowClip/WindowClipContent"):
+		return
+
+	$WindowClip/WindowClipContent.position.y = $ScrollBarVertical.get_scrolled_pixel()

@@ -7,6 +7,7 @@ const DOUBLE_CLICK_DELAY_SEC: float = 0.5
 @export var w: float
 @export var h: float
 @export var draw_frame: bool
+@export var draw_background: bool
 @export var draw_debug_frame: bool
 @export var texture: Texture2D
 @export var z: int
@@ -58,12 +59,16 @@ func _draw():
 		draw_texture_rect(texture, Rect2(0, 0, draw_w, draw_h), false)
 
 	var color_line: = Colors.COLOR_LINE_DAY
+	var color_background: = Colors.COLOR_BACKGROUND_DAY
 
 	if draw_frame:
 		draw_rect(Rect2(0,      -2,     draw_w, 2     ), color_line, true)
 		draw_rect(Rect2(0,      draw_h, draw_w, 2     ), color_line, true)
 		draw_rect(Rect2(-2,     0,      2,      draw_h), color_line, true)
 		draw_rect(Rect2(draw_w, 0,      2,      draw_h), color_line, true)
+
+	if draw_background:
+		draw_rect(Rect2(0, 0, w, h), color_background, true)
 
 	if draw_debug_frame:
 		draw_rect(Rect2(-2,             -2,             draw_w + 4, 1         ), Color("#ff0000"), true)
