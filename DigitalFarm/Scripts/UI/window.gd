@@ -185,7 +185,7 @@ func _process(_delta):
 
 		_show_hide_resize_buttons()
 		_pressing_process()
-		_scroll_window()
+		_scroll_window(_delta)
 
 	queue_redraw()
 
@@ -439,9 +439,20 @@ func _move_window() -> void:
 		var _tween: = get_tree().create_tween()
 		_tween.tween_property(self, "position", move_to, Consts.TWEEN_TIME_SEC).set_trans(Tween.TRANS_SINE)
 
-func _scroll_window():
+func _scroll_window(_delta: float):
 	if not has_node("WindowClip/WindowClipContent"):
 		return
+
+	if Input.is_action_just_released("SCROLL_UP") and not Input.is_action_pressed("KEY_SHIFT"):
+		$ScrollBarVertical.scroll(- Consts.SCROLL_SPEED_PX_SEC * _delta)
+	if Input.is_action_just_released("SCROLL_DOWN") and not Input.is_action_pressed("KEY_SHIFT"):
+		$ScrollBarVertical.scroll(+ Consts.SCROLL_SPEED_PX_SEC * _delta)
+	if Input.is_action_just_released("SCROLL_LEFT") \
+	or (Input.is_action_just_released("SCROLL_UP") and Input.is_action_pressed("KEY_SHIFT")):
+		$ScrollBarHorizontal.scroll(- Consts.SCROLL_SPEED_PX_SEC * _delta)
+	if Input.is_action_just_released("SCROLL_RIGHT") \
+	or (Input.is_action_just_released("SCROLL_DOWN") and Input.is_action_pressed("KEY_SHIFT")):
+		$ScrollBarHorizontal.scroll(+ Consts.SCROLL_SPEED_PX_SEC * _delta)
 
 	if $ScrollBarVertical.scrolling() or resizing():
 		$WindowClip/WindowClipContent.position.y = $ScrollBarVertical.get_scrolled_pixel()
