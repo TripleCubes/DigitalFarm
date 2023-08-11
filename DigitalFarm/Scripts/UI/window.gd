@@ -8,20 +8,27 @@ const BAR_HEIGHT: float = 24
 		w = val
 		if not Engine.is_editor_hint():
 			return
+
 		if has_node("Button_Close"):
 			$Button_Close.position.x = w - 19
 		if has_node("Sprite_CloseWindow"):
 			$Sprite_CloseWindow.position.x = w - 19
+
 		if has_node("ScrollBarVertical"):
 			$ScrollBarVertical.position.x = w - 15
+		if has_node("ScrollBarHorizontal"):
+			$ScrollBarHorizontal.length = w - $ScrollBarHorizontal.width + 4
 
 @export var h: float:
 	set(val):
 		h = val
 		if not Engine.is_editor_hint():
 			return
+
 		if has_node("ScrollBarVertical"):
-			$ScrollBarVertical.length = h - $ScrollBarVertical.width
+			$ScrollBarVertical.length = h - $ScrollBarVertical.width + 4
+		if has_node("ScrollBarHorizontal"):
+			$ScrollBarHorizontal.position.y = h - 15
 
 @export var resizable: bool
 @export var min_w: float
@@ -148,7 +155,9 @@ func _ready():
 
 		if resizable:
 			$ScrollBarVertical.show()
+			$ScrollBarHorizontal.show()
 		move_child($ScrollBarVertical, get_child_count() - 1)
+		move_child($ScrollBarHorizontal, get_child_count() - 1)
 
 		set_button_list()
 
@@ -248,7 +257,8 @@ func _pressing_process() -> void:
 		_resize_window()
 	_move_window()
 	
-	_set_buttons()
+	if resizing():
+		_set_buttons()
 
 	if $Button_Close.just_pressed():
 		queue_free()
@@ -326,8 +336,12 @@ func _set_buttons() -> void:
 	$Sprite_CloseWindow.position.y = -20
 
 	$ScrollBarVertical.position.x = w - 15
-	$ScrollBarVertical.length = h - $ScrollBarVertical.width
+	$ScrollBarVertical.length = h - $ScrollBarVertical.width + 4
 	$ScrollBarVertical.set_page_length(max_h, h)
+
+	$ScrollBarHorizontal.position.y = h - 15
+	$ScrollBarHorizontal.length = w - $ScrollBarHorizontal.width + 4
+	$ScrollBarHorizontal.set_page_length(max_w, w)
 
 func _resize_window() -> void:
 	if $Button_BorderLeft.pressed():
@@ -429,4 +443,8 @@ func _scroll_window():
 	if not has_node("WindowClip/WindowClipContent"):
 		return
 
-	$WindowClip/WindowClipContent.position.y = $ScrollBarVertical.get_scrolled_pixel()
+	if $ScrollBarVertical.scrolling() or resizing():
+		$WindowClip/WindowClipContent.position.y = $ScrollBarVertical.get_scrolled_pixel()
+
+	if $ScrollBarHorizontal.scrolling() or resizing():
+		$WindowClip/WindowClipContent.position.x = $ScrollBarHorizontal.get_scrolled_pixel()

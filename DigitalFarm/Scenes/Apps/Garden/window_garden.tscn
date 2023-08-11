@@ -9,17 +9,15 @@ script = ExtResource("1_4l2wq")
 
 [node name="Window" parent="." instance=ExtResource("2_pk1qc")]
 w = 200.0
-h = 200.0
+h = 120.0
 resizable = true
 min_w = 200.0
-min_h = 200.0
 max_w = 450.0
 max_h = 300.0
 
 [node name="WindowClip" type="ScrollContainer" parent="Window"]
-clip_contents = false
 offset_right = 200.0
-offset_bottom = 200.0
+offset_bottom = 120.0
 script = ExtResource("3_bakkh")
 
 [node name="WindowClipContent" type="Node2D" parent="Window/WindowClip"]

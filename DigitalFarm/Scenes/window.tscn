@@ -1,15 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://daxbag8xh0v2q"]
+[gd_scene load_steps=6 format=3 uid="uid://daxbag8xh0v2q"]
 
 [ext_resource type="Script" path="res://Scripts/UI/window.gd" id="1_4pfb5"]
 [ext_resource type="Script" path="res://Scripts/UI/button.gd" id="2_rffpy"]
 [ext_resource type="Texture2D" uid="uid://dqawqkapue0ta" path="res://Assets/Sprites/UI/close_window.png" id="3_g28ip"]
 [ext_resource type="Script" path="res://Scripts/UI/scroll_bar_vertical.gd" id="4_fjy6o"]
+[ext_resource type="Script" path="res://Scripts/UI/scroll_bar_horizontal.gd" id="5_7qhsi"]
 
 [node name="Window" type="Node2D" groups=["Windows"]]
 texture_filter = 1
 script = ExtResource("1_4pfb5")
-w = 150.0
-h = 150.0
+w = 120.0
+h = 120.0
 min_w = 120.0
 min_h = 120.0
 max_w = 400.0
@@ -17,27 +18,21 @@ max_h = 400.0
 
 [node name="Button_Content" type="Node2D" parent="."]
 script = ExtResource("2_rffpy")
-w = 150.0
-h = 150.0
 
 [node name="Button_Bar" type="Node2D" parent="."]
 position = Vector2(0, -24)
 script = ExtResource("2_rffpy")
-w = 150.0
 h = 22.0
 
 [node name="Button_BorderTop" type="Node2D" parent="."]
 visible = false
 position = Vector2(0, -26)
 script = ExtResource("2_rffpy")
-w = 150.0
 h = 2.0
 
 [node name="Button_BorderBottom" type="Node2D" parent="."]
 visible = false
-position = Vector2(0, 150)
 script = ExtResource("2_rffpy")
-w = 150.0
 h = 2.0
 
 [node name="Button_BorderLeft" type="Node2D" parent="."]
@@ -45,14 +40,14 @@ visible = false
 position = Vector2(-2, -24)
 script = ExtResource("2_rffpy")
 w = 2.0
-h = 174.0
+h = 24.0
 
 [node name="Button_BorderRight" type="Node2D" parent="."]
 visible = false
-position = Vector2(150, -24)
+position = Vector2(0, -24)
 script = ExtResource("2_rffpy")
 w = 2.0
-h = 174.0
+h = 24.0
 
 [node name="Button_CornerTopLeft" type="Node2D" parent="."]
 visible = false
@@ -63,40 +58,46 @@ h = 2.0
 
 [node name="Button_CornerTopRight" type="Node2D" parent="."]
 visible = false
-position = Vector2(150, -26)
+position = Vector2(0, -26)
 script = ExtResource("2_rffpy")
 w = 2.0
 h = 2.0
 
 [node name="Button_CornerBottomLeft" type="Node2D" parent="."]
 visible = false
-position = Vector2(-2, 150)
+position = Vector2(-2, 0)
 script = ExtResource("2_rffpy")
 w = 2.0
 h = 2.0
 
 [node name="Button_CornerBottomRight" type="Node2D" parent="."]
 visible = false
-position = Vector2(150, 150)
 script = ExtResource("2_rffpy")
 w = 2.0
 h = 2.0
 
 [node name="Button_Close" type="Node2D" parent="."]
-position = Vector2(131, -20)
+position = Vector2(101, -20)
 script = ExtResource("2_rffpy")
 w = 14.0
 h = 14.0
 
 [node name="Sprite_CloseWindow" type="Sprite2D" parent="."]
-position = Vector2(131, -20)
+position = Vector2(101, -20)
 scale = Vector2(2, 2)
 texture = ExtResource("3_g28ip")
 centered = false
 
 [node name="ScrollBarVertical" type="Node2D" parent="."]
 visible = false
-position = Vector2(135, 0)
+position = Vector2(105, 0)
 script = ExtResource("4_fjy6o")
-length = 135.0
+length = 109.0
+width = 15.0
+
+[node name="ScrollBarHorizontal" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, 105)
+script = ExtResource("5_7qhsi")
+length = 109.0
 width = 15.0
