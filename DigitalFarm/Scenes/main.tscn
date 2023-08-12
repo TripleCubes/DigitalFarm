@@ -51,6 +51,3 @@ app_name = 6
 texture = ExtResource("9_xs500")
 
 [node name="WindowWrapperList" type="Node2D" parent="."]
-
-[node name="HiddenWindowWrapperList" type="Node2D" parent="."]
-visible = false

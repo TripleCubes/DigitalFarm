@@ -1,6 +1,6 @@
 extends Node
 
-const DAY_NIGHT_TRANSITION_TIME_SEC: float = 0.4
+const DAY_NIGHT_TRANSITION_TIME_SEC: float = 1
 
 var at_night: = true
 
@@ -8,9 +8,9 @@ var at_night_float: float = 1
 
 func _process(_delta):
 	if at_night:
-		at_night_float += _delta
+		at_night_float += _delta / DAY_NIGHT_TRANSITION_TIME_SEC
 	else:
-		at_night_float -= _delta
+		at_night_float -= _delta / DAY_NIGHT_TRANSITION_TIME_SEC
 
 	if at_night_float > 1:
 		at_night_float = 1

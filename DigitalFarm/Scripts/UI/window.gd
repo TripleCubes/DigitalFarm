@@ -146,11 +146,11 @@ func throw_window_out(window: Node2D) -> void:
 	elif self.position.x > window.w + THROW_PADDING - 20:
 		move_to.x = self.position.x - window.w - THROW_PADDING
 		move_to.y = window.position.y
-	elif self.position.y - BAR_HEIGHT > window.h + THROW_PADDING + 20:
+	elif self.position.y - BAR_HEIGHT > window.h + THROW_PADDING + 15:
 		move_to.x = window.position.x
 		move_to.y = self.position.y - window.h - THROW_PADDING - BAR_HEIGHT
 
-	move_to += Vector2(randf_range(-20, 20), randf_range(-20, 20))
+	move_to += Vector2(randf_range(-15, 15), randf_range(-15, 15))
 
 	var tween_0: = get_tree().create_tween()
 	tween_0.tween_property(window, "position", move_to, Consts.TWEEN_TIME_SEC).set_trans(Tween.TRANS_SINE)
