@@ -58,6 +58,13 @@ func interacted() -> bool:
 	
 	return false
 
+func hovered() -> bool:
+	for button in _button_list:
+		if button.hovered():
+			return true
+	
+	return false
+
 func close_button_pressed() -> bool:
 	return $Button_Close.pressed()
 
@@ -446,16 +453,20 @@ func _scroll_window(_delta: float):
 	if not has_node("WindowClip/WindowClipContent"):
 		return
 
-	if Input.is_action_just_released("SCROLL_UP") and not Input.is_action_pressed("KEY_SHIFT"):
-		$ScrollBarVertical.scroll(- Consts.SCROLL_SPEED_PX_SEC * _delta)
-	if Input.is_action_just_released("SCROLL_DOWN") and not Input.is_action_pressed("KEY_SHIFT"):
-		$ScrollBarVertical.scroll(+ Consts.SCROLL_SPEED_PX_SEC * _delta)
-	if Input.is_action_just_released("SCROLL_LEFT") \
-	or (Input.is_action_just_released("SCROLL_UP") and Input.is_action_pressed("KEY_SHIFT")):
-		$ScrollBarHorizontal.scroll(- Consts.SCROLL_SPEED_PX_SEC * _delta * 2)
-	if Input.is_action_just_released("SCROLL_RIGHT") \
-	or (Input.is_action_just_released("SCROLL_DOWN") and Input.is_action_pressed("KEY_SHIFT")):
-		$ScrollBarHorizontal.scroll(+ Consts.SCROLL_SPEED_PX_SEC * _delta * 2)
+	if GlobalFunctions.cursor_inside_of_window() == self:
+		if Input.is_action_just_released("SCROLL_UP") and not Input.is_action_pressed("KEY_SHIFT"):
+			$ScrollBarVertical.scroll(- Consts.SCROLL_SPEED_PX_SEC * _delta)
+
+		if Input.is_action_just_released("SCROLL_DOWN") and not Input.is_action_pressed("KEY_SHIFT"):
+			$ScrollBarVertical.scroll(+ Consts.SCROLL_SPEED_PX_SEC * _delta)
+
+		if Input.is_action_just_released("SCROLL_LEFT") \
+		or (Input.is_action_just_released("SCROLL_UP") and Input.is_action_pressed("KEY_SHIFT")):
+			$ScrollBarHorizontal.scroll(- Consts.SCROLL_SPEED_PX_SEC * _delta * 2)
+
+		if Input.is_action_just_released("SCROLL_RIGHT") \
+		or (Input.is_action_just_released("SCROLL_DOWN") and Input.is_action_pressed("KEY_SHIFT")):
+			$ScrollBarHorizontal.scroll(+ Consts.SCROLL_SPEED_PX_SEC * _delta * 2)
 
 	if $ScrollBarVertical.scrolling() or resizing():
 		$WindowClip/WindowClipContent.position.y = $ScrollBarVertical.get_scrolled_pixel()
