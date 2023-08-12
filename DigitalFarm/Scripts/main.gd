@@ -1,5 +1,8 @@
 extends Node2D
 
+func _ready():
+	Input.set_custom_mouse_cursor(preload("res://Assets/Sprites/UI/cursor_pointer.png"))
+
 func _process(_delta):
 	ButtonUpdater._update(_delta)
 

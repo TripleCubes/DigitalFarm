@@ -3,6 +3,12 @@ extends Node2D
 
 const BAR_HEIGHT: float = 24
 
+const _texture_cursor_downward_diagonal: Texture2D = preload("res://Assets/Sprites/UI/cursor_downward_diagonal.png")
+const _texture_cursor_forward_diagonal: Texture2D = preload("res://Assets/Sprites/UI/cursor_forward_diagonal.png")
+const _texture_cursor_top_down: Texture2D = preload("res://Assets/Sprites/UI/cursor_top_down.png")
+const _texture_cursor_left_right: Texture2D = preload("res://Assets/Sprites/UI/cursor_left_right.png")
+const _texture_cursor_pointer: Texture2D = preload("res://Assets/Sprites/UI/cursor_pointer.png")
+
 @export var w: float:
 	set(val):
 		w = val
@@ -202,6 +208,7 @@ func _process(_delta):
 		_show_hide_resize_buttons()
 		_pressing_process()
 		_scroll_window(_delta)
+		_cursor_texture_handle()
 
 	queue_redraw()
 
@@ -480,3 +487,35 @@ func _scroll_window(_delta: float):
 
 	if $ScrollBarHorizontal.scrolling() or resizing():
 		$WindowClip/WindowClipContent.position.x = $ScrollBarHorizontal.get_scrolled_pixel()
+
+func _cursor_texture_handle() -> void:
+	if not resizable:
+		return
+
+	if $Button_CornerTopLeft.pressed() or $Button_CornerBottomRight.pressed():
+		Input.set_custom_mouse_cursor(_texture_cursor_downward_diagonal, Input.CURSOR_ARROW, Vector2(10, 10))
+		return
+	if $Button_CornerBottomLeft.pressed() or $Button_CornerTopRight.pressed():
+		Input.set_custom_mouse_cursor(_texture_cursor_forward_diagonal, Input.CURSOR_ARROW, Vector2(10, 10))
+		return
+	if $Button_BorderBottom.pressed() or $Button_BorderTop.pressed():
+		Input.set_custom_mouse_cursor(_texture_cursor_top_down, Input.CURSOR_ARROW, Vector2(10, 10))
+		return
+	if $Button_BorderLeft.pressed() or $Button_BorderRight.pressed():
+		Input.set_custom_mouse_cursor(_texture_cursor_left_right, Input.CURSOR_ARROW, Vector2(10, 10))
+		return
+
+	if $Button_CornerTopLeft.hovered() or $Button_CornerBottomRight.hovered():
+		Input.set_custom_mouse_cursor(_texture_cursor_downward_diagonal, Input.CURSOR_ARROW, Vector2(10, 10))
+		return
+	if $Button_CornerBottomLeft.hovered() or $Button_CornerTopRight.hovered():
+		Input.set_custom_mouse_cursor(_texture_cursor_forward_diagonal, Input.CURSOR_ARROW, Vector2(10, 10))
+		return
+	if $Button_BorderBottom.hovered() or $Button_BorderTop.hovered():
+		Input.set_custom_mouse_cursor(_texture_cursor_top_down, Input.CURSOR_ARROW, Vector2(10, 10))
+		return
+	if $Button_BorderLeft.hovered() or $Button_BorderRight.hovered():
+		Input.set_custom_mouse_cursor(_texture_cursor_left_right, Input.CURSOR_ARROW, Vector2(10, 10))
+		return
+
+	Input.set_custom_mouse_cursor(_texture_cursor_pointer)
