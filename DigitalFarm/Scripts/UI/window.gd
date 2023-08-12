@@ -11,8 +11,6 @@ const BAR_HEIGHT: float = 24
 
 		if has_node("Button_Close"):
 			$Button_Close.position.x = w - 19
-		if has_node("Sprite_CloseWindow"):
-			$Sprite_CloseWindow.position.x = w - 19
 
 		if has_node("ScrollBarVertical"):
 			$ScrollBarVertical.position.x = w - 15
@@ -110,9 +108,20 @@ func enable_buttons() -> void:
 		button.show()
 		_show_hide_resize_buttons()
 
+	$ScrollBarHorizontal.button.enabled = true
+	$ScrollBarVertical.button.enabled = true
+	$Button_Close.enabled = true
+
 func disable_buttons() -> void:
 	for button in _button_list:
 		button.hide()
+
+	$ScrollBarHorizontal.button.enabled = false
+	$ScrollBarHorizontal.button.show()
+	$ScrollBarVertical.button.enabled = false
+	$ScrollBarVertical.button.show()
+	$Button_Close.enabled = false
+	$Button_Close.show()
 
 func set_button_list() -> void:
 	_button_list.clear()
@@ -339,8 +348,6 @@ func _set_buttons() -> void:
 
 	$Button_Close.position.x = w - 19
 	$Button_Close.position.y = -20
-	$Sprite_CloseWindow.position.x = w - 19
-	$Sprite_CloseWindow.position.y = -20
 
 	if not has_node("WindowClip"):
 		return

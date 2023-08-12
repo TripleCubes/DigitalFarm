@@ -86,14 +86,7 @@ h = 2.0
 [node name="Button_Close" type="Node2D" parent="."]
 position = Vector2(101, -20)
 script = ExtResource("2_rffpy")
-w = 14.0
-h = 14.0
-
-[node name="Sprite_CloseWindow" type="Sprite2D" parent="."]
-position = Vector2(101, -20)
-scale = Vector2(2, 2)
 texture = ExtResource("3_g28ip")
-centered = false
 
 [node name="ScrollBarVertical" type="Node2D" parent="."]
 visible = false

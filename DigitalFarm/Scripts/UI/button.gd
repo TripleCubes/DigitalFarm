@@ -13,6 +13,14 @@ const DOUBLE_CLICK_DELAY_SEC: float = 0.5
 @export var z: int
 @export var window_clip: UI_WindowClip
 
+var enabled: bool = true:
+	set(val):
+		enabled = val
+	get:
+		if not visible:
+			return false
+		return enabled
+
 var _hovered: = false
 var _pressed: = false
 var _just_pressed: = false
@@ -80,7 +88,7 @@ func _process(_delta):
 	queue_redraw()
 
 func _update(_delta) -> void:
-	if not visible:
+	if not enabled:
 		_hovered = false
 		_pressed = false
 		_just_pressed = false
