@@ -64,18 +64,17 @@ func _garden_handle() -> void:
 		var pot_spot: = GlobalFunctions.cursor_on_draw_window_in(window_check, "pot_spot_list")
 		if pot_spot != null and not pot_spot.has_pot:
 			pot_spot.put_window($Window)
-			queue_free()
 
 	_show_pot_mini = $Window.window_dragged_into_app(App_Garden)
 
 func _pot_mini_handle() -> void:
 	if not _show_pot_mini:
 		$PotMini.hide()
-		$Window.show()
+		$Window.modulate.a = 1
 		return
 
 	$PotMini.show()
-	$Window.hide()
+	$Window.modulate.a = 0
 
 	var mouse_pos: = GlobalFunctions.get_mouse_pos()
 	$PotMini.position.x = mouse_pos.x

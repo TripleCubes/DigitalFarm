@@ -29,9 +29,6 @@ func hovered() -> bool:
 func just_pressed() -> bool:
 	return _button.just_pressed()
 
-func put_window(_window: Node2D) -> void:
-	pass
-
 func _ready():
 	self.add_to_group("DragWindowIns")
 	add_child(_button)

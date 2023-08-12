@@ -17,7 +17,7 @@ var enabled: bool = true:
 	set(val):
 		enabled = val
 	get:
-		if not visible:
+		if not is_visible_in_tree():
 			return false
 		return enabled
 
@@ -54,7 +54,7 @@ func _ready():
 	draw_debug_frame = ButtonUpdater.draw_button_debug_frame_enabled
 
 func _draw():
-	if not visible:
+	if not is_visible_in_tree():
 		return
 
 	var draw_w: = w

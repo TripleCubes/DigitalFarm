@@ -20,26 +20,26 @@ scale = Vector2(2, 2)
 texture = ExtResource("3_8mtdm")
 
 [node name="PotMini" type="Node2D" parent="."]
-visible = false
 
-[node name="PotMiniEmpty" type="Sprite2D" parent="PotMini"]
+[node name="Sprite_PotEmpty" type="Sprite2D" parent="PotMini"]
+visible = false
 position = Vector2(14, -11)
 scale = Vector2(2, 2)
 texture = ExtResource("3_qysmi")
 
-[node name="PotMiniHasSeed" type="Sprite2D" parent="PotMini"]
+[node name="Sprite_PotHasSeed" type="Sprite2D" parent="PotMini"]
 visible = false
 position = Vector2(14, -11)
 scale = Vector2(2, 2)
 texture = ExtResource("4_o6ond")
 
-[node name="Pot_Grown" type="Sprite2D" parent="PotMini"]
+[node name="Sprite_PotGrown" type="Sprite2D" parent="PotMini"]
 visible = false
 position = Vector2(14, -11)
 scale = Vector2(2, 2)
 texture = ExtResource("5_rt84r")
 
-[node name="PotMiniDead" type="Sprite2D" parent="PotMini"]
+[node name="Sprite_PotDead" type="Sprite2D" parent="PotMini"]
 visible = false
 position = Vector2(14, -11)
 scale = Vector2(2, 2)
