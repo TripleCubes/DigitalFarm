@@ -335,13 +335,16 @@ func _set_buttons() -> void:
 	$Sprite_CloseWindow.position.x = w - 19
 	$Sprite_CloseWindow.position.y = -20
 
+	if not has_node("WindowClip"):
+		return
+
 	$ScrollBarVertical.position.x = w - 15
 	$ScrollBarVertical.length = h - $ScrollBarVertical.width + 4
-	$ScrollBarVertical.set_page_length(max_h, h)
+	$ScrollBarVertical.set_page_length($WindowClip.content_h, h)
 
 	$ScrollBarHorizontal.position.y = h - 15
 	$ScrollBarHorizontal.length = w - $ScrollBarHorizontal.width + 4
-	$ScrollBarHorizontal.set_page_length(max_w, w)
+	$ScrollBarHorizontal.set_page_length($WindowClip.content_w, w)
 
 func _resize_window() -> void:
 	if $Button_BorderLeft.pressed():
@@ -449,10 +452,10 @@ func _scroll_window(_delta: float):
 		$ScrollBarVertical.scroll(+ Consts.SCROLL_SPEED_PX_SEC * _delta)
 	if Input.is_action_just_released("SCROLL_LEFT") \
 	or (Input.is_action_just_released("SCROLL_UP") and Input.is_action_pressed("KEY_SHIFT")):
-		$ScrollBarHorizontal.scroll(- Consts.SCROLL_SPEED_PX_SEC * _delta)
+		$ScrollBarHorizontal.scroll(- Consts.SCROLL_SPEED_PX_SEC * _delta * 2)
 	if Input.is_action_just_released("SCROLL_RIGHT") \
 	or (Input.is_action_just_released("SCROLL_DOWN") and Input.is_action_pressed("KEY_SHIFT")):
-		$ScrollBarHorizontal.scroll(+ Consts.SCROLL_SPEED_PX_SEC * _delta)
+		$ScrollBarHorizontal.scroll(+ Consts.SCROLL_SPEED_PX_SEC * _delta * 2)
 
 	if $ScrollBarVertical.scrolling() or resizing():
 		$WindowClip/WindowClipContent.position.y = $ScrollBarVertical.get_scrolled_pixel()

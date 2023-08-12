@@ -2,9 +2,9 @@ extends Node
 
 const DAY_NIGHT_TRANSITION_TIME_SEC: float = 0.4
 
-var at_night: = false
+var at_night: = true
 
-var at_night_float: float = 0
+var at_night_float: float = 1
 
 func _process(_delta):
 	if at_night:

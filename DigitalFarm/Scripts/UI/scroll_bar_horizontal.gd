@@ -2,7 +2,7 @@
 class_name UI_ScrollBarHorizontal
 extends Node2D
 
-const SCROLL_TWEEN_TIME_SEC: float = 0.15
+const SCROLL_TWEEN_TIME_SEC: float = 0.05
 
 @export var length: float:
 	set(val):
