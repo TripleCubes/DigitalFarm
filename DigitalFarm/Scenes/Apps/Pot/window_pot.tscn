@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bj4sm1n35gcij"]
+[gd_scene load_steps=14 format=3 uid="uid://bj4sm1n35gcij"]
 
 [ext_resource type="Script" path="res://Scripts/Apps/Pot/window_pot.gd" id="1_mi2a3"]
 [ext_resource type="PackedScene" uid="uid://daxbag8xh0v2q" path="res://Scenes/window.tscn" id="2_d2kgx"]
@@ -9,14 +9,16 @@
 [ext_resource type="Script" path="res://Scripts/UI/progress_bar_horizontal.gd" id="7_rcf7r"]
 [ext_resource type="Script" path="res://Scripts/UI/bubble.gd" id="8_lie4l"]
 [ext_resource type="Texture2D" uid="uid://c3bi0k2goi0ql" path="res://Assets/Sprites/Apps/Pot/water_drop.png" id="9_1l86b"]
-[ext_resource type="Texture2D" uid="uid://bvh06akk7hyxv" path="res://Assets/Sprites/Apps/Pot/pot_mini.png" id="10_3e6rr"]
+[ext_resource type="Texture2D" uid="uid://bvh06akk7hyxv" path="res://Assets/Sprites/Apps/Pot/pot_mini_grown.png" id="10_igefk"]
+[ext_resource type="Texture2D" uid="uid://o3q2jtwg0wj7" path="res://Assets/Sprites/Apps/Pot/pot_mini_dead.png" id="11_io5cc"]
+[ext_resource type="Texture2D" uid="uid://cgkdnilge3uvo" path="res://Assets/Sprites/Apps/Pot/pot_mini_empty.png" id="12_3v7xk"]
+[ext_resource type="Texture2D" uid="uid://w2v0c01cpqe7" path="res://Assets/Sprites/Apps/Pot/pot_mini_has_seed.png" id="13_hr2df"]
 
 [node name="Window_Pot" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_mi2a3")
 
 [node name="Window" parent="." instance=ExtResource("2_d2kgx")]
-w = 120.0
 h = 180.0
 
 [node name="Sprite_PotEmpty" type="Sprite2D" parent="Window"]
@@ -61,8 +63,29 @@ script = ExtResource("8_lie4l")
 init_texture = ExtResource("9_1l86b")
 init_dir = 2
 
-[node name="PotMini" type="Sprite2D" parent="."]
-position = Vector2(-30, -40)
+[node name="PotMini" type="Node2D" parent="."]
+position = Vector2(-70, -70)
+
+[node name="Sprite_PotEmpty" type="Sprite2D" parent="PotMini"]
+position = Vector2(0, -39)
 scale = Vector2(2, 2)
-texture = ExtResource("10_3e6rr")
+texture = ExtResource("12_3v7xk")
+
+[node name="Sprite_PotHasSeed" type="Sprite2D" parent="PotMini"]
+visible = false
+position = Vector2(0, -39)
+scale = Vector2(2, 2)
+texture = ExtResource("13_hr2df")
+
+[node name="Sprite_PotGrown" type="Sprite2D" parent="PotMini"]
+visible = false
+position = Vector2(0, -3)
+scale = Vector2(2, 2)
+texture = ExtResource("10_igefk")
 offset = Vector2(0, -18)
+
+[node name="Sprite_PotDead" type="Sprite2D" parent="PotMini"]
+visible = false
+position = Vector2(0, -39)
+scale = Vector2(2, 2)
+texture = ExtResource("11_io5cc")

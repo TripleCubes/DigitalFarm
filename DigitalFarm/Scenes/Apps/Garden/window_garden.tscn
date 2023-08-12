@@ -15,6 +15,7 @@ max_w = 450.0
 max_h = 300.0
 
 [node name="WindowClip" type="ScrollContainer" parent="Window"]
+clip_contents = false
 offset_right = 200.0
 offset_bottom = 120.0
 script = ExtResource("3_bakkh")

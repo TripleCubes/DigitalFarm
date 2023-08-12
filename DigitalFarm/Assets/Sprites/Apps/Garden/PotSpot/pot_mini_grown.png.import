@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvh06akk7hyxv"
-path="res://.godot/imported/pot_mini.png-9fb14d182a870b65fef6241fc07ad8a0.ctex"
+uid="uid://dsuijx5tj7et3"
+path="res://.godot/imported/pot_mini_grown.png-a6bfeee005eef5340864c9ea7a3f1634.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Apps/Pot/pot_mini.png"
-dest_files=["res://.godot/imported/pot_mini.png-9fb14d182a870b65fef6241fc07ad8a0.ctex"]
+source_file="res://Assets/Sprites/Apps/Garden/PotSpot/pot_mini_grown.png"
+dest_files=["res://.godot/imported/pot_mini_grown.png-a6bfeee005eef5340864c9ea7a3f1634.ctex"]
 
 [params]
 

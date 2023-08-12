@@ -26,38 +26,20 @@ var pot_status: = App_Pot.PotStatus.EMPTY:
 	set(val):
 		match val:
 			App_Pot.PotStatus.EMPTY:
-				$Window/Sprite_PotEmpty.show()
-				$Window/Sprite_PotHasSeed.hide()
-				$Window/Sprite_PotGrown.hide()
-				$Window/Sprite_PotDead.hide()
+				_show_only_sprite("Sprite_PotEmpty")
+
 			App_Pot.PotStatus.HAS_SEED:
-				$Window/Sprite_PotEmpty.hide()
-				$Window/Sprite_PotHasSeed.show()
-				$Window/Sprite_PotGrown.hide()
-				$Window/Sprite_PotDead.hide()
+				_show_only_sprite("Sprite_PotHasSeed")
+				_progress_bar_activate()
 
-				$Window/ProgressBar.show()
-				$Window/ProgressBar.paused = false
-				if not Settings.debug_mode:
-					_time_until_need_water_sec = WATER_REQUEST_TIME_SEC
-				else:
-					_time_until_need_water_sec = DEBUG_WATER_REQUEST_TIME_SEC
 			App_Pot.PotStatus.GROWN:
-				$Window/Sprite_PotEmpty.hide()
-				$Window/Sprite_PotHasSeed.hide()
-				$Window/Sprite_PotGrown.show()
-				$Window/Sprite_PotDead.hide()
+				_show_only_sprite("Sprite_PotGrown")
+				_progress_bar_finished()
 
-				$Window/ProgressBar.hide()
-				$Window/ProgressBar.paused = true
 			App_Pot.PotStatus.DEAD:
-				$Window/Sprite_PotEmpty.hide()
-				$Window/Sprite_PotHasSeed.hide()
-				$Window/Sprite_PotGrown.hide()
-				$Window/Sprite_PotDead.show()
+				_show_only_sprite("Sprite_PotDead")
+				_progress_bar_finished()
 
-				$Window/ProgressBar.hide()
-				$Window/ProgressBar.paused = true
 		pot_status = val
 
 func _process(_delta):
@@ -98,3 +80,29 @@ func _pot_mini_handle() -> void:
 	var mouse_pos: = GlobalFunctions.get_mouse_pos()
 	$PotMini.position.x = mouse_pos.x
 	$PotMini.position.y = mouse_pos.y
+
+func _show_only_sprite(sprite_name: String) -> void:
+	for node in $Window.get_children():
+		if not node is Sprite2D:
+			continue
+		node.hide()
+
+	for node in $PotMini.get_children():
+		if not node is Sprite2D:
+			continue
+		node.hide()
+
+	$Window.get_node(sprite_name).show()
+	$PotMini.get_node(sprite_name).show()
+
+func _progress_bar_activate() -> void:
+	$Window/ProgressBar.show()
+	$Window/ProgressBar.paused = false
+	if not Settings.debug_mode:
+		_time_until_need_water_sec = WATER_REQUEST_TIME_SEC
+	else:
+		_time_until_need_water_sec = DEBUG_WATER_REQUEST_TIME_SEC
+
+func _progress_bar_finished() -> void:
+	$Window/ProgressBar.hide()
+	$Window/ProgressBar.paused = true

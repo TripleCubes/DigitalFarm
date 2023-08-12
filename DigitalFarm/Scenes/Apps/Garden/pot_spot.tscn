@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0nixgofbknb3"]
+[gd_scene load_steps=7 format=3 uid="uid://b0nixgofbknb3"]
 
 [ext_resource type="Script" path="res://Scripts/Apps/Garden/pot_spot.gd" id="1_3taro"]
-[ext_resource type="Texture2D" uid="uid://dsuijx5tj7et3" path="res://Assets/Sprites/Apps/Garden/PotSpot/pot_mini.png" id="2_n1ll2"]
 [ext_resource type="Texture2D" uid="uid://dxu0784e0u275" path="res://Assets/Sprites/Apps/Garden/PotSpot/table.png" id="3_8mtdm"]
+[ext_resource type="Texture2D" uid="uid://dwxsomme5wswp" path="res://Assets/Sprites/Apps/Garden/PotSpot/pot_mini_empty.png" id="3_qysmi"]
+[ext_resource type="Texture2D" uid="uid://xg82cqpj70mq" path="res://Assets/Sprites/Apps/Garden/PotSpot/pot_mini_has_seed.png" id="4_o6ond"]
+[ext_resource type="Texture2D" uid="uid://dsuijx5tj7et3" path="res://Assets/Sprites/Apps/Garden/PotSpot/pot_mini_grown.png" id="5_rt84r"]
+[ext_resource type="Texture2D" uid="uid://cqrjukbipxbja" path="res://Assets/Sprites/Apps/Garden/PotSpot/pot_mini_dead.png" id="6_f7dbr"]
 
 [node name="PotSpot" type="Node2D"]
 texture_filter = 1
@@ -16,8 +19,28 @@ position = Vector2(15, 18)
 scale = Vector2(2, 2)
 texture = ExtResource("3_8mtdm")
 
-[node name="PotMini" type="Sprite2D" parent="."]
+[node name="PotMini" type="Node2D" parent="."]
+visible = false
+
+[node name="PotMiniEmpty" type="Sprite2D" parent="PotMini"]
+position = Vector2(14, -11)
+scale = Vector2(2, 2)
+texture = ExtResource("3_qysmi")
+
+[node name="PotMiniHasSeed" type="Sprite2D" parent="PotMini"]
 visible = false
 position = Vector2(14, -11)
 scale = Vector2(2, 2)
-texture = ExtResource("2_n1ll2")
+texture = ExtResource("4_o6ond")
+
+[node name="Pot_Grown" type="Sprite2D" parent="PotMini"]
+visible = false
+position = Vector2(14, -11)
+scale = Vector2(2, 2)
+texture = ExtResource("5_rt84r")
+
+[node name="PotMiniDead" type="Sprite2D" parent="PotMini"]
+visible = false
+position = Vector2(14, -11)
+scale = Vector2(2, 2)
+texture = ExtResource("6_f7dbr")
