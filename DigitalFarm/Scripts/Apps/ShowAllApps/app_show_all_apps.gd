@@ -76,6 +76,8 @@ func _process(_delta):
 		close_app()
 		return
 
+	_scroll_wheel_handle(_delta)
+
 	if _scroll_bar.scrolling():
 		_move_icons_and_windows(false)
 
@@ -217,3 +219,13 @@ func _enable_window_buttons() -> void:
 func _disable_window_buttons() -> void:
 	for window in get_tree().get_nodes_in_group("Windows"):
 		window.disable_buttons()
+
+func _scroll_wheel_handle(_delta: float) -> void:
+	if not running:
+		return
+
+	if Input.is_action_just_released("SCROLL_UP") and not Input.is_action_pressed("KEY_SHIFT"):
+		_scroll_bar.scroll(- Consts.SCROLL_SPEED_PX_SEC * _delta)
+
+	if Input.is_action_just_released("SCROLL_DOWN") and not Input.is_action_pressed("KEY_SHIFT"):
+		_scroll_bar.scroll(+ Consts.SCROLL_SPEED_PX_SEC * _delta)
