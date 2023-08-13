@@ -29,7 +29,7 @@ func _update(_delta) -> void:
 				
 			button_dict[z][i]._update(_delta)
 
-			if button_dict[z][i].pressed():
+			if button_dict[z][i].pressed() or button_dict[z][i].hovered():
 				return
 
 func toggle_draw_button_debug_frame() -> void:

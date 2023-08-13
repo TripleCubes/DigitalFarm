@@ -36,6 +36,9 @@ func cursor_inside_of_window(ignore_window: Node2D = null) -> Node2D:
 
 		if ignore_window != null and ignore_window == window:
 			continue
+
+		if not window.is_visible_in_tree():
+			continue
 			
 		if mouse_pos.x >= window.position.x and mouse_pos.y >= window.position.y \
 		and mouse_pos.x <= window.position.x + window.w \
@@ -44,9 +47,12 @@ func cursor_inside_of_window(ignore_window: Node2D = null) -> Node2D:
 
 	return null
 
-func cursor_on_draw_window_in(window_check: Node2D, draw_window_in_list_name: String) -> UI_DragWindowIn:
-	for draw_window_in in window_check.window_wrapper[draw_window_in_list_name]:
-		if draw_window_in.hovered():
-			return draw_window_in
+func cursor_on_drag_window_in(window_check: Node2D, drag_window_in_list_name: String) -> UI_DragWindowIn:
+	var mouse_pos: = GlobalFunctions.get_mouse_pos()
+	for drag_window_in in window_check.window_wrapper[drag_window_in_list_name]:
+		if mouse_pos.x >= drag_window_in.global_position.x and mouse_pos.y >= drag_window_in.global_position.y \
+		and mouse_pos.x <= drag_window_in.global_position.x + drag_window_in.w \
+		and mouse_pos.y <= drag_window_in.global_position.y + drag_window_in.h:
+			return drag_window_in
 	
 	return null

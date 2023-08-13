@@ -61,7 +61,7 @@ func _garden_handle() -> void:
 	var window_check = GlobalFunctions.cursor_inside_of_window($Window)
 
 	if $Window.just_released() and _show_pot_mini:
-		var pot_spot: = GlobalFunctions.cursor_on_draw_window_in(window_check, "pot_spot_list")
+		var pot_spot: = GlobalFunctions.cursor_on_drag_window_in(window_check, "pot_spot_list")
 		if pot_spot != null and not pot_spot.has_pot:
 			pot_spot.put_window($Window)
 
