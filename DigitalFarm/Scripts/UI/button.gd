@@ -99,6 +99,9 @@ func _update(_delta) -> void:
 	_hover_check()
 	_pressing_check()
 
+func _before_update(_delta) -> void:
+	_hovered = false
+
 func _notification(what):
 	if Engine.is_editor_hint():
 		return
@@ -107,8 +110,6 @@ func _notification(what):
 		ButtonUpdater.remove_button(self)
 
 func _hover_check() -> void:
-	_hovered = false
-
 	var check_w: = w
 	var check_h: = h
 	if texture != null and (w == 0 or h == 0):

@@ -20,6 +20,15 @@ func place_button_on_top(button: UI_Button) -> void:
 	button_dict[button.z].erase(button)
 	button_dict[button.z].push_back(button)
 
+func _before_update(_delta) -> void:
+	for z_list_index in range(button_z_list.size() - 1, -1, -1):
+		var z: int = button_z_list[z_list_index]
+		for i in range(button_dict[z].size() - 1, -1, -1):
+			if button_dict[z][i].is_queued_for_deletion():
+				continue
+				
+			button_dict[z][i]._before_update(_delta)
+
 func _update(_delta) -> void:
 	for z_list_index in range(button_z_list.size() - 1, -1, -1):
 		var z: int = button_z_list[z_list_index]
