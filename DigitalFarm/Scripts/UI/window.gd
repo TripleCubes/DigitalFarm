@@ -508,6 +508,9 @@ func _cursor_texture_handle() -> void:
 	if not resizable:
 		return
 
+	if holding_bar():
+		return
+
 	if $Button_CornerTopLeft.pressed() or $Button_CornerBottomRight.pressed():
 		Input.set_custom_mouse_cursor(_texture_cursor_downward_diagonal, Input.CURSOR_ARROW, Vector2(10, 10))
 		return
