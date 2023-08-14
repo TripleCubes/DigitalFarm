@@ -194,7 +194,7 @@ func _draw():
 	var color_background: = Colors.COLOR_BACKGROUND_DAY
 
 	# Background
-	draw_rect(Rect2(0,  - BAR_HEIGHT - 2, w,     h + BAR_HEIGHT + 2), color_background, true)
+	draw_rect(Rect2(0,  - BAR_HEIGHT    , w,     h + BAR_HEIGHT    ), color_background, true)
 
 	# Top border
 	draw_rect(Rect2(2,  - BAR_HEIGHT - 2, w - 4, 2                 ), color_line, true)
