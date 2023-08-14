@@ -193,12 +193,28 @@ func _draw():
 	var color_line: = Colors.COLOR_LINE_DAY
 	var color_background: = Colors.COLOR_BACKGROUND_DAY
 
-	draw_rect(Rect2(0,  - BAR_HEIGHT - 2, w, h + BAR_HEIGHT + 2), color_background, true)
-	draw_rect(Rect2(0,  - BAR_HEIGHT - 2, w, 2                 ), color_line, true)
-	draw_rect(Rect2(0,  -2,               w, 2                 ), color_line, true)
-	draw_rect(Rect2(0,  h,                w, 2                 ), color_line, true)
-	draw_rect(Rect2(-2, - BAR_HEIGHT,     2, h + BAR_HEIGHT    ), color_line, true)
-	draw_rect(Rect2(w,  - BAR_HEIGHT,     2, h + BAR_HEIGHT    ), color_line, true)
+	# Background
+	draw_rect(Rect2(0,  - BAR_HEIGHT - 2, w,     h + BAR_HEIGHT + 2), color_background, true)
+
+	# Top border
+	draw_rect(Rect2(2,  - BAR_HEIGHT - 2, w - 4, 2                 ), color_line, true)
+	# Middle border
+	draw_rect(Rect2(0,  -2,               w,     2                 ), color_line, true)
+	# Bottom border
+	draw_rect(Rect2(2,  h,                w - 4, 2                 ), color_line, true)
+	# Left border
+	draw_rect(Rect2(-2, - BAR_HEIGHT + 2, 2,     h + BAR_HEIGHT - 4), color_line, true)
+	# Right border
+	draw_rect(Rect2(w,  - BAR_HEIGHT + 2, 2,     h + BAR_HEIGHT - 4), color_line, true)
+
+	# Top left corner
+	draw_rect(Rect2(0, 0 - BAR_HEIGHT, 2, 2), color_line, true)
+	# Top right corner
+	draw_rect(Rect2(w - 2, 0 - BAR_HEIGHT, 2, 2), color_line, true)
+	# Bottom left corner
+	draw_rect(Rect2(0, h - 2, 2, 2), color_line, true)
+	# Bottom right corner
+	draw_rect(Rect2(w - 2, h - 2, 2, 2), color_line, true)
 
 func _process(_delta):
 	if not Engine.is_editor_hint():
