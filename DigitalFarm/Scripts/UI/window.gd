@@ -126,6 +126,13 @@ func enable_buttons() -> void:
 
 	$ScrollBarHorizontal.button.enabled = true
 	$ScrollBarVertical.button.enabled = true
+
+	if not $ScrollBarHorizontal.should_be_visible():
+		$ScrollBarHorizontal.button.hide()
+
+	if not $ScrollBarVertical.should_be_visible():
+		$ScrollBarVertical.button.hide()
+
 	$Button_Close.enabled = true
 
 func disable_buttons() -> void:
@@ -133,9 +140,14 @@ func disable_buttons() -> void:
 		button.hide()
 
 	$ScrollBarHorizontal.button.enabled = false
-	$ScrollBarHorizontal.button.show()
 	$ScrollBarVertical.button.enabled = false
-	$ScrollBarVertical.button.show()
+
+	if $ScrollBarHorizontal.should_be_visible():
+		$ScrollBarHorizontal.button.show()
+
+	if $ScrollBarVertical.should_be_visible():
+		$ScrollBarVertical.button.show()
+
 	$Button_Close.enabled = false
 	$Button_Close.show()
 

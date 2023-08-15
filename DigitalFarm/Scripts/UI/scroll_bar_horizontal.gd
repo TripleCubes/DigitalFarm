@@ -53,14 +53,18 @@ func get_scrolled_pixel() -> float:
 func scrolling() -> bool:
 	return Time.get_ticks_msec() - _just_scrolled_at < (SCROLL_TWEEN_TIME_SEC + 0.05) * 1000
 
+func should_be_visible() -> bool:
+	return _page_length - _view_length > 0
+
 func set_page_length(page_length: float, view_length: float) -> void:
-	if page_length - view_length <= 0:
+	_page_length = page_length
+	_view_length = view_length
+	
+	if not should_be_visible():
 		button.hide()
 		return
 
 	button.show()
-	_page_length = page_length
-	_view_length = view_length
 	_bar_length = view_length / page_length * length
 	button.w = _bar_length - 8
 
