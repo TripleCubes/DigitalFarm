@@ -9,6 +9,8 @@ const _texture_cursor_top_down: Texture2D = preload("res://Assets/Sprites/UI/cur
 const _texture_cursor_left_right: Texture2D = preload("res://Assets/Sprites/UI/cursor_left_right.png")
 const _texture_cursor_pointer: Texture2D = preload("res://Assets/Sprites/UI/cursor_pointer.png")
 
+signal signal_resize
+
 @export var w: float:
 	set(val):
 		w = val
@@ -28,6 +30,8 @@ const _texture_cursor_pointer: Texture2D = preload("res://Assets/Sprites/UI/curs
 		if has_node("CornerPixelBottomRight"):
 			$CornerPixelBottomRight.position.x = w - 2
 
+		signal_resize.emit()
+
 @export var h: float:
 	set(val):
 		h = val
@@ -43,6 +47,8 @@ const _texture_cursor_pointer: Texture2D = preload("res://Assets/Sprites/UI/curs
 			$CornerPixelBottomLeft.position.y = h - 2
 		if has_node("CornerPixelBottomRight"):
 			$CornerPixelBottomRight.position.y = h - 2
+
+		signal_resize.emit()
 
 @export var resizable: bool
 @export var min_w: float
@@ -241,11 +247,18 @@ func _draw():
 
 func _process(_delta):
 	if not Engine.is_editor_hint():
-		if $Button_Bar.hovered() and Input.is_action_just_pressed("KEY_2"):
+		if hovered() and Input.is_action_just_pressed("KEY_2"):
 			print("Window size: " + str(w) + " " + str(h))
+
+			var mouse_pos: Vector2 = GlobalFunctions.get_mouse_pos() - self.position
+			mouse_pos.x -= $ScrollBarHorizontal.get_scrolled_pixel()
+			mouse_pos.y -= $ScrollBarVertical.get_scrolled_pixel()
+			print("In window mouse pos: " + str(mouse_pos))
 
 		_show_hide_resize_buttons()
 		_pressing_process()
+		if resizing():
+			signal_resize.emit()
 		_scroll_window(_delta)
 		_cursor_texture_handle()
 
