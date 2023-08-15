@@ -179,6 +179,8 @@ func throw_window_out(window: Node2D) -> void:
 		move_to.y = self.position.y - window.h - THROW_PADDING - BAR_HEIGHT
 
 	move_to += Vector2(randf_range(-15, 15), randf_range(-15, 15))
+	if move_to.y < BAR_HEIGHT + 2:
+		move_to.y = BAR_HEIGHT + 2
 
 	var tween_0: = get_tree().create_tween()
 	tween_0.tween_property(window, "position", move_to, Consts.TWEEN_TIME_SEC).set_trans(Tween.TRANS_SINE)
@@ -503,8 +505,8 @@ func _move_window() -> void:
 		var move_to: = Vector2(self.position.x, self.position.y)
 		if self.position.x + w - 40 < 0:
 			move_to.x = 40 - w
-		if self.position.y - BAR_HEIGHT < 0:
-			move_to.y = BAR_HEIGHT
+		if self.position.y < BAR_HEIGHT + 2:
+			move_to.y = BAR_HEIGHT + 2
 		if self.position.x + 20 > get_viewport().size.x:
 			move_to.x = get_viewport().size.x - 20
 		if self.position.y + 20 > get_viewport().size.y:
