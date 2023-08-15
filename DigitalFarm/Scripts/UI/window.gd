@@ -181,12 +181,17 @@ func _ready():
 		move_child($ScrollBarVertical, get_child_count() - 1)
 		move_child($ScrollBarHorizontal, get_child_count() - 1)
 
+		move_child($CornerPixelTopLeft, get_child_count() - 1)
+		move_child($CornerPixelTopRight, get_child_count() - 1)
+		move_child($CornerPixelBottomLeft, get_child_count() - 1)
+		move_child($CornerPixelBottomRight, get_child_count() - 1)
+
 		set_button_list()
 
 		self.position.x = (get_viewport().size.x - w) / 2 + randf_range(-100, 100)
 		self.position.y = (get_viewport().size.y - h) / 2 + randf_range(-100, 100)
 	
-	_set_buttons()
+	_set_element_locations()
 	_set_init_window_sizes()
 
 func _draw():
@@ -206,15 +211,6 @@ func _draw():
 	draw_rect(Rect2(-2, - BAR_HEIGHT + 2, 2,     h + BAR_HEIGHT - 4), color_line, true)
 	# Right border
 	draw_rect(Rect2(w,  - BAR_HEIGHT + 2, 2,     h + BAR_HEIGHT - 4), color_line, true)
-
-	# Top left corner
-	draw_rect(Rect2(0, 0 - BAR_HEIGHT, 2, 2), color_line, true)
-	# Top right corner
-	draw_rect(Rect2(w - 2, 0 - BAR_HEIGHT, 2, 2), color_line, true)
-	# Bottom left corner
-	draw_rect(Rect2(0, h - 2, 2, 2), color_line, true)
-	# Bottom right corner
-	draw_rect(Rect2(w - 2, h - 2, 2, 2), color_line, true)
 
 func _process(_delta):
 	if not Engine.is_editor_hint():
@@ -297,7 +293,7 @@ func _pressing_process() -> void:
 	_move_window()
 	
 	if resizing():
-		_set_buttons()
+		_set_element_locations()
 
 	if $Button_Close.just_pressed():
 		queue_free()
@@ -320,7 +316,7 @@ func _button_search(node: Node) -> void:
 		if search.get_child_count() > 0:
 			_button_search(search)
 
-func _set_buttons() -> void:
+func _set_element_locations() -> void:
 	$Button_Bar.w = w
 	$Button_Bar.h = BAR_HEIGHT - 2
 
@@ -371,6 +367,22 @@ func _set_buttons() -> void:
 
 	$Button_Close.position.x = w - 19
 	$Button_Close.position.y = -20
+
+
+
+	$CornerPixelTopLeft.position.x = 0
+	$CornerPixelTopLeft.position.y = 0 - BAR_HEIGHT
+
+	$CornerPixelTopRight.position.x = w - 2
+	$CornerPixelTopRight.position.y = 0 - BAR_HEIGHT
+
+	$CornerPixelBottomLeft.position.x = 0
+	$CornerPixelBottomLeft.position.y = h - 2
+	
+	$CornerPixelBottomRight.position.x = w - 2
+	$CornerPixelBottomRight.position.y = h - 2
+
+
 
 	if not has_node("WindowClip"):
 		return
