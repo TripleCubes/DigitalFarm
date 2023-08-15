@@ -4,8 +4,18 @@ extends Node2D
 
 const DOUBLE_CLICK_DELAY_SEC: float = 0.5
 
-@export var w: float
-@export var h: float
+@export var w: float:
+	get:
+		if w == 0:
+			return texture.get_width() * 2
+		return w
+		
+@export var h: float:
+	get:
+		if h == 0:
+			return texture.get_height() * 2
+		return h
+
 @export var draw_frame: bool
 @export var draw_background: bool
 @export var draw_debug_frame: bool

@@ -49,7 +49,7 @@ func cursor_inside_of_window(ignore_window: Node2D = null) -> Node2D:
 
 func cursor_on_drag_window_in(window_check: Node2D, drag_window_in_list_name: String) -> UI_DragWindowIn:
 	var mouse_pos: = GlobalFunctions.get_mouse_pos()
-	for drag_window_in in window_check.window_wrapper[drag_window_in_list_name]:
+	for drag_window_in in window_check.window_wrapper[drag_window_in_list_name].values():
 		if mouse_pos.x >= drag_window_in.global_position.x and mouse_pos.y >= drag_window_in.global_position.y \
 		and mouse_pos.x <= drag_window_in.global_position.x + drag_window_in.w \
 		and mouse_pos.y <= drag_window_in.global_position.y + drag_window_in.h:

@@ -30,6 +30,9 @@ func put_window(in_window: Node2D) -> void:
 	_window_wrapper_list.remove_child(in_window.window_wrapper)
 
 func _process(_delta):
+	if Engine.is_editor_hint():
+		return
+	
 	if just_pressed() and has_pot:
 		_window_wrapper_list.add_child(contain_window.window_wrapper)
 		window.throw_window_out(contain_window)

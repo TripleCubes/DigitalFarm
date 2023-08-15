@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b0nixgofbknb3"]
 
-[ext_resource type="Script" path="res://Scripts/Apps/Garden/pot_spot.gd" id="1_3taro"]
+[ext_resource type="Script" path="res://Scripts/Apps/Garden/PotSpot/pot_spot.gd" id="1_3taro"]
 [ext_resource type="Texture2D" uid="uid://dxu0784e0u275" path="res://Assets/Sprites/Apps/Garden/PotSpot/table.png" id="3_8mtdm"]
 [ext_resource type="Texture2D" uid="uid://dwxsomme5wswp" path="res://Assets/Sprites/Apps/Garden/PotSpot/pot_mini_empty.png" id="3_qysmi"]
 [ext_resource type="Texture2D" uid="uid://xg82cqpj70mq" path="res://Assets/Sprites/Apps/Garden/PotSpot/pot_mini_has_seed.png" id="4_o6ond"]
