@@ -462,7 +462,7 @@ func _resize_left() -> void:
 func _resize_right() -> void:
 	var mouse_pos: = GlobalFunctions.get_mouse_pos()
 
-	w = mouse_pos.x + 1 - _prev_x
+	w = mouse_pos.x - 1 - _prev_x
 
 	if w > max_w:
 		w = max_w
@@ -485,7 +485,7 @@ func _resize_top() -> void:
 func _resize_bottom() -> void:
 	var mouse_pos: = GlobalFunctions.get_mouse_pos()
 
-	h = mouse_pos.y + 1 - _prev_y
+	h = mouse_pos.y - 1 - _prev_y
 
 	if h > max_h:
 		h = max_h
