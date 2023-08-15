@@ -4,11 +4,11 @@ var card_type: App_Garden.CardType
 
 var w: float:
 	get:
-		return $Button.w
+		return $Button.w + 4
 
 var h: float:
 	get:
-		return $Button.h
+		return $Button.h + 4
 
 var card_list: Node2D
 var window_wrapper: Node2D
@@ -25,6 +25,7 @@ func _ready():
 
 func _draw():
 	var texture = sprite_list[card_type]
+	draw_rect(Rect2(2, 2, w - 4, h - 4), Colors.COLOR_BACKGROUND_DAY, true)
 	draw_texture_rect(texture, Rect2(w / 2 - texture.get_width(),
 									h / 2 - texture.get_height(),
 									texture.get_width() * 2,

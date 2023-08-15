@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://34p5p47ka24h"]
+[gd_scene load_steps=3 format=3 uid="uid://34p5p47ka24h"]
 
 [ext_resource type="Script" path="res://Scripts/Apps/Garden/Cards/card.gd" id="1_dhi8j"]
-[ext_resource type="Texture2D" uid="uid://dwkamtxwjxbl5" path="res://Assets/Sprites/Apps/Garden/Cards/card_empty.png" id="2_fed6y"]
 [ext_resource type="Script" path="res://Scripts/UI/button.gd" id="3_cvyfi"]
 
 [node name="Card" type="Node2D"]
@@ -9,7 +8,8 @@ texture_filter = 1
 script = ExtResource("1_dhi8j")
 
 [node name="Button" type="Node2D" parent="."]
+position = Vector2(2, 2)
 script = ExtResource("3_cvyfi")
-w = 36.0
-h = 48.0
-texture = ExtResource("2_fed6y")
+w = 32.0
+h = 44.0
+draw_frame = true
