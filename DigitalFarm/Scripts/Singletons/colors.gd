@@ -2,6 +2,7 @@ extends Node
 
 const COLOR_BACKGROUND_DAY: = Color("CC8747")
 const COLOR_LINE_DAY: = Color("FFE59E")
+const COLOR_WHITE: = Color(1, 1, 1)
 
 enum ColorIndex {
 	WHITE,
@@ -19,8 +20,8 @@ var color_list: = {}
 
 func _ready():
 	color_list[ColorIndex.WHITE] = {
-		day = Color(1, 1, 1),
-		night = Color(1, 1, 1),
+		day = COLOR_WHITE,
+		night = COLOR_WHITE,
 	}
 
 	color_list[ColorIndex.BACKGROUND] = {

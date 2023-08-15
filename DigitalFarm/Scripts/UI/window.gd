@@ -79,6 +79,9 @@ func hovered() -> bool:
 	
 	return false
 
+func content_hovered() -> bool:
+	return $Button_Content.hovered()
+
 func close_button_pressed() -> bool:
 	return $Button_Close.pressed()
 
