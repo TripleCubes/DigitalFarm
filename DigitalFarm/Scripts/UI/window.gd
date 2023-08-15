@@ -23,6 +23,11 @@ const _texture_cursor_pointer: Texture2D = preload("res://Assets/Sprites/UI/curs
 		if has_node("ScrollBarHorizontal"):
 			$ScrollBarHorizontal.length = w - $ScrollBarHorizontal.width + 4
 
+		if has_node("CornerPixelTopRight"):
+			$CornerPixelTopRight.position.x = w - 2
+		if has_node("CornerPixelBottomRight"):
+			$CornerPixelBottomRight.position.x = w - 2
+
 @export var h: float:
 	set(val):
 		h = val
@@ -33,6 +38,11 @@ const _texture_cursor_pointer: Texture2D = preload("res://Assets/Sprites/UI/curs
 			$ScrollBarVertical.length = h - $ScrollBarVertical.width + 4
 		if has_node("ScrollBarHorizontal"):
 			$ScrollBarHorizontal.position.y = h - 15
+
+		if has_node("CornerPixelBottomLeft"):
+			$CornerPixelBottomLeft.position.y = h - 2
+		if has_node("CornerPixelBottomRight"):
+			$CornerPixelBottomRight.position.y = h - 2
 
 @export var resizable: bool
 @export var min_w: float
