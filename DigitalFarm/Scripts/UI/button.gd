@@ -102,6 +102,16 @@ func _update(_delta) -> void:
 func _before_update(_delta) -> void:
 	_hovered = false
 
+	_just_released = false
+	if Input.is_action_just_released("MOUSE_LEFT"):
+		if _pressed:
+			_just_released = true
+
+		_pressed = false
+		
+	_just_pressed = false
+	_double_clicked = false
+
 func _notification(what):
 	if Engine.is_editor_hint():
 		return
@@ -138,16 +148,6 @@ func _hover_check() -> void:
 		_hovered = true
 
 func _pressing_check() -> void:
-	_just_released = false
-	if Input.is_action_just_released("MOUSE_LEFT"):
-		if _pressed:
-			_just_released = true
-
-		_pressed = false
-		
-	_just_pressed = false
-	_double_clicked = false
-
 	if not Input.is_action_just_pressed("MOUSE_LEFT"):
 		return
 
