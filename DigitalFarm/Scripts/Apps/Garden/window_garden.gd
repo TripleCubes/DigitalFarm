@@ -10,6 +10,7 @@ const TILE_H: float = 40
 
 const CONTENT_PATH: String = "Window/WindowClip/WindowClipContent/"
 @onready var tile_selection = get_node(CONTENT_PATH + "TileSelection")
+@onready var draw_grid = get_node(CONTENT_PATH + "DrawGrid")
 
 var pot_spot_list: = {}
 
@@ -18,6 +19,8 @@ func _ready():
 
 	if Engine.is_editor_hint():
 		return
+
+	draw_grid.window_wrapper = self
 
 	tile_selection.w = TILE_W
 	tile_selection.h = TILE_H
@@ -50,7 +53,7 @@ func _place_handle(mouse_pos: Vector2) -> void:
 		return
 
 	var tile_xy: = _get_tile_xy(mouse_pos)
-	var tile_xy_pixel: = _get_tile_xy_pixel(mouse_pos)
+	var tile_xy_pixel: = _get_tile_xy_pixel_from_tile_xy(tile_xy)
 
 	if pot_spot_list.has(tile_xy):
 		return
@@ -79,7 +82,9 @@ func _get_grid_wh() -> Vector2i:
 						floor(($Window.max_h - PADDING_TOP - PADDING_BOTTOM) / TILE_H))
 
 func _get_tile_xy_pixel(mouse_pos: Vector2) -> Vector2:
-	var tile_xy: = _get_tile_xy(mouse_pos)
+	return _get_tile_xy_pixel_from_tile_xy(_get_tile_xy(mouse_pos))
+
+func _get_tile_xy_pixel_from_tile_xy(tile_xy: Vector2i) -> Vector2:
 	return Vector2(tile_xy.x * TILE_W + PADDING_LEFT, tile_xy.y * TILE_H + PADDING_TOP)
 
 func _get_tile_xy(mouse_pos: Vector2) -> Vector2i:

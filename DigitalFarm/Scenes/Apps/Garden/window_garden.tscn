@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dflmolhmg6eqq"]
+[gd_scene load_steps=8 format=3 uid="uid://dflmolhmg6eqq"]
 
 [ext_resource type="Script" path="res://Scripts/Apps/Garden/window_garden.gd" id="1_4l2wq"]
 [ext_resource type="PackedScene" uid="uid://daxbag8xh0v2q" path="res://Scenes/window.tscn" id="2_pk1qc"]
 [ext_resource type="Script" path="res://Scripts/UI/window_clip.gd" id="3_bakkh"]
 [ext_resource type="Script" path="res://Scripts/Apps/Garden/UI/tile_selection.gd" id="4_6cjji"]
 [ext_resource type="Script" path="res://Scripts/Apps/Garden/Cards/card_list.gd" id="5_2msw5"]
+[ext_resource type="Script" path="res://Scripts/Apps/Garden/UI/draw_grid.gd" id="5_ktjiv"]
 [ext_resource type="Script" path="res://Scripts/UI/button.gd" id="6_6q606"]
 
 [node name="Window_Garden" type="Node2D"]
@@ -28,6 +29,9 @@ content_w = 600.0
 content_h = 400.0
 
 [node name="WindowClipContent" type="Node2D" parent="Window/WindowClip"]
+
+[node name="DrawGrid" type="Node2D" parent="Window/WindowClip/WindowClipContent"]
+script = ExtResource("5_ktjiv")
 
 [node name="TileSelection" type="Node2D" parent="Window/WindowClip/WindowClipContent"]
 visible = false
