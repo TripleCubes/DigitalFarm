@@ -41,3 +41,13 @@ func _reposition_cards(tween: bool, tween_time: float) -> void:
 									tween_time).set_trans(Tween.TRANS_SINE)
 		else:
 			card.position.x = i * (card.w + CARD_SPACING)
+
+	_set_prevent_click_through_button_size()
+
+func _set_prevent_click_through_button_size() -> void:
+	if card_list.size() == 0:
+		$Button_PreventClickthrough.w = 10
+		return
+
+	var card_w = card_list[0].w
+	$Button_PreventClickthrough.w = card_list.size() * (card_w + CARD_SPACING) - CARD_SPACING*2

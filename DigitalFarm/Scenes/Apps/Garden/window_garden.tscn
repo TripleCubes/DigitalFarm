@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dflmolhmg6eqq"]
+[gd_scene load_steps=7 format=3 uid="uid://dflmolhmg6eqq"]
 
 [ext_resource type="Script" path="res://Scripts/Apps/Garden/window_garden.gd" id="1_4l2wq"]
 [ext_resource type="PackedScene" uid="uid://daxbag8xh0v2q" path="res://Scenes/window.tscn" id="2_pk1qc"]
 [ext_resource type="Script" path="res://Scripts/UI/window_clip.gd" id="3_bakkh"]
 [ext_resource type="Script" path="res://Scripts/Apps/Garden/UI/tile_selection.gd" id="4_6cjji"]
 [ext_resource type="Script" path="res://Scripts/Apps/Garden/Cards/card_list.gd" id="5_2msw5"]
+[ext_resource type="Script" path="res://Scripts/UI/button.gd" id="6_6q606"]
 
 [node name="Window_Garden" type="Node2D"]
 script = ExtResource("1_4l2wq")
@@ -18,6 +19,7 @@ min_h = 180.0
 max_w = 600.0
 
 [node name="WindowClip" type="ScrollContainer" parent="Window"]
+clip_contents = false
 offset_right = 400.0
 offset_bottom = 250.0
 script = ExtResource("3_bakkh")
@@ -34,3 +36,9 @@ script = ExtResource("4_6cjji")
 [node name="CardList" type="Node2D" parent="Window"]
 position = Vector2(8, 182)
 script = ExtResource("5_2msw5")
+
+[node name="Button_PreventClickthrough" type="Node2D" parent="Window/CardList"]
+position = Vector2(2, 2)
+script = ExtResource("6_6q606")
+w = 10.0
+h = 44.0
