@@ -1,15 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://daxbag8xh0v2q"]
+[gd_scene load_steps=8 format=3 uid="uid://daxbag8xh0v2q"]
 
-[ext_resource type="Script" path="res://Scripts/UI/window.gd" id="1_4pfb5"]
+[ext_resource type="Script" path="res://Scripts/UI/Window/window.gd" id="1_srfgk"]
 [ext_resource type="Script" path="res://Scripts/UI/button.gd" id="2_rffpy"]
 [ext_resource type="Texture2D" uid="uid://dqawqkapue0ta" path="res://Assets/Sprites/UI/close_window.png" id="3_g28ip"]
+[ext_resource type="Script" path="res://Scripts/UI/Window/button_borders_corners.gd" id="3_sokgh"]
 [ext_resource type="Script" path="res://Scripts/UI/scroll_bar_vertical.gd" id="4_fjy6o"]
 [ext_resource type="Script" path="res://Scripts/UI/scroll_bar_horizontal.gd" id="5_7qhsi"]
-[ext_resource type="Script" path="res://Scripts/UI/window_corner_pixel.gd" id="6_khaqq"]
+[ext_resource type="Script" path="res://Scripts/UI/Window/window_corner_pixel.gd" id="6_edgob"]
 
 [node name="Window" type="Node2D" groups=["Windows"]]
 texture_filter = 1
-script = ExtResource("1_4pfb5")
+script = ExtResource("1_srfgk")
 w = 120.0
 h = 120.0
 min_w = 120.0
@@ -28,49 +29,52 @@ script = ExtResource("2_rffpy")
 w = 120.0
 h = 22.0
 
-[node name="Button_BorderTop" type="Node2D" parent="."]
+[node name="Buttons_BordersCorners" type="Node2D" parent="."]
+script = ExtResource("3_sokgh")
+
+[node name="Button_BorderTop" type="Node2D" parent="Buttons_BordersCorners"]
 position = Vector2(0, -26)
 script = ExtResource("2_rffpy")
 w = 120.0
 h = 2.0
 
-[node name="Button_BorderBottom" type="Node2D" parent="."]
+[node name="Button_BorderBottom" type="Node2D" parent="Buttons_BordersCorners"]
 position = Vector2(0, 120)
 script = ExtResource("2_rffpy")
 w = 120.0
 h = 2.0
 
-[node name="Button_BorderLeft" type="Node2D" parent="."]
+[node name="Button_BorderLeft" type="Node2D" parent="Buttons_BordersCorners"]
 position = Vector2(-2, -24)
 script = ExtResource("2_rffpy")
 w = 2.0
 h = 144.0
 
-[node name="Button_BorderRight" type="Node2D" parent="."]
+[node name="Button_BorderRight" type="Node2D" parent="Buttons_BordersCorners"]
 position = Vector2(120, -24)
 script = ExtResource("2_rffpy")
 w = 2.0
 h = 144.0
 
-[node name="Button_CornerTopLeft" type="Node2D" parent="."]
+[node name="Button_CornerTopLeft" type="Node2D" parent="Buttons_BordersCorners"]
 position = Vector2(-2, -26)
 script = ExtResource("2_rffpy")
 w = 2.0
 h = 2.0
 
-[node name="Button_CornerTopRight" type="Node2D" parent="."]
+[node name="Button_CornerTopRight" type="Node2D" parent="Buttons_BordersCorners"]
 position = Vector2(120, -26)
 script = ExtResource("2_rffpy")
 w = 2.0
 h = 2.0
 
-[node name="Button_CornerBottomLeft" type="Node2D" parent="."]
+[node name="Button_CornerBottomLeft" type="Node2D" parent="Buttons_BordersCorners"]
 position = Vector2(-2, 120)
 script = ExtResource("2_rffpy")
 w = 2.0
 h = 2.0
 
-[node name="Button_CornerBottomRight" type="Node2D" parent="."]
+[node name="Button_CornerBottomRight" type="Node2D" parent="Buttons_BordersCorners"]
 position = Vector2(120, 120)
 script = ExtResource("2_rffpy")
 w = 2.0
@@ -99,16 +103,16 @@ width = 15.0
 
 [node name="CornerPixelTopLeft" type="Node2D" parent="."]
 position = Vector2(0, -24)
-script = ExtResource("6_khaqq")
+script = ExtResource("6_edgob")
 
 [node name="CornerPixelTopRight" type="Node2D" parent="."]
 position = Vector2(118, -24)
-script = ExtResource("6_khaqq")
+script = ExtResource("6_edgob")
 
 [node name="CornerPixelBottomLeft" type="Node2D" parent="."]
 position = Vector2(0, 118)
-script = ExtResource("6_khaqq")
+script = ExtResource("6_edgob")
 
 [node name="CornerPixelBottomRight" type="Node2D" parent="."]
 position = Vector2(118, 118)
-script = ExtResource("6_khaqq")
+script = ExtResource("6_edgob")

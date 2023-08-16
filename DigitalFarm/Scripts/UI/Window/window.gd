@@ -3,12 +3,6 @@ extends Node2D
 
 const BAR_HEIGHT: float = 24
 
-const _texture_cursor_downward_diagonal: Texture2D = preload("res://Assets/Sprites/UI/cursor_downward_diagonal.png")
-const _texture_cursor_forward_diagonal: Texture2D = preload("res://Assets/Sprites/UI/cursor_forward_diagonal.png")
-const _texture_cursor_top_down: Texture2D = preload("res://Assets/Sprites/UI/cursor_top_down.png")
-const _texture_cursor_left_right: Texture2D = preload("res://Assets/Sprites/UI/cursor_left_right.png")
-const _texture_cursor_pointer: Texture2D = preload("res://Assets/Sprites/UI/cursor_pointer.png")
-
 signal signal_resize
 
 @export var w: float:
@@ -98,14 +92,7 @@ func just_released() -> bool:
 	return $Button_Bar.just_released()
 
 func resizing() -> bool:
-	return $Button_BorderTop.pressed() \
-			or $Button_BorderBottom.pressed() \
-			or $Button_BorderLeft.pressed() \
-			or $Button_BorderRight.pressed() \
-			or $Button_CornerTopLeft.pressed() \
-			or $Button_CornerTopRight.pressed() \
-			or $Button_CornerBottomLeft.pressed() \
-			or $Button_CornerBottomRight.pressed()
+	return $Buttons_BordersCorners.resizing()
 
 func place_on_top() -> void:
 	window_wrapper.move_to_front()
@@ -131,7 +118,7 @@ func released_on_window() -> Node2D:
 func enable_buttons() -> void:
 	for button in _button_list:
 		button.enabled = true
-		_show_hide_resize_buttons()
+		$Buttons_BordersCorners.show_hide_resize_buttons()
 
 func disable_buttons() -> void:
 	for button in _button_list:
@@ -234,12 +221,11 @@ func _process(_delta):
 			mouse_pos.y -= $ScrollBarVertical.get_scrolled_pixel()
 			print("In window mouse pos: " + str(mouse_pos))
 
-		_show_hide_resize_buttons()
+		$Buttons_BordersCorners._update(_delta)
 		_pressing_process()
 		if resizing():
 			signal_resize.emit()
 		_scroll_window(_delta)
-		_cursor_texture_handle()
 
 	queue_redraw()
 
@@ -274,27 +260,6 @@ func _set_init_window_sizes() -> void:
 	if max_h == 0:
 		max_h = 400
 
-func _show_hide_resize_buttons() -> void:
-	if not resizable or App_ShowAllApps.running:
-		$Button_BorderTop.enabled = false
-		$Button_BorderBottom.enabled = false
-		$Button_BorderLeft.enabled = false
-		$Button_BorderRight.enabled = false
-		$Button_CornerTopLeft.enabled = false
-		$Button_CornerTopRight.enabled = false
-		$Button_CornerBottomLeft.enabled = false
-		$Button_CornerBottomRight.enabled = false
-		return
-
-	$Button_BorderTop.enabled = true
-	$Button_BorderBottom.enabled = true
-	$Button_BorderLeft.enabled = true
-	$Button_BorderRight.enabled = true
-	$Button_CornerTopLeft.enabled = true
-	$Button_CornerTopRight.enabled = true
-	$Button_CornerBottomLeft.enabled = true
-	$Button_CornerBottomRight.enabled = true
-
 func _pressing_process() -> void:
 	if App_ShowAllApps.running:
 		return
@@ -307,8 +272,7 @@ func _pressing_process() -> void:
 		var mouse_pos: = GlobalFunctions.get_mouse_pos()
 		_prev_mouse_x = mouse_pos.x
 		_prev_mouse_y = mouse_pos.y
-	if resizable:
-		_resize_window()
+
 	_move_window()
 	
 	if resizing():
@@ -342,47 +306,7 @@ func _set_element_locations() -> void:
 	$Button_Content.w = w
 	$Button_Content.h = h
 
-	var true_btn_w = Consts.BORDER_BUTTON_WIDTH - 4
-
-	$Button_BorderTop.position.x = 0
-	$Button_BorderTop.position.y = -25 - true_btn_w / 2
-	$Button_BorderTop.w = w
-	$Button_BorderTop.h = true_btn_w
-
-	$Button_BorderBottom.position.x = 0
-	$Button_BorderBottom.position.y = h + 1 - true_btn_w / 2
-	$Button_BorderBottom.w = w
-	$Button_BorderBottom.h = true_btn_w
-
-	$Button_BorderLeft.position.x = -1 - true_btn_w / 2
-	$Button_BorderLeft.position.y = -24
-	$Button_BorderLeft.w = true_btn_w
-	$Button_BorderLeft.h = h + BAR_HEIGHT
-
-	$Button_BorderRight.position.x = w + 1 - true_btn_w / 2
-	$Button_BorderRight.position.y = -24
-	$Button_BorderRight.w = true_btn_w
-	$Button_BorderRight.h = h + BAR_HEIGHT
-
-	$Button_CornerTopLeft.position.x = -1 - true_btn_w / 2
-	$Button_CornerTopLeft.position.y = -25 - true_btn_w / 2
-	$Button_CornerTopLeft.w = true_btn_w
-	$Button_CornerTopLeft.h = true_btn_w
-
-	$Button_CornerTopRight.position.x = w + 1 - true_btn_w / 2
-	$Button_CornerTopRight.position.y = -25 - true_btn_w / 2
-	$Button_CornerTopRight.w = true_btn_w
-	$Button_CornerTopRight.h = true_btn_w
-
-	$Button_CornerBottomLeft.position.x = -1 - true_btn_w / 2
-	$Button_CornerBottomLeft.position.y = h + 1 - true_btn_w / 2
-	$Button_CornerBottomLeft.w = true_btn_w
-	$Button_CornerBottomLeft.h = true_btn_w
-
-	$Button_CornerBottomRight.position.x = w + 1 - true_btn_w / 2
-	$Button_CornerBottomRight.position.y = h + 1 - true_btn_w / 2
-	$Button_CornerBottomRight.w = true_btn_w
-	$Button_CornerBottomRight.h = true_btn_w
+	
 
 	$Button_Close.position.x = w - 19
 	$Button_Close.position.y = -20
@@ -413,81 +337,6 @@ func _set_element_locations() -> void:
 	$ScrollBarHorizontal.position.y = h - 15
 	$ScrollBarHorizontal.length = w - $ScrollBarHorizontal.width + 4
 	$ScrollBarHorizontal.set_page_length($WindowClip.content_w, w)
-
-func _resize_window() -> void:
-	if $Button_BorderLeft.pressed():
-		_resize_left()
-
-	if $Button_BorderRight.pressed():
-		_resize_right()
-
-	if $Button_BorderTop.pressed():
-		_resize_top()
-
-	if $Button_BorderBottom.pressed():
-		_resize_bottom()
-
-	if $Button_CornerTopLeft.pressed():
-		_resize_top()
-		_resize_left()
-
-	if $Button_CornerTopRight.pressed():
-		_resize_top()
-		_resize_right()
-
-	if $Button_CornerBottomLeft.pressed():
-		_resize_bottom()
-		_resize_left()
-
-	if $Button_CornerBottomRight.pressed():
-		_resize_bottom()
-		_resize_right()
-
-func _resize_left() -> void:
-	var mouse_pos: = GlobalFunctions.get_mouse_pos()
-
-	self.global_position.x = mouse_pos.x + 1
-	w = _prev_w - (mouse_pos.x + 1 - _prev_x)
-
-	if w > max_w:
-		w = max_w
-		self.global_position.x = _prev_x + _prev_w - w
-	elif w < min_w:
-		w = min_w
-		self.global_position.x = _prev_x + _prev_w - w
-
-func _resize_right() -> void:
-	var mouse_pos: = GlobalFunctions.get_mouse_pos()
-
-	w = mouse_pos.x - 1 - _prev_x
-
-	if w > max_w:
-		w = max_w
-	elif w < min_w:
-		w = min_w
-
-func _resize_top() -> void:
-	var mouse_pos: = GlobalFunctions.get_mouse_pos()
-
-	self.global_position.y = mouse_pos.y + 1 + BAR_HEIGHT
-	h = _prev_h - (mouse_pos.y + 1 - _prev_y) - BAR_HEIGHT
-
-	if h > max_h:
-		h = max_h
-		self.global_position.y = _prev_y + _prev_h - h
-	elif h < min_h:
-		h = min_h
-		self.global_position.y = _prev_y + _prev_h - h
-
-func _resize_bottom() -> void:
-	var mouse_pos: = GlobalFunctions.get_mouse_pos()
-
-	h = mouse_pos.y - 1 - _prev_y
-
-	if h > max_h:
-		h = max_h
-	elif h < min_h:
-		h = min_h
 
 func _move_window() -> void:
 	var mouse_pos: = GlobalFunctions.get_mouse_pos()
@@ -534,38 +383,3 @@ func _scroll_window(_delta: float):
 
 	if $ScrollBarHorizontal.scrolling() or resizing():
 		$WindowClip/WindowClipContent.position.x = $ScrollBarHorizontal.get_scrolled_pixel()
-
-func _cursor_texture_handle() -> void:
-	if not resizable:
-		return
-
-	if holding_bar():
-		return
-
-	if $Button_CornerTopLeft.pressed() or $Button_CornerBottomRight.pressed():
-		Input.set_custom_mouse_cursor(_texture_cursor_downward_diagonal, Input.CURSOR_ARROW, Vector2(10, 10))
-		return
-	if $Button_CornerBottomLeft.pressed() or $Button_CornerTopRight.pressed():
-		Input.set_custom_mouse_cursor(_texture_cursor_forward_diagonal, Input.CURSOR_ARROW, Vector2(10, 10))
-		return
-	if $Button_BorderBottom.pressed() or $Button_BorderTop.pressed():
-		Input.set_custom_mouse_cursor(_texture_cursor_top_down, Input.CURSOR_ARROW, Vector2(10, 10))
-		return
-	if $Button_BorderLeft.pressed() or $Button_BorderRight.pressed():
-		Input.set_custom_mouse_cursor(_texture_cursor_left_right, Input.CURSOR_ARROW, Vector2(10, 10))
-		return
-
-	if $Button_CornerTopLeft.hovered() or $Button_CornerBottomRight.hovered():
-		Input.set_custom_mouse_cursor(_texture_cursor_downward_diagonal, Input.CURSOR_ARROW, Vector2(10, 10))
-		return
-	if $Button_CornerBottomLeft.hovered() or $Button_CornerTopRight.hovered():
-		Input.set_custom_mouse_cursor(_texture_cursor_forward_diagonal, Input.CURSOR_ARROW, Vector2(10, 10))
-		return
-	if $Button_BorderBottom.hovered() or $Button_BorderTop.hovered():
-		Input.set_custom_mouse_cursor(_texture_cursor_top_down, Input.CURSOR_ARROW, Vector2(10, 10))
-		return
-	if $Button_BorderLeft.hovered() or $Button_BorderRight.hovered():
-		Input.set_custom_mouse_cursor(_texture_cursor_left_right, Input.CURSOR_ARROW, Vector2(10, 10))
-		return
-
-	Input.set_custom_mouse_cursor(_texture_cursor_pointer)
