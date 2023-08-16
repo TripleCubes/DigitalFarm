@@ -209,23 +209,27 @@ func _draw():
 
 func _process(_delta):
 	if not Engine.is_editor_hint():
-		if hovered() and Input.is_action_just_pressed("KEY_2"):
-			print("Window size: " + str(w) + " " + str(h))
-
-			var mouse_pos: Vector2 = GlobalFunctions.get_mouse_pos() - self.position
-			mouse_pos.x -= $ScrollBars/ScrollBarHorizontal.get_scrolled_pixel()
-			mouse_pos.y -= $ScrollBars/ScrollBarVertical.get_scrolled_pixel()
-			print("In window mouse pos: " + str(mouse_pos))
-
+		_print_debug_messages()
+		
 		# Not using $Buttons_BordersCorners._process() because doing so will make window elements's
 		# positions lag behind resizing. Might as well use $ScrollBars._update() to be consistent.
 		$Buttons_BordersCorners._update(_delta)
 		$ScrollBars._update(_delta)
 		_pressing_process()
+
 		if resizing():
 			signal_resize.emit()
 
 	queue_redraw()
+
+func _print_debug_messages() -> void:
+	if hovered() and Input.is_action_just_pressed("KEY_2"):
+		print("Window size: " + str(w) + " " + str(h))
+
+		var mouse_pos: Vector2 = GlobalFunctions.get_mouse_pos() - self.position
+		mouse_pos.x -= $ScrollBars/ScrollBarHorizontal.get_scrolled_pixel()
+		mouse_pos.y -= $ScrollBars/ScrollBarVertical.get_scrolled_pixel()
+		print("In window mouse pos: " + str(mouse_pos))
 
 func _set_init_window_sizes() -> void:
 	if w == 0:
