@@ -217,6 +217,8 @@ func _process(_delta):
 			mouse_pos.y -= $ScrollBars/ScrollBarVertical.get_scrolled_pixel()
 			print("In window mouse pos: " + str(mouse_pos))
 
+		# Not using $Buttons_BordersCorners._process() because doing so will make window elements's
+		# positions lag behind resizing. Might as well use $ScrollBars._update() to be consistent.
 		$Buttons_BordersCorners._update(_delta)
 		$ScrollBars._update(_delta)
 		_pressing_process()
