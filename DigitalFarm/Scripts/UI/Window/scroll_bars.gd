@@ -11,11 +11,11 @@ func _ready():
 
 func _update(_delta) -> void:
 	if window.resizing():
-		set_element_locations()
+		set_location_and_page_length()
 	
 	_scroll_window(_delta)
 
-func set_element_locations() -> void:
+func set_location_and_page_length() -> void:
 	if window_clip == null:
 		return
 

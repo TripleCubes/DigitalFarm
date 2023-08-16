@@ -184,9 +184,9 @@ func _ready():
 	
 	_set_element_locations()
 	# This line is not in $ScrollBars._ready() because $ScrollBars init before window and
-	# $ScrollBars.set_element_locations() need window_clip.content_h which need window.max_h
-	# which require widnow to be loaded
-	$ScrollBars.set_element_locations()
+	# $ScrollBars.set_location_and_page_length() need window_clip.content_h which need window.max_h
+	# which require widnow to be loaded.
+	$ScrollBars.set_location_and_page_length()
 	_set_init_window_sizes()
 
 func _draw():
@@ -210,7 +210,7 @@ func _draw():
 func _process(_delta):
 	if not Engine.is_editor_hint():
 		_print_debug_messages()
-		
+
 		# Not using $Buttons_BordersCorners._process() because doing so will make window elements's
 		# positions lag behind resizing. Might as well use $ScrollBars._update() to be consistent.
 		$Buttons_BordersCorners._update(_delta)

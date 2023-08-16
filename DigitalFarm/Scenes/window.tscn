@@ -12,12 +12,13 @@
 [node name="Window" type="Node2D" groups=["Windows"]]
 texture_filter = 1
 script = ExtResource("1_srfgk")
-w = 120.0
-h = 120.0
-min_w = 120.0
-min_h = 120.0
-max_w = 400.0
-max_h = 400.0
+w = null
+h = null
+resizable = null
+min_w = null
+min_h = null
+max_w = null
+max_h = null
 
 [node name="Button_Content" type="Node2D" parent="."]
 script = ExtResource("2_rffpy")

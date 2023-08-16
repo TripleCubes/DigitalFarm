@@ -18,6 +18,7 @@ resizable = true
 min_w = 300.0
 min_h = 180.0
 max_w = 600.0
+max_h = 400.0
 
 [node name="WindowClip" type="ScrollContainer" parent="Window"]
 clip_contents = false
