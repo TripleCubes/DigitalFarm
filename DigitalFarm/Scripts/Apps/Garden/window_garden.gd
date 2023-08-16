@@ -30,8 +30,8 @@ func _process(_delta):
 		return
 
 	var mouse_pos: Vector2 = GlobalFunctions.get_mouse_pos() - $Window.position
-	mouse_pos.x -= $Window/ScrollBarHorizontal.get_scrolled_pixel()
-	mouse_pos.y -= $Window/ScrollBarVertical.get_scrolled_pixel()
+	mouse_pos.x -= $Window/ScrollBars/ScrollBarHorizontal.get_scrolled_pixel()
+	mouse_pos.y -= $Window/ScrollBars/ScrollBarVertical.get_scrolled_pixel()
 
 	_tile_selection_handle(mouse_pos)
 	_place_handle(mouse_pos)

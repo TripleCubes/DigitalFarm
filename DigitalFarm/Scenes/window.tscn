@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://daxbag8xh0v2q"]
+[gd_scene load_steps=9 format=3 uid="uid://daxbag8xh0v2q"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Window/window.gd" id="1_srfgk"]
 [ext_resource type="Script" path="res://Scripts/UI/button.gd" id="2_rffpy"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/Window/button_borders_corners.gd" id="3_sokgh"]
 [ext_resource type="Script" path="res://Scripts/UI/scroll_bar_vertical.gd" id="4_fjy6o"]
 [ext_resource type="Script" path="res://Scripts/UI/scroll_bar_horizontal.gd" id="5_7qhsi"]
+[ext_resource type="Script" path="res://Scripts/UI/Window/scroll_bars.gd" id="5_i4g3s"]
 [ext_resource type="Script" path="res://Scripts/UI/Window/window_corner_pixel.gd" id="6_edgob"]
 
 [node name="Window" type="Node2D" groups=["Windows"]]
@@ -87,14 +88,17 @@ w = 14.0
 h = 14.0
 texture = ExtResource("3_g28ip")
 
-[node name="ScrollBarVertical" type="Node2D" parent="."]
+[node name="ScrollBars" type="Node2D" parent="."]
+script = ExtResource("5_i4g3s")
+
+[node name="ScrollBarVertical" type="Node2D" parent="ScrollBars"]
 visible = false
 position = Vector2(105, 0)
 script = ExtResource("4_fjy6o")
 length = 109.0
 width = 15.0
 
-[node name="ScrollBarHorizontal" type="Node2D" parent="."]
+[node name="ScrollBarHorizontal" type="Node2D" parent="ScrollBars"]
 visible = false
 position = Vector2(0, 105)
 script = ExtResource("5_7qhsi")

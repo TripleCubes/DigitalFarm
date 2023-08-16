@@ -14,7 +14,7 @@ var _prev_x: float = 0
 var _prev_y: float = 0
 
 func _ready():
-	_set_element_locations()
+	set_element_locations()
 
 func _update(_delta) -> void:
 	show_hide_resize_buttons()
@@ -36,7 +36,7 @@ func _update(_delta) -> void:
 		_prev_h = window.h
 
 	_resize_window()
-	_set_element_locations()
+	set_element_locations()
 
 func resizing() -> bool:
 	return $Button_BorderTop.pressed() \
@@ -69,7 +69,7 @@ func show_hide_resize_buttons() -> void:
 	$Button_CornerBottomLeft.enabled = true
 	$Button_CornerBottomRight.enabled = true
 
-func _set_element_locations() -> void:
+func set_element_locations() -> void:
 	var true_btn_w = Consts.BORDER_BUTTON_WIDTH - 4
 
 	$Button_BorderTop.position.x = 0

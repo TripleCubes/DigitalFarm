@@ -14,10 +14,8 @@ signal signal_resize
 		if has_node("Button_Close"):
 			$Button_Close.position.x = w - 19
 
-		if has_node("ScrollBarVertical"):
-			$ScrollBarVertical.position.x = w - 15
-		if has_node("ScrollBarHorizontal"):
-			$ScrollBarHorizontal.length = w - $ScrollBarHorizontal.width + 4
+		if has_node("ScrollBars"):
+			$ScrollBars.set_element_locations()
 
 		if has_node("CornerPixelTopRight"):
 			$CornerPixelTopRight.position.x = w - 2
@@ -32,10 +30,8 @@ signal signal_resize
 		if not Engine.is_editor_hint():
 			return
 
-		if has_node("ScrollBarVertical"):
-			$ScrollBarVertical.length = h - $ScrollBarVertical.width + 4
-		if has_node("ScrollBarHorizontal"):
-			$ScrollBarHorizontal.position.y = h - 15
+		if has_node("ScrollBars"):
+			$ScrollBars.set_element_locations()
 
 		if has_node("CornerPixelBottomLeft"):
 			$CornerPixelBottomLeft.position.y = h - 2
@@ -174,11 +170,7 @@ func _ready():
 		if window_wrapper != null:
 			app = window_wrapper.app
 
-		if resizable:
-			$ScrollBarVertical.show()
-			$ScrollBarHorizontal.show()
-		move_child($ScrollBarVertical, get_child_count() - 1)
-		move_child($ScrollBarHorizontal, get_child_count() - 1)
+		move_child($ScrollBars, get_child_count() - 1)
 
 		move_child($CornerPixelTopLeft, get_child_count() - 1)
 		move_child($CornerPixelTopRight, get_child_count() - 1)
@@ -191,6 +183,10 @@ func _ready():
 		self.position.y = (get_viewport().size.y - h) / 2 + randf_range(-100, 100)
 	
 	_set_element_locations()
+	# This line is not in $ScrollBars._ready() because $ScrollBars init before window and
+	# $ScrollBars.set_element_locations() need window_clip.content_h which need window.max_h
+	# which require widnow to be loaded
+	$ScrollBars.set_element_locations()
 	_set_init_window_sizes()
 
 func _draw():
@@ -217,15 +213,15 @@ func _process(_delta):
 			print("Window size: " + str(w) + " " + str(h))
 
 			var mouse_pos: Vector2 = GlobalFunctions.get_mouse_pos() - self.position
-			mouse_pos.x -= $ScrollBarHorizontal.get_scrolled_pixel()
-			mouse_pos.y -= $ScrollBarVertical.get_scrolled_pixel()
+			mouse_pos.x -= $ScrollBars/ScrollBarHorizontal.get_scrolled_pixel()
+			mouse_pos.y -= $ScrollBars/ScrollBarVertical.get_scrolled_pixel()
 			print("In window mouse pos: " + str(mouse_pos))
 
 		$Buttons_BordersCorners._update(_delta)
+		$ScrollBars._update(_delta)
 		_pressing_process()
 		if resizing():
 			signal_resize.emit()
-		_scroll_window(_delta)
 
 	queue_redraw()
 
@@ -306,12 +302,8 @@ func _set_element_locations() -> void:
 	$Button_Content.w = w
 	$Button_Content.h = h
 
-	
-
 	$Button_Close.position.x = w - 19
 	$Button_Close.position.y = -20
-
-
 
 	$CornerPixelTopLeft.position.x = 0
 	$CornerPixelTopLeft.position.y = 0 - BAR_HEIGHT
@@ -324,19 +316,6 @@ func _set_element_locations() -> void:
 	
 	$CornerPixelBottomRight.position.x = w - 2
 	$CornerPixelBottomRight.position.y = h - 2
-
-
-
-	if not has_node("WindowClip"):
-		return
-
-	$ScrollBarVertical.position.x = w - 15
-	$ScrollBarVertical.length = h - $ScrollBarVertical.width + 4
-	$ScrollBarVertical.set_page_length($WindowClip.content_h, h)
-
-	$ScrollBarHorizontal.position.y = h - 15
-	$ScrollBarHorizontal.length = w - $ScrollBarHorizontal.width + 4
-	$ScrollBarHorizontal.set_page_length($WindowClip.content_w, w)
 
 func _move_window() -> void:
 	var mouse_pos: = GlobalFunctions.get_mouse_pos()
@@ -358,28 +337,3 @@ func _move_window() -> void:
 
 		var _tween: = get_tree().create_tween()
 		_tween.tween_property(self, "position", move_to, Consts.TWEEN_TIME_SEC).set_trans(Tween.TRANS_SINE)
-
-func _scroll_window(_delta: float):
-	if not has_node("WindowClip/WindowClipContent"):
-		return
-
-	if GlobalFunctions.cursor_inside_of_window() == self and not App_ShowAllApps.running:
-		if Input.is_action_just_released("SCROLL_UP") and not Input.is_action_pressed("KEY_SHIFT"):
-			$ScrollBarVertical.scroll(- Consts.SCROLL_SPEED_PX_SEC * _delta)
-
-		if Input.is_action_just_released("SCROLL_DOWN") and not Input.is_action_pressed("KEY_SHIFT"):
-			$ScrollBarVertical.scroll(+ Consts.SCROLL_SPEED_PX_SEC * _delta)
-
-		if Input.is_action_just_released("SCROLL_LEFT") \
-		or (Input.is_action_just_released("SCROLL_UP") and Input.is_action_pressed("KEY_SHIFT")):
-			$ScrollBarHorizontal.scroll(- Consts.SCROLL_SPEED_PX_SEC * _delta * 2)
-
-		if Input.is_action_just_released("SCROLL_RIGHT") \
-		or (Input.is_action_just_released("SCROLL_DOWN") and Input.is_action_pressed("KEY_SHIFT")):
-			$ScrollBarHorizontal.scroll(+ Consts.SCROLL_SPEED_PX_SEC * _delta * 2)
-
-	if $ScrollBarVertical.scrolling() or resizing():
-		$WindowClip/WindowClipContent.position.y = $ScrollBarVertical.get_scrolled_pixel()
-
-	if $ScrollBarHorizontal.scrolling() or resizing():
-		$WindowClip/WindowClipContent.position.x = $ScrollBarHorizontal.get_scrolled_pixel()
