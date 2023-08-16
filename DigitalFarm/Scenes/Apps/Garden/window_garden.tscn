@@ -21,7 +21,6 @@ max_w = 600.0
 max_h = 400.0
 
 [node name="WindowClip" type="ScrollContainer" parent="Window"]
-clip_contents = false
 offset_right = 400.0
 offset_bottom = 250.0
 script = ExtResource("3_m4ydr")

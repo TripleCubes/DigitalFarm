@@ -69,25 +69,29 @@ position = Vector2(-70, -70)
 script = ExtResource("10_igf1o")
 
 [node name="Sprite_PotEmpty" type="Sprite2D" parent="MiniIcon"]
-position = Vector2(0, -39)
+position = Vector2(-21, -78)
 scale = Vector2(2, 2)
 texture = ExtResource("12_3v7xk")
+centered = false
 
 [node name="Sprite_PotHasSeed" type="Sprite2D" parent="MiniIcon"]
 visible = false
-position = Vector2(0, -39)
+position = Vector2(-21, -78)
 scale = Vector2(2, 2)
 texture = ExtResource("13_hr2df")
+centered = false
 
 [node name="Sprite_PotGrown" type="Sprite2D" parent="MiniIcon"]
 visible = false
-position = Vector2(0, -3)
+position = Vector2(-21, -42)
 scale = Vector2(2, 2)
 texture = ExtResource("10_igefk")
+centered = false
 offset = Vector2(0, -18)
 
 [node name="Sprite_PotDead" type="Sprite2D" parent="MiniIcon"]
 visible = false
-position = Vector2(0, -39)
+position = Vector2(-21, -78)
 scale = Vector2(2, 2)
 texture = ExtResource("11_io5cc")
+centered = false

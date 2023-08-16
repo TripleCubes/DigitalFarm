@@ -11,6 +11,13 @@ var filled: = false:
 			$Window/WateringCanFilled.hide()
 
 func _process(_delta):
+	_watering_handle()
+	_garden_handle()
+
+func _garden_handle() -> void:
+	$MiniIcon.show_mini_icon = $Window.window_dragged_into_app(App_Garden)
+
+func _watering_handle() -> void:
 	if not filled:
 		return
 		

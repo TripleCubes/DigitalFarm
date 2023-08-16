@@ -1,16 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjf0xrrf8ne3"]
+[gd_scene load_steps=7 format=3 uid="uid://cjf0xrrf8ne3"]
 
 [ext_resource type="PackedScene" uid="uid://daxbag8xh0v2q" path="res://Scenes/window.tscn" id="1_ccqyu"]
 [ext_resource type="Script" path="res://Scripts/Apps/WateringCan/window_watering_can.gd" id="1_lai28"]
 [ext_resource type="Texture2D" uid="uid://dxllmsfx0y3ru" path="res://Assets/Sprites/Apps/WateringCan/watering_can_empty.png" id="2_1u8m3"]
 [ext_resource type="Texture2D" uid="uid://y24kt2hrl6ap" path="res://Assets/Sprites/Apps/WateringCan/watering_can_filled.png" id="4_c04xu"]
+[ext_resource type="Script" path="res://Scripts/UI/Window/mini_icon.gd" id="5_ghu1c"]
+[ext_resource type="Texture2D" uid="uid://fkg0upopj7q4" path="res://Assets/Sprites/Apps/WateringCan/mini_icon.png" id="6_tcgw5"]
 
 [node name="Window_WateringCan" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_lai28")
 
 [node name="Window" parent="." instance=ExtResource("1_ccqyu")]
-w = 120.0
-h = 120.0
 
 [node name="WateringCanEmpty" type="Sprite2D" parent="Window"]
 position = Vector2(60, 60)
@@ -22,3 +23,12 @@ visible = false
 position = Vector2(60, 60)
 scale = Vector2(2, 2)
 texture = ExtResource("4_c04xu")
+
+[node name="MiniIcon" type="Node2D" parent="."]
+position = Vector2(-110, 0)
+script = ExtResource("5_ghu1c")
+
+[node name="Sprite" type="Sprite2D" parent="MiniIcon"]
+position = Vector2(0, -39)
+scale = Vector2(2, 2)
+texture = ExtResource("6_tcgw5")

@@ -32,7 +32,7 @@ func _draw():
 									texture.get_height() * 2), false)
 
 func _set_sprite_list() -> void:
-	sprite_list[App_Garden.CardType.TABLE_01X01] = preload("res://Assets/Sprites/Apps/Garden/PotSpot/table_mini.png")
+	sprite_list[App_Garden.CardType.TABLE_01X01] = preload("res://Assets/Sprites/Apps/Garden/Cards/table.png")
 
 func _set_scene_list() -> void:
 	scene_list[App_Garden.CardType.TABLE_01X01] = preload("res://Scenes/Apps/Garden/pot_spot.tscn")

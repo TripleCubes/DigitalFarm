@@ -17,10 +17,13 @@ h = 120.0
 
 [node name="Button_Content" type="Node2D" parent="."]
 script = ExtResource("2_rffpy")
+w = 120.0
+h = 120.0
 
 [node name="Button_Bar" type="Node2D" parent="."]
 position = Vector2(0, -24)
 script = ExtResource("2_rffpy")
+w = 120.0
 h = 22.0
 
 [node name="Buttons_BordersCorners" type="Node2D" parent="."]
