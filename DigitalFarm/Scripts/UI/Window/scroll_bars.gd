@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 
 @onready var window: Node2D = get_parent()

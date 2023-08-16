@@ -6,13 +6,13 @@ const DOUBLE_CLICK_DELAY_SEC: float = 0.5
 
 @export var w: float:
 	get:
-		if w == 0:
+		if texture != null:
 			return texture.get_width() * 2
 		return w
 		
 @export var h: float:
 	get:
-		if h == 0:
+		if texture != null:
 			return texture.get_height() * 2
 		return h
 

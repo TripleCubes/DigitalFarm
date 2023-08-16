@@ -15,7 +15,7 @@ signal signal_resize
 			$Button_Close.position.x = w - 19
 
 		if has_node("ScrollBars"):
-			$ScrollBars.set_element_locations()
+			$ScrollBars.set_location_and_page_length()
 
 		if has_node("CornerPixelTopRight"):
 			$CornerPixelTopRight.position.x = w - 2
@@ -31,7 +31,7 @@ signal signal_resize
 			return
 
 		if has_node("ScrollBars"):
-			$ScrollBars.set_element_locations()
+			$ScrollBars.set_location_and_page_length()
 
 		if has_node("CornerPixelBottomLeft"):
 			$CornerPixelBottomLeft.position.y = h - 2

@@ -12,23 +12,15 @@
 [node name="Window" type="Node2D" groups=["Windows"]]
 texture_filter = 1
 script = ExtResource("1_srfgk")
-w = null
-h = null
-resizable = null
-min_w = null
-min_h = null
-max_w = null
-max_h = null
+w = 120.0
+h = 120.0
 
 [node name="Button_Content" type="Node2D" parent="."]
 script = ExtResource("2_rffpy")
-w = 120.0
-h = 120.0
 
 [node name="Button_Bar" type="Node2D" parent="."]
 position = Vector2(0, -24)
 script = ExtResource("2_rffpy")
-w = 120.0
 h = 22.0
 
 [node name="Buttons_BordersCorners" type="Node2D" parent="."]
