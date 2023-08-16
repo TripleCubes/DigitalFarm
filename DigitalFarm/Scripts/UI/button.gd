@@ -88,7 +88,7 @@ func _draw():
 	if draw_background:
 		draw_rect(Rect2(0, 0, w, h), color_background, true)
 
-	if draw_debug_frame:
+	if draw_debug_frame and enabled:
 		draw_rect(Rect2(-2,             -2,             draw_w + 4, 1         ), Color("#ff0000"), true)
 		draw_rect(Rect2(-2,             draw_h + 2 - 1, draw_w + 4, 1         ), Color("#ff0000"), true)
 		draw_rect(Rect2(-2,             -2,             1,          draw_h + 4), Color("#ff0000"), true)

@@ -1,6 +1,6 @@
 extends Node2D
 
-const CARD_SPACING: float = 5
+const CARD_SPACING: float = 4
 const SELECTED_CARD_UP_OFFSET: float = 8
 const SELECTED_CARD_TWEEN_TIME: float = 0.15
 

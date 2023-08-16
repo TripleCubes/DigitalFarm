@@ -130,35 +130,14 @@ func released_on_window() -> Node2D:
 
 func enable_buttons() -> void:
 	for button in _button_list:
-		button.show()
+		button.enabled = true
 		_show_hide_resize_buttons()
-
-	$ScrollBarHorizontal.button.enabled = true
-	$ScrollBarVertical.button.enabled = true
-
-	if not $ScrollBarHorizontal.should_be_visible():
-		$ScrollBarHorizontal.button.hide()
-
-	if not $ScrollBarVertical.should_be_visible():
-		$ScrollBarVertical.button.hide()
-
-	$Button_Close.enabled = true
 
 func disable_buttons() -> void:
 	for button in _button_list:
-		button.hide()
+		button.enabled = false
 
-	$ScrollBarHorizontal.button.enabled = false
-	$ScrollBarVertical.button.enabled = false
-
-	if $ScrollBarHorizontal.should_be_visible():
-		$ScrollBarHorizontal.button.show()
-
-	if $ScrollBarVertical.should_be_visible():
-		$ScrollBarVertical.button.show()
-
-	$Button_Close.enabled = false
-	$Button_Close.show()
+	$Button_Close.enabled = true
 
 func set_button_list() -> void:
 	_button_list.clear()
@@ -297,24 +276,24 @@ func _set_init_window_sizes() -> void:
 
 func _show_hide_resize_buttons() -> void:
 	if not resizable or App_ShowAllApps.running:
-		$Button_BorderTop.visible = false
-		$Button_BorderBottom.visible = false
-		$Button_BorderLeft.visible = false
-		$Button_BorderRight.visible = false
-		$Button_CornerTopLeft.visible = false
-		$Button_CornerTopRight.visible = false
-		$Button_CornerBottomLeft.visible = false
-		$Button_CornerBottomRight.visible = false
+		$Button_BorderTop.enabled = false
+		$Button_BorderBottom.enabled = false
+		$Button_BorderLeft.enabled = false
+		$Button_BorderRight.enabled = false
+		$Button_CornerTopLeft.enabled = false
+		$Button_CornerTopRight.enabled = false
+		$Button_CornerBottomLeft.enabled = false
+		$Button_CornerBottomRight.enabled = false
 		return
 
-	$Button_BorderTop.visible = true
-	$Button_BorderBottom.visible = true
-	$Button_BorderLeft.visible = true
-	$Button_BorderRight.visible = true
-	$Button_CornerTopLeft.visible = true
-	$Button_CornerTopRight.visible = true
-	$Button_CornerBottomLeft.visible = true
-	$Button_CornerBottomRight.visible = true
+	$Button_BorderTop.enabled = true
+	$Button_BorderBottom.enabled = true
+	$Button_BorderLeft.enabled = true
+	$Button_BorderRight.enabled = true
+	$Button_CornerTopLeft.enabled = true
+	$Button_CornerTopRight.enabled = true
+	$Button_CornerBottomLeft.enabled = true
+	$Button_CornerBottomRight.enabled = true
 
 func _pressing_process() -> void:
 	if App_ShowAllApps.running:
