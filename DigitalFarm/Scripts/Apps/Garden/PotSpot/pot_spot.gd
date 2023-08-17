@@ -9,18 +9,18 @@ var contain_window: Node2D = null:
 		contain_window = val
 
 		if contain_window == null:
-			_hide_all_sprites()
+			_hide_all_pot_sprites()
 			return
 
 		match contain_window.window_wrapper.pot_status:
 			App_Pot.PotStatus.EMPTY:
-				_show_only_sprite("Sprite_PotEmpty")
+				_show_only_pot_sprite("Sprite_PotEmpty")
 			App_Pot.PotStatus.HAS_SEED:
-				_show_only_sprite("Sprite_PotHasSeed")
+				_show_only_pot_sprite("Sprite_PotHasSeed")
 			App_Pot.PotStatus.GROWN:
-				_show_only_sprite("Sprite_PotGrown")
+				_show_only_pot_sprite("Sprite_PotGrown")
 			App_Pot.PotStatus.DEAD:
-				_show_only_sprite("Sprite_PotDead")				
+				_show_only_pot_sprite("Sprite_PotDead")				
 
 var has_pot: bool:
 	get:
@@ -36,19 +36,36 @@ func _process(_delta):
 	if Engine.is_editor_hint():
 		return
 	
-	if just_pressed() and has_pot:
-		_hidden_window_wrapper_list.remove_child(contain_window.window_wrapper)
-		_window_wrapper_list.add_child(contain_window.window_wrapper)
-		contain_window.show()
-		window.throw_window_out(contain_window)
-		contain_window = null
+	_throw_window_when_pressed()
+	_bubble_need_water_handle()
 
-func _hide_all_sprites() -> void:
+func _throw_window_when_pressed() -> void:
+	if not (just_pressed() and has_pot):
+		return
+
+	_hidden_window_wrapper_list.remove_child(contain_window.window_wrapper)
+	_window_wrapper_list.add_child(contain_window.window_wrapper)
+	contain_window.show()
+	window.throw_window_out(contain_window)
+	contain_window = null
+
+func _hide_all_pot_sprites() -> void:
 	for node in $PotMini.get_children():
 		if not node is Sprite2D:
 			continue
 		node.hide()
 
-func _show_only_sprite(sprite_name: String) -> void:
-	_hide_all_sprites()
+func _show_only_pot_sprite(sprite_name: String) -> void:
+	_hide_all_pot_sprites()
 	$PotMini.get_node(sprite_name).show()
+
+func _bubble_need_water_handle() -> void:
+	if contain_window == null:
+		$Bubble_NeedWater.hide()
+		return
+
+	if not contain_window.window_wrapper.requesting_water():
+		$Bubble_NeedWater.hide()
+		return
+
+	$Bubble_NeedWater.show()

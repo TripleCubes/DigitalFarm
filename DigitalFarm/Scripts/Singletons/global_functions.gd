@@ -28,7 +28,7 @@ func windows_overllap(window1: Node2D, window2: Node2D) -> bool:
 	return box_collision_check(x1, w1, x2, w2) \
 	and box_collision_check(y1, h1, y2, h2)
 
-func cursor_inside_of_window(ignore_window: Node2D = null) -> Node2D:
+func cursor_inside_of_window_ignore(ignore_window: Node2D = null) -> Node2D:
 	var mouse_pos: = GlobalFunctions.get_mouse_pos()
 	var window_list: = get_tree().get_nodes_in_group("Windows")
 	for i in range(window_list.size() - 1, -1, -1):

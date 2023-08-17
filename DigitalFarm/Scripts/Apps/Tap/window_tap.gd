@@ -28,6 +28,9 @@ func _process(_delta):
 func _get_window_on_top_of_list() -> Array:
 	var result_arr: = []
 	for window_comp in get_tree().get_nodes_in_group("Windows"):
+		if not window_comp.is_visible_in_tree():
+			continue
+			
 		var wx = window_comp.position.x
 		var wy = window_comp.position.y
 		var self_wx = $Window.position.x

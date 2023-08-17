@@ -32,7 +32,7 @@ func _scroll_window(_delta: float):
 	if window_clip_content == null:
 		return
 
-	if GlobalFunctions.cursor_inside_of_window() == window and not App_ShowAllApps.running:
+	if GlobalFunctions.cursor_inside_of_window_ignore() == window and not App_ShowAllApps.running:
 		if Input.is_action_just_released("SCROLL_UP") and not Input.is_action_pressed("KEY_SHIFT"):
 			$ScrollBarVertical.scroll(- Consts.SCROLL_SPEED_PX_SEC * _delta)
 

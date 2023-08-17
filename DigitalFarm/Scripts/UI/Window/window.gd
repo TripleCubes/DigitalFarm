@@ -105,6 +105,9 @@ func released_on_window() -> Node2D:
 		var window_comp: Node2D = window_list[i]
 		if window_comp == self:
 			continue
+
+		if not window_comp.is_visible_in_tree():
+			continue
 			
 		if GlobalFunctions.windows_overllap(self, window_comp):
 			return window_comp
@@ -127,6 +130,12 @@ func set_button_list() -> void:
 	_button_search(self)
 
 func throw_window_out(window: Node2D) -> void:
+	var timer = get_tree().create_timer(0.01)
+	timer.timeout.connect(func():
+		_throw_window_out_after_wait(window)
+	)
+
+func _throw_window_out_after_wait(window: Node2D) -> void:
 	const THROW_PADDING: float = 20
 
 	place_on_top()
@@ -157,7 +166,7 @@ func throw_window_out(window: Node2D) -> void:
 	tween_0.tween_property(window, "position", move_to, Consts.TWEEN_TIME_SEC).set_trans(Tween.TRANS_SINE)
 
 func window_dragged_into_app(app_comp: App) -> bool:
-	var window_check = GlobalFunctions.cursor_inside_of_window(self)
+	var window_check = GlobalFunctions.cursor_inside_of_window_ignore(self)
 
 	if self.holding_bar() and window_check != null and window_check.app == app_comp:
 		return true

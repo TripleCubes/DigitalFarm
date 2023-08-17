@@ -14,9 +14,6 @@ func _process(_delta):
 	_watering_handle()
 	_garden_handle()
 
-func _garden_handle() -> void:
-	$MiniIcon.show_mini_icon = $Window.window_dragged_into_app(App_Garden)
-
 func _watering_handle() -> void:
 	if not filled:
 		return
@@ -33,3 +30,26 @@ func _watering_handle() -> void:
 
 	released_on_window.window_wrapper.water()
 	filled = false
+
+func _garden_handle() -> void:
+	if not filled:
+		return
+		
+	var window_check = GlobalFunctions.cursor_inside_of_window_ignore($Window)
+
+	if $Window.just_released() and $MiniIcon.show_mini_icon:
+		var pot_spot: = GlobalFunctions.cursor_on_drag_window_in(window_check, "pot_spot_list")
+		
+		if pot_spot == null:
+			return
+		
+		if not pot_spot.has_pot:
+			return
+
+		if not pot_spot.contain_window.window_wrapper.requesting_water():
+			return
+
+		pot_spot.contain_window.window_wrapper.water()
+		window_check.throw_window_out($Window)
+
+	$MiniIcon.show_mini_icon = $Window.window_dragged_into_app(App_Garden)
