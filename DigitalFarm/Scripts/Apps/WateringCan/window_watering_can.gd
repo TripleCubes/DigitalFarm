@@ -6,9 +6,13 @@ var filled: = false:
 		if filled:
 			$Window/WateringCanEmpty.hide()
 			$Window/WateringCanFilled.show()
+
+			_show_only_mini_sprite($MiniIcon/Sprite)
 		else:
 			$Window/WateringCanEmpty.show()
 			$Window/WateringCanFilled.hide()
+
+			_show_only_mini_sprite($MiniIcon/Sprite_NoWater)
 
 func _process(_delta):
 	_watering_handle()
@@ -31,13 +35,13 @@ func _watering_handle() -> void:
 	released_on_window.window_wrapper.water()
 	filled = false
 
-func _garden_handle() -> void:
-	if not filled:
-		return
-		
+func _garden_handle() -> void:	
 	var window_check = GlobalFunctions.cursor_inside_of_window_ignore($Window)
 
 	if $Window.just_released() and $MiniIcon.show_mini_icon:
+		if not filled:
+			return
+
 		var pot_spot: = GlobalFunctions.cursor_on_drag_window_in(window_check, "pot_spot_list")
 		
 		if pot_spot == null:
@@ -51,5 +55,14 @@ func _garden_handle() -> void:
 
 		pot_spot.contain_window.window_wrapper.water()
 		window_check.throw_window_out($Window)
+		filled = false
 
 	$MiniIcon.show_mini_icon = $Window.window_dragged_into_app(App_Garden)
+
+func _hide_all_mini_sprites() -> void:
+	for sprite in $MiniIcon.get_children():
+		sprite.hide()
+
+func _show_only_mini_sprite(sprite: Node2D) -> void:
+	_hide_all_mini_sprites()
+	sprite.show()
