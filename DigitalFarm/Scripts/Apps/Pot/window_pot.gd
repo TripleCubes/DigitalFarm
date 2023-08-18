@@ -3,6 +3,8 @@ extends WindowWrapper
 const WATER_REQUEST_TIME_SEC: float = 25
 const DEBUG_WATER_REQUEST_TIME_SEC: float = 3
 
+signal signal_pot_status_changed
+
 var _time_until_need_water_sec: float = 0
 
 func requesting_water():
@@ -20,6 +22,9 @@ func water() -> void:
 
 	$Window/ProgressBar.paused = false
 	$Window/Bubble_NeedWater.hide()
+
+func put_seed() -> void:
+	pot_status = App_Pot.PotStatus.HAS_SEED
 
 var pot_status: = App_Pot.PotStatus.EMPTY:
 	set(val):
@@ -40,6 +45,7 @@ var pot_status: = App_Pot.PotStatus.EMPTY:
 				_progress_bar_finished()
 
 		pot_status = val
+		signal_pot_status_changed.emit()
 
 func _process(_delta):
 	_pot_status_handle(_delta)

@@ -12,15 +12,8 @@ var contain_window: Node2D = null:
 			_hide_all_pot_sprites()
 			return
 
-		match contain_window.window_wrapper.pot_status:
-			App_Pot.PotStatus.EMPTY:
-				_show_only_pot_sprite("Sprite_PotEmpty")
-			App_Pot.PotStatus.HAS_SEED:
-				_show_only_pot_sprite("Sprite_PotHasSeed")
-			App_Pot.PotStatus.GROWN:
-				_show_only_pot_sprite("Sprite_PotGrown")
-			App_Pot.PotStatus.DEAD:
-				_show_only_pot_sprite("Sprite_PotDead")				
+		_set_pot_sprite()
+		contain_window.window_wrapper.signal_pot_status_changed.connect(_set_pot_sprite)
 
 var has_pot: bool:
 	get:
@@ -58,6 +51,17 @@ func _hide_all_pot_sprites() -> void:
 func _show_only_pot_sprite(sprite_name: String) -> void:
 	_hide_all_pot_sprites()
 	$PotMini.get_node(sprite_name).show()
+
+func _set_pot_sprite() -> void:
+	match contain_window.window_wrapper.pot_status:
+		App_Pot.PotStatus.EMPTY:
+			_show_only_pot_sprite("Sprite_PotEmpty")
+		App_Pot.PotStatus.HAS_SEED:
+			_show_only_pot_sprite("Sprite_PotHasSeed")
+		App_Pot.PotStatus.GROWN:
+			_show_only_pot_sprite("Sprite_PotGrown")
+		App_Pot.PotStatus.DEAD:
+			_show_only_pot_sprite("Sprite_PotDead")		
 
 func _bubble_need_water_handle() -> void:
 	if contain_window == null:
