@@ -18,6 +18,8 @@ var progress: float = 0
 var reversed: = false
 var paused: = false
 
+var connected_to: UI_ProgressBarHorizontal
+
 func _ready():
 	if length == 0:
 		length = 100
@@ -40,6 +42,9 @@ func _ready():
 
 func _draw():
 	var color_line: = Colors.COLOR_LINE_DAY
+	var color_background: = Colors.COLOR_BACKGROUND_DAY
+
+	draw_rect(Rect2(0, 2, length, 8), color_background, true)
 
 	draw_rect(Rect2(2,          0,  length - 4, 2), color_line)
 	draw_rect(Rect2(2,          10, length - 4, 2), color_line)
@@ -48,7 +53,10 @@ func _draw():
 	draw_rect(Rect2(4, 4, (length - 8) * progress, 4), color)
 
 func _process(_delta):
-	_progress_process(_delta)
+	if connected_to == null:
+		_progress_process(_delta)
+	else:
+		progress = connected_to.progress
 
 	queue_redraw()
 

@@ -10,10 +10,12 @@ var contain_window: Node2D = null:
 
 		if contain_window == null:
 			_hide_all_pot_sprites()
+			$ProgressBar.hide()
 			return
 
 		_set_pot_sprite()
 		contain_window.window_wrapper.signal_pot_status_changed.connect(_set_pot_sprite)
+		$ProgressBar.connected_to = contain_window.get_node("ProgressBar")
 
 var has_pot: bool:
 	get:
@@ -56,12 +58,19 @@ func _set_pot_sprite() -> void:
 	match contain_window.window_wrapper.pot_status:
 		App_Pot.PotStatus.EMPTY:
 			_show_only_pot_sprite("Sprite_PotEmpty")
+			$ProgressBar.hide()
+
 		App_Pot.PotStatus.HAS_SEED:
 			_show_only_pot_sprite("Sprite_PotHasSeed")
+			$ProgressBar.show()
+
 		App_Pot.PotStatus.GROWN:
 			_show_only_pot_sprite("Sprite_PotGrown")
+			$ProgressBar.hide()
+
 		App_Pot.PotStatus.DEAD:
 			_show_only_pot_sprite("Sprite_PotDead")		
+			$ProgressBar.hide()
 
 func _bubble_need_water_handle() -> void:
 	if contain_window == null:

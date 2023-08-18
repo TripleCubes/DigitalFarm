@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0nixgofbknb3"]
+[gd_scene load_steps=10 format=3 uid="uid://b0nixgofbknb3"]
 
 [ext_resource type="Script" path="res://Scripts/Apps/Garden/PotSpot/pot_spot.gd" id="1_3taro"]
 [ext_resource type="Texture2D" uid="uid://dxu0784e0u275" path="res://Assets/Sprites/Apps/Garden/PotSpot/table.png" id="3_8mtdm"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cqrjukbipxbja" path="res://Assets/Sprites/Apps/Garden/PotSpot/pot_mini_dead.png" id="6_f7dbr"]
 [ext_resource type="Script" path="res://Scripts/UI/bubble.gd" id="7_oeqby"]
 [ext_resource type="Texture2D" uid="uid://bv678n4l2fjoc" path="res://Assets/Sprites/Apps/Garden/PotSpot/mini_water_drop.png" id="8_po002"]
+[ext_resource type="Script" path="res://Scripts/UI/progress_bar_horizontal.gd" id="9_4w4dm"]
 
 [node name="PotSpot" type="Node2D"]
 texture_filter = 1
@@ -52,3 +53,15 @@ position = Vector2(25, -34)
 script = ExtResource("7_oeqby")
 init_texture = ExtResource("8_po002")
 init_dir = 2
+
+[node name="ProgressBar" type="Node2D" parent="."]
+visible = false
+position = Vector2(-2, 27)
+script = ExtResource("9_4w4dm")
+length = 40.0
+color = Color(0.415686, 0.886275, 0.352941, 1)
+fill_time_sec = 5.0
+reverse_fill_time_sec = 5.0
+init_paused = true
+debug_fill_time_sec = 5.0
+debug_reverse_fill_time_sec = 5.0
