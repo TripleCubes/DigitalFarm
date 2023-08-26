@@ -28,6 +28,8 @@ func _draw():
 		draw_w = texture.get_width() * 2
 		draw_h = texture.get_height() * 2
 
+	draw_rect(Rect2(0, 0, draw_w, draw_h), Colors.COLOR_BACKGROUND_DAY, true)
+
 	if texture != null:
 		draw_texture_rect(texture, Rect2(0, 0, draw_w, draw_h), false)
 
