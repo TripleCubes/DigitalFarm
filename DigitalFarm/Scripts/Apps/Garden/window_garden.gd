@@ -67,7 +67,7 @@ func _place_handle(mouse_pos: Vector2) -> void:
 func _place_pot_spot(pot_spot: UI_DragWindowIn) -> void:
 	pot_spot.window_clip = $Window/WindowClip
 	pot_spot.window = $Window
-	$Window/WindowClip/WindowClipContent.add_child(pot_spot)
+	$Window/WindowClip/WindowClipContent/PotSpots.add_child(pot_spot)
 	$Window.set_button_list()
 
 func _mouse_in_grid(mouse_pos: Vector2) -> bool:

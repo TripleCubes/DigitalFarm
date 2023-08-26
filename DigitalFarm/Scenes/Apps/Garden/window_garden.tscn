@@ -21,6 +21,7 @@ max_w = 600.0
 max_h = 400.0
 
 [node name="WindowClip" type="ScrollContainer" parent="Window"]
+clip_contents = false
 offset_right = 400.0
 offset_bottom = 250.0
 script = ExtResource("3_m4ydr")
@@ -36,6 +37,9 @@ script = ExtResource("5_ktjiv")
 [node name="TileSelection" type="Node2D" parent="Window/WindowClip/WindowClipContent"]
 visible = false
 script = ExtResource("4_6cjji")
+
+[node name="PotSpots" type="Node2D" parent="Window/WindowClip/WindowClipContent"]
+y_sort_enabled = true
 
 [node name="CardList" type="Node2D" parent="Window"]
 position = Vector2(8, 182)
