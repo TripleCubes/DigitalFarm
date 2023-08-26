@@ -6,6 +6,8 @@ extends UI_DragWindowIn
 
 var contain_window: Node2D = null:
 	set(val):
+		if contain_window != null:
+			contain_window.window_wrapper.signal_pot_status_changed.disconnect(_set_pot_sprite)
 		contain_window = val
 
 		if contain_window == null:
