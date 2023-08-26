@@ -88,6 +88,9 @@ func _update_prev_pos_lists() -> void:
 	_prev_icon_pos_list.clear()
 
 	for window in get_tree().get_nodes_in_group("Windows"):
+		if not window.is_visible_in_tree():
+			continue
+
 		_prev_window_pos_list.append({
 			window = window,
 			pos = Vector2(window.position.x, window.position.y),
@@ -116,6 +119,9 @@ func _move_icons_and_windows(tween: bool) -> float:
 		var max_window_h: float = 0
 		for window in get_tree().get_nodes_in_group("Windows"):
 			if window.is_queued_for_deletion():
+				continue
+
+			if not window.is_visible_in_tree():
 				continue
 				
 			if window.app != AppNames.app_list[app_name]:
@@ -173,6 +179,9 @@ func _windows_pressing_check():
 
 	for window_pos in _prev_window_pos_list:
 		if not is_instance_valid(window_pos.window):
+			continue
+
+		if not window_pos.window.is_visible_in_tree():
 			continue
 			
 		var window: Node2D = window_pos.window

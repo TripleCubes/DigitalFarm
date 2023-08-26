@@ -36,6 +36,15 @@ func _process(_delta):
 	_throw_window_when_pressed()
 	_bubble_need_water_handle()
 
+func _notification(what):
+	if what != NOTIFICATION_PREDELETE:
+		return
+
+	if contain_window == null:
+		return
+
+	contain_window.queue_free()
+
 func _throw_window_when_pressed() -> void:
 	if not (just_pressed() and has_pot):
 		return
