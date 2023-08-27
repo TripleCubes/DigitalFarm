@@ -6,9 +6,16 @@ const SELECTED_CARD_TWEEN_TIME: float = 0.15
 
 const _card_scene: PackedScene = preload("res://Scenes/Apps/Garden/card.tscn")
 
+@onready var window_wrapper: = get_parent().get_parent()
+
 var selected_card: Node2D:
 	set(val):
 		selected_card = val
+
+		if selected_card.card_type == App_Garden.CardType.REMOVE:
+			window_wrapper.disable_all_pot_spots()
+		else:
+			window_wrapper.enable_all_pot_spots()
 
 		_reposition_cards(true, SELECTED_CARD_TWEEN_TIME)
 
@@ -20,17 +27,21 @@ var selected_card: Node2D:
 var card_list: = []
 
 func _ready():
-	for i in 4:
-		var card = _card_scene.instantiate()
-		
-		card.card_list = self
-		card.window_wrapper = get_parent().get_parent()
-		card.card_type = App_Garden.CardType.TABLE_01X01
-
-		card_list.append(card)
-		add_child(card)
+	_add_card(App_Garden.CardType.TABLE_01X01)
+	_add_card(App_Garden.CardType.REMOVE)
 
 	_reposition_cards(false, Consts.TWEEN_TIME_SEC)
+
+func _add_card(card_type: App_Garden.CardType) -> void:
+	var card = _card_scene.instantiate()
+		
+	card.card_list = self
+	card.window_wrapper = get_parent().get_parent()
+	card.window = get_parent().get_parent().get_parent()
+	card.card_type = card_type
+
+	card_list.append(card)
+	add_child(card)
 
 func _reposition_cards(tween: bool, tween_time: float) -> void:
 	for i in card_list.size():

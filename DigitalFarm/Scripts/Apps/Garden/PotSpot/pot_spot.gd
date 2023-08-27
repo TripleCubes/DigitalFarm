@@ -29,6 +29,16 @@ func put_window(in_window: Node2D) -> void:
 	_window_wrapper_list.remove_child(contain_window.window_wrapper)
 	_hidden_window_wrapper_list.add_child(contain_window.window_wrapper)
 
+func throw_window() -> void:
+	if not has_pot:
+		return
+		
+	_hidden_window_wrapper_list.remove_child(contain_window.window_wrapper)
+	_window_wrapper_list.add_child(contain_window.window_wrapper)
+	contain_window.show()
+	window.throw_window_out(contain_window)
+	contain_window = null
+
 func _process(_delta):
 	if Engine.is_editor_hint():
 		return
@@ -40,20 +50,16 @@ func _notification(what):
 	if what != NOTIFICATION_PREDELETE:
 		return
 
-	if contain_window == null:
-		return
+	if contain_window != null:
+		contain_window.queue_free()
 
-	contain_window.queue_free()
+	window.remove_button(button)
 
 func _throw_window_when_pressed() -> void:
-	if not (just_pressed() and has_pot):
+	if not just_pressed():
 		return
 
-	_hidden_window_wrapper_list.remove_child(contain_window.window_wrapper)
-	_window_wrapper_list.add_child(contain_window.window_wrapper)
-	contain_window.show()
-	window.throw_window_out(contain_window)
-	contain_window = null
+	throw_window()
 
 func _hide_all_pot_sprites() -> void:
 	for node in $PotMini.get_children():

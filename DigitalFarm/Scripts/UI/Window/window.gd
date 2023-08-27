@@ -129,6 +129,12 @@ func set_button_list() -> void:
 	_button_list.clear()
 	_button_search(self)
 
+func add_button(button: UI_Button) -> void:
+	_button_list.append(button)
+
+func remove_button(button) -> void:
+	_button_list.erase(button)
+
 func throw_window_out(window: Node2D) -> void:
 	var timer = get_tree().create_timer(0.01)
 	timer.timeout.connect(func():

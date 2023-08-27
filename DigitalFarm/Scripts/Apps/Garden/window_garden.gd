@@ -14,6 +14,14 @@ const CONTENT_PATH: String = "Window/WindowClip/WindowClipContent/"
 
 var pot_spot_list: = {}
 
+func disable_all_pot_spots() -> void:
+	for pot_spot in pot_spot_list.values():
+		pot_spot.enabled = false
+
+func enable_all_pot_spots() -> void:
+	for pot_spot in pot_spot_list.values():
+		pot_spot.enabled = true
+
 func _ready():
 	$Window.signal_resize.connect(_window_resized)
 
@@ -53,22 +61,36 @@ func _place_handle(mouse_pos: Vector2) -> void:
 		return
 
 	var tile_xy: = _get_tile_xy(mouse_pos)
-	var tile_xy_pixel: = _get_tile_xy_pixel_from_tile_xy(tile_xy)
 
+	if $Window/CardList.selected_card.card_type == App_Garden.CardType.REMOVE:
+		_remove_pot_spot(tile_xy)
+		return
+
+	_place_pot_spot(tile_xy)
+
+func _place_pot_spot(tile_xy: Vector2i) -> void:
 	if pot_spot_list.has(tile_xy):
 		return
+
+	var tile_xy_pixel: = _get_tile_xy_pixel_from_tile_xy(tile_xy)
 
 	pot_spot_list[tile_xy] = $Window/CardList.selected_card.get_scene().instantiate()
 	var pot_spot = pot_spot_list[tile_xy]
 	pot_spot.position.x = tile_xy_pixel.x + TILE_W / 2 - pot_spot.w / 2
 	pot_spot.position.y = tile_xy_pixel.y + TILE_H / 2 - pot_spot.h / 2
-	_place_pot_spot(pot_spot)
 
-func _place_pot_spot(pot_spot: UI_DragWindowIn) -> void:
 	pot_spot.window_clip = $Window/WindowClip
 	pot_spot.window = $Window
 	$Window/WindowClip/WindowClipContent/PotSpots.add_child(pot_spot)
-	$Window.set_button_list()
+	$Window.add_button(pot_spot.button)
+
+func _remove_pot_spot(tile_xy: Vector2i) -> void:
+	if not pot_spot_list.has(tile_xy):
+		return
+
+	pot_spot_list[tile_xy].throw_window()
+	pot_spot_list[tile_xy].queue_free()
+	pot_spot_list.erase(tile_xy)
 
 func _mouse_in_grid(mouse_pos: Vector2) -> bool:
 	var grid_wh: = _get_grid_wh()

@@ -4,31 +4,37 @@ extends Node2D
 
 @export var w: float:
 	set(val):
-		_button.w = val
+		button.w = val
 		w = val
 @export var h: float:
 	set(val):
-		_button.h = val
+		button.h = val
 		h = val
 @export var draw_debug_frame: bool:
 	set(val):
-		_button.draw_debug_frame = val
+		button.draw_debug_frame = val
 		draw_debug_frame = val
 
 var window_clip: UI_WindowClip:
 	set(val):
-		_button.window_clip = val
+		button.window_clip = val
+
+var enabled: = true:
+	set(val):
+		button.enabled = val
+	get:
+		return button.enabled
 
 var window: Node2D
 
-var _button: = UI_Button.new()
+var button: = UI_Button.new()
 
 func hovered() -> bool:
-	return _button.hovered()
+	return button.hovered()
 
 func just_pressed() -> bool:
-	return _button.just_pressed()
+	return button.just_pressed()
 
 func _ready():
 	self.add_to_group("DragWindowIns")
-	add_child(_button)
+	add_child(button)

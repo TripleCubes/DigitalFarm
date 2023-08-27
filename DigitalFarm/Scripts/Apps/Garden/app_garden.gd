@@ -2,6 +2,7 @@ extends App
 
 enum CardType {
 	TABLE_01X01,
+	REMOVE,
 }
 
 func _ready():
