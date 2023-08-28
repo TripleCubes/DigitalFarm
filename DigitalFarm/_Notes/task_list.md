@@ -7,7 +7,7 @@
 
 - [ ] Download and delete apps
 - [ ] RAM
-- [ ] Single window app save states when closed
+- [X] Single window app save states when closed
 
 ## Ship
 
