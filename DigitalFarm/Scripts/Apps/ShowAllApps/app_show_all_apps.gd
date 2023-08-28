@@ -1,5 +1,7 @@
 extends App
 
+@onready var _window_wrapper_list: = get_node(Consts.MAIN_NODE_PATH + "WindowWrapperList")
+
 const PADDING_LEFT: float = 10
 const PADDING_RIGHT: float = 30
 const PADDING_TOP: float = 10
@@ -31,7 +33,7 @@ func run_app() -> Node2D:
 	if _running:
 		return
 
-	if get_tree().get_nodes_in_group("Windows").size() == 0:
+	if _window_wrapper_list.get_child_count() == 0:
 		return
 
 	_disable_window_buttons()
@@ -187,7 +189,7 @@ func _windows_pressing_check():
 		var window: Node2D = window_pos.window
 
 		if clicked_close.call(window):
-			window.queue_free()
+			window.close_window()
 			_move_icons_and_windows(true)
 			return
 

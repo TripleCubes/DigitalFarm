@@ -10,6 +10,7 @@ var max_num_windows: int = 999999
 
 func run_app() -> Node2D:
 	if window_wrapper_list.size() == 1 and max_num_windows == 1:
+		window_wrapper_list[0].window.put_wrapper_to_main_wrapper_list()
 		window_wrapper_list[0].window.place_on_top()
 		return
 

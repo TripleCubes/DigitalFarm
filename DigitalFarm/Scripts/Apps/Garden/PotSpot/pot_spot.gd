@@ -1,9 +1,6 @@
 @tool
 extends UI_DragWindowIn
 
-@onready var _window_wrapper_list: = get_node(Consts.MAIN_NODE_PATH + "WindowWrapperList")
-@onready var _hidden_window_wrapper_list: = get_node(Consts.MAIN_NODE_PATH + "HiddenWindowWrapperList")
-
 var contain_window: Node2D = null:
 	set(val):
 		if contain_window != null:
@@ -25,17 +22,13 @@ var has_pot: bool:
 
 func put_window(in_window: Node2D) -> void:
 	contain_window = in_window
-	contain_window.hide()
-	_window_wrapper_list.remove_child(contain_window.window_wrapper)
-	_hidden_window_wrapper_list.add_child(contain_window.window_wrapper)
+	contain_window.put_wrapper_to_hidden_wrapper_list()
 
 func throw_window() -> void:
 	if not has_pot:
 		return
 		
-	_hidden_window_wrapper_list.remove_child(contain_window.window_wrapper)
-	_window_wrapper_list.add_child(contain_window.window_wrapper)
-	contain_window.show()
+	contain_window.put_wrapper_to_main_wrapper_list()
 	window.throw_window_out(contain_window)
 	contain_window = null
 

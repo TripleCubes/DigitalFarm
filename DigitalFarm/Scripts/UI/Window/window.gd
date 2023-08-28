@@ -1,6 +1,9 @@
 @tool
 extends Node2D
 
+@onready var _window_wrapper_list: = get_node(Consts.MAIN_NODE_PATH + "WindowWrapperList")
+@onready var _hidden_window_wrapper_list: = get_node(Consts.MAIN_NODE_PATH + "HiddenWindowWrapperList")
+
 const BAR_HEIGHT: float = 24
 
 signal signal_resize
@@ -57,6 +60,29 @@ var _prev_mouse_x: float = 0
 var _prev_mouse_y: float = 0
 
 var _button_list: = []
+
+func put_wrapper_to_hidden_wrapper_list() -> void:
+	if self.window_wrapper == _hidden_window_wrapper_list:
+		return
+
+	self.hide()
+	_window_wrapper_list.remove_child(self.window_wrapper)
+	_hidden_window_wrapper_list.add_child(self.window_wrapper)
+
+func put_wrapper_to_main_wrapper_list() -> void:
+	if self.window_wrapper == _window_wrapper_list:
+		return
+
+	_hidden_window_wrapper_list.remove_child(self.window_wrapper)
+	_window_wrapper_list.add_child(self.window_wrapper)
+	self.show()
+
+func close_window() -> void:
+	if _is_single_window_app():
+		put_wrapper_to_hidden_wrapper_list()
+		return
+
+	queue_free()
 
 func interacted() -> bool:
 	for button in _button_list:
@@ -296,7 +322,7 @@ func _pressing_process() -> void:
 		_set_element_locations()
 
 	if $Button_Close.just_pressed():
-		queue_free()
+		close_window()
 
 	if interacted():
 		place_on_top()
@@ -358,3 +384,6 @@ func _move_window() -> void:
 
 		var _tween: = get_tree().create_tween()
 		_tween.tween_property(self, "position", move_to, Consts.TWEEN_TIME_SEC).set_trans(Tween.TRANS_SINE)
+
+func _is_single_window_app() -> bool:
+	return app.max_num_windows == 1
