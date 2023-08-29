@@ -49,17 +49,15 @@ func _process(_delta):
 	_move_icon()
 	_double_click_handle()
 
-	if Input.is_action_just_pressed("KEY_2"):
-		_text_bubble.show_text("This is a test This is a test This is a test This is a test This is a test This is a test This is a test")
-
 func _move_icon() -> void:
 	var mouse_pos: = GlobalFunctions.get_mouse_pos()
-	var dir: = _get_text_bubble_dir()
 
 	if $Button.pressed():
 		self.global_position.x = _prev_x + (mouse_pos.x - _prev_mouse_x)
 		self.global_position.y = _prev_y + (mouse_pos.y - _prev_mouse_y)
 
+		var dir: = _get_text_bubble_dir()
+		_text_bubble.dir = dir
 		_text_bubble.position = _get_text_bubble_pos(self.position, dir)
 
 	if $Button.just_released():
@@ -76,6 +74,8 @@ func _move_icon() -> void:
 		var _tween: = get_tree().create_tween()
 		_tween.tween_property(self, "position", move_to, Consts.TWEEN_TIME_SEC).set_trans(Tween.TRANS_SINE)
 
+		var dir: = _get_text_bubble_dir()
+		_text_bubble.dir = dir
 		var _tween_0: = get_tree().create_tween()
 		_tween_0.tween_property(_text_bubble, "position", _get_text_bubble_pos(move_to, dir), 
 									Consts.TWEEN_TIME_SEC).set_trans(Tween.TRANS_SINE)

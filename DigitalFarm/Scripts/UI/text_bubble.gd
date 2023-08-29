@@ -22,7 +22,10 @@ enum Dir {
 		max_w = val
 		queue_redraw()
 
-@export var dir: Dir
+@export var dir: Dir:
+	set(val):
+		dir = val
+		queue_redraw()
 
 var _text: = UI_Text.new()
 var _time_counter_sec: float = TIME_COUNT_MAX_SEC
