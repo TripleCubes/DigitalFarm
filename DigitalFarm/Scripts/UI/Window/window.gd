@@ -61,6 +61,9 @@ var _prev_mouse_y: float = 0
 
 var _button_list: = []
 
+func page_length_resize_handle() -> void:
+	$ScrollBars.page_length_resize_handle()
+
 func put_wrapper_to_hidden_wrapper_list() -> void:
 	if self.window_wrapper.get_parent() == _hidden_window_wrapper_list:
 		return

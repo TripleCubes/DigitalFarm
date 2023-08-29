@@ -56,7 +56,8 @@ func scrolling() -> bool:
 func should_be_visible() -> bool:
 	return _page_length - _view_length > 0
 
-func set_page_length(page_length: float, view_length: float) -> void:
+func set_page_length(page_length: float, view_length: float, page_length_resizing: bool) -> void:
+	var prev_scrolled_pixel = get_scrolled_pixel()
 	_page_length = page_length
 	_view_length = view_length
 	
@@ -68,6 +69,10 @@ func set_page_length(page_length: float, view_length: float) -> void:
 	_bar_length = view_length / page_length * length
 	button.h = _bar_length - 8
 
+	if page_length_resizing:
+		_scrolled_percentage = - prev_scrolled_pixel / (_page_length - _view_length)
+		if _scrolled_percentage > 1:
+			_scrolled_percentage = 1
 	button.position.y = _scrolled_percentage * (length - _bar_length) + 4
 
 var button: = UI_Button.new()

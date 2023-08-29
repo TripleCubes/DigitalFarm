@@ -22,11 +22,18 @@ func set_location_and_page_length() -> void:
 
 	$ScrollBarVertical.position.x = window.w - 15
 	$ScrollBarVertical.length = window.h - $ScrollBarVertical.width + 4
-	$ScrollBarVertical.set_page_length(window_clip.content_h, window.h)
+	$ScrollBarVertical.set_page_length(window_clip.content_h, window.h, false)
 
 	$ScrollBarHorizontal.position.y = window.h - 15
 	$ScrollBarHorizontal.length = window.w - $ScrollBarHorizontal.width + 4
-	$ScrollBarHorizontal.set_page_length(window_clip.content_w, window.w)
+	$ScrollBarHorizontal.set_page_length(window_clip.content_w, window.w, false)
+
+func page_length_resize_handle() -> void:
+	$ScrollBarVertical.set_page_length(window_clip.content_h, window.h, true)
+	$ScrollBarHorizontal.set_page_length(window_clip.content_w, window.w, true)
+	var tween: = get_tree().create_tween()
+	tween.tween_property(window_clip_content, "position", Vector2($ScrollBarHorizontal.get_scrolled_pixel(),
+							$ScrollBarVertical.get_scrolled_pixel()), 0.3).set_trans(Tween.TRANS_SINE)
 
 func _scroll_window(_delta: float):
 	if window_clip_content == null:

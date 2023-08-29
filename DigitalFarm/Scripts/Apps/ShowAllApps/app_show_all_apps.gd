@@ -41,7 +41,7 @@ func run_app() -> Node2D:
 	_scroll_bar.scroll_to_zero()
 	var _cursor_y = _move_icons_and_windows(true)
 	_scroll_bar.show()
-	_scroll_bar.set_page_length(_cursor_y + PADDING_BOTTOM, get_viewport().size.y)
+	_scroll_bar.set_page_length(_cursor_y + PADDING_BOTTOM, get_viewport().size.y, false)
 
 	_running = true
 

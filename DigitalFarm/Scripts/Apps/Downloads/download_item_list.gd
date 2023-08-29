@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var _window_clip: UI_WindowClip = get_parent().get_parent()
+@onready var _window: Node2D = _window_clip.get_parent()
 
 const ITEM_SPACING: float = 6
 const PADDING_TOP: float = 10
@@ -20,6 +21,9 @@ func rearrange(do_tween: bool) -> void:
 			download_item.position.y = cursor_y
 
 		cursor_y += ITEM_SPACING + download_item.h + 4
+	
+	_window_clip.content_h = cursor_y + PADDING_BOTTOM - ITEM_SPACING - 4
+	_window.page_length_resize_handle()
 
 func _ready():
 	for download_item in get_children():
