@@ -1,8 +1,8 @@
 @tool
 extends Node2D
 
-@onready var _window_wrapper_list: = get_node(Consts.MAIN_NODE_PATH + "WindowWrapperList")
-@onready var _hidden_window_wrapper_list: = get_node(Consts.MAIN_NODE_PATH + "HiddenWindowWrapperList")
+@onready var _window_wrapper_list: Node2D
+@onready var _hidden_window_wrapper_list: Node2D
 
 const BAR_HEIGHT: float = 24
 
@@ -62,7 +62,7 @@ var _prev_mouse_y: float = 0
 var _button_list: = []
 
 func put_wrapper_to_hidden_wrapper_list() -> void:
-	if self.window_wrapper == _hidden_window_wrapper_list:
+	if self.window_wrapper.get_parent() == _hidden_window_wrapper_list:
 		return
 
 	self.hide()
@@ -70,7 +70,7 @@ func put_wrapper_to_hidden_wrapper_list() -> void:
 	_hidden_window_wrapper_list.add_child(self.window_wrapper)
 
 func put_wrapper_to_main_wrapper_list() -> void:
-	if self.window_wrapper == _window_wrapper_list:
+	if self.window_wrapper.get_parent() == _window_wrapper_list:
 		return
 
 	_hidden_window_wrapper_list.remove_child(self.window_wrapper)
@@ -207,6 +207,9 @@ func window_dragged_into_app(app_comp: App) -> bool:
 
 func _ready():
 	if not Engine.is_editor_hint():
+		_window_wrapper_list = get_node(Consts.MAIN_NODE_PATH + "WindowWrapperList")
+		_hidden_window_wrapper_list = get_node(Consts.MAIN_NODE_PATH + "HiddenWindowWrapperList")
+		
 		window_wrapper = self.get_parent()
 		if window_wrapper != null:
 			app = window_wrapper.app

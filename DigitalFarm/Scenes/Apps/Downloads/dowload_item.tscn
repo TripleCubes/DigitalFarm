@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://dueax3f8b5gbg"]
+
+[ext_resource type="Script" path="res://Scripts/Apps/Downloads/download_item.gd" id="1_7n83c"]
+[ext_resource type="Script" path="res://Scripts/UI/box.gd" id="1_w0vqs"]
+[ext_resource type="Theme" uid="uid://cs0bo0uq45n3m" path="res://Themes/theme.tres" id="4_je3mm"]
+[ext_resource type="Texture2D" uid="uid://dt6rgu28o4s1o" path="res://Assets/Sprites/Icons/garden.png" id="5_4qww3"]
+[ext_resource type="Script" path="res://Scripts/UI/text.gd" id="5_52xuw"]
+[ext_resource type="Script" path="res://Scripts/UI/button.gd" id="6_w0whe"]
+[ext_resource type="Texture2D" uid="uid://jy0p530xubkx" path="res://Assets/Sprites/Apps/Downloads/download.png" id="7_m58tj"]
+[ext_resource type="Texture2D" uid="uid://ck2cyybw82l38" path="res://Assets/Sprites/Apps/Downloads/download_hovered.png" id="8_7js5v"]
+
+[node name="DownloadItem" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_7n83c")
+title = null
+
+[node name="UI_Box" type="Node2D" parent="."]
+position = Vector2(10, 10)
+script = ExtResource("1_w0vqs")
+w = 170.0
+h = 52.0
+
+[node name="Icon" type="Sprite2D" parent="UI_Box"]
+position = Vector2(6, 6)
+scale = Vector2(2, 2)
+texture = ExtResource("5_4qww3")
+centered = false
+
+[node name="Title" type="RichTextLabel" parent="UI_Box"]
+offset_left = 52.0
+offset_top = 3.0
+offset_right = 162.0
+offset_bottom = 27.0
+theme = ExtResource("4_je3mm")
+text = "Test test"
+scroll_active = false
+visible_characters_behavior = 1
+script = ExtResource("5_52xuw")
+
+[node name="DownloadButton" type="Node2D" parent="UI_Box"]
+position = Vector2(54, 30)
+script = ExtResource("6_w0whe")
+w = 14.0
+h = 14.0
+draw_frame = true
+texture = ExtResource("7_m58tj")
+hovered_texture = ExtResource("8_7js5v")

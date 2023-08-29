@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0r3w2ft5u2xh"
-path="res://.godot/imported/store.png-4b9ed8eaa6c6be5f2e2d8e9ba87d80f2.ctex"
+uid="uid://ck2cyybw82l38"
+path="res://.godot/imported/download_hovered.png-726b468356cc1eafae13344e9db2793c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Icons/store.png"
-dest_files=["res://.godot/imported/store.png-4b9ed8eaa6c6be5f2e2d8e9ba87d80f2.ctex"]
+source_file="res://Assets/Sprites/Apps/Downloads/download_hovered.png"
+dest_files=["res://.godot/imported/download_hovered.png-726b468356cc1eafae13344e9db2793c.ctex"]
 
 [params]
 

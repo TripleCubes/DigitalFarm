@@ -6,7 +6,7 @@ extends Node2D
 @onready var window_clip = window.get_node_or_null("WindowClip")
 
 func _ready():
-	if window.resizable:
+	if window_clip != null:
 		$ScrollBarVertical.show()
 		$ScrollBarHorizontal.show()
 

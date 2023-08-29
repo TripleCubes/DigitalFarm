@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctr06ga8g7bg1"]
+
+[ext_resource type="Script" path="res://Scripts/Apps/Downloads/window_downloads.gd" id="1_kqp7b"]
+[ext_resource type="PackedScene" uid="uid://daxbag8xh0v2q" path="res://Scenes/window.tscn" id="1_q06a0"]
+[ext_resource type="Script" path="res://Scripts/UI/Window/window_clip.gd" id="3_khyys"]
+[ext_resource type="Script" path="res://Scripts/Apps/Downloads/download_item_list.gd" id="4_3id44"]
+[ext_resource type="PackedScene" uid="uid://dueax3f8b5gbg" path="res://Scenes/Apps/Downloads/dowload_item.tscn" id="4_7gn2x"]
+[ext_resource type="Texture2D" uid="uid://1jd6vm0anmbn" path="res://Assets/Sprites/Icons/pot.png" id="6_5n6jp"]
+
+[node name="Window_Downloads" type="Node2D"]
+script = ExtResource("1_kqp7b")
+
+[node name="Window" parent="." instance=ExtResource("1_q06a0")]
+w = 200.0
+h = 270.0
+min_w = 100.0
+min_h = 100.0
+max_w = 400.0
+max_h = 400.0
+
+[node name="WindowClip" type="ScrollContainer" parent="Window"]
+clip_contents = false
+offset_right = 200.0
+offset_bottom = 270.0
+script = ExtResource("3_khyys")
+content_w = 200.0
+content_h = 1000.0
+
+[node name="WindowClipContent" type="Node2D" parent="Window/WindowClip"]
+
+[node name="DownloadItemList" type="Node2D" parent="Window/WindowClip/WindowClipContent"]
+script = ExtResource("4_3id44")
+
+[node name="DownloadItem" parent="Window/WindowClip/WindowClipContent/DownloadItemList" instance=ExtResource("4_7gn2x")]
+icon = ExtResource("6_5n6jp")
+title = "App 1"
+
+[node name="DownloadItem2" parent="Window/WindowClip/WindowClipContent/DownloadItemList" instance=ExtResource("4_7gn2x")]
+position = Vector2(0, 62)
+title = ""
+
+[node name="DownloadItem3" parent="Window/WindowClip/WindowClipContent/DownloadItemList" instance=ExtResource("4_7gn2x")]
+position = Vector2(0, 124)
+title = ""

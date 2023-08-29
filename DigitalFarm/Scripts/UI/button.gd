@@ -20,6 +20,7 @@ const DOUBLE_CLICK_DELAY_SEC: float = 0.5
 @export var draw_background: bool
 @export var draw_debug_frame: bool
 @export var texture: Texture2D
+@export var hovered_texture: Texture2D
 @export var z: int
 @export var window_clip: UI_WindowClip
 
@@ -74,7 +75,10 @@ func _draw():
 		draw_h = texture.get_height() * 2
 		
 	if texture != null:
-		draw_texture_rect(texture, Rect2(0, 0, draw_w, draw_h), false)
+		if hovered_texture != null and hovered():
+			draw_texture_rect(hovered_texture, Rect2(0, 0, draw_w, draw_h), false)
+		else:
+			draw_texture_rect(texture, Rect2(0, 0, draw_w, draw_h), false)
 
 	var color_line: = Colors.COLOR_LINE_DAY
 	var color_background: = Colors.COLOR_BACKGROUND_DAY

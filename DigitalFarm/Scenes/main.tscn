@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dspl26do46lds"]
+[gd_scene load_steps=11 format=3 uid="uid://dspl26do46lds"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_cppfy"]
 [ext_resource type="Texture2D" uid="uid://1jd6vm0anmbn" path="res://Assets/Sprites/Icons/pot.png" id="3_0ye52"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cfmm6rmr62gd5" path="res://Assets/Sprites/Icons/tap.png" id="5_1g4sm"]
 [ext_resource type="Texture2D" uid="uid://dla7hqbukpehg" path="res://Assets/Sprites/Icons/seed.png" id="7_iyo4b"]
 [ext_resource type="Texture2D" uid="uid://dt6rgu28o4s1o" path="res://Assets/Sprites/Icons/garden.png" id="9_xs500"]
+[ext_resource type="Texture2D" uid="uid://d0r3w2ft5u2xh" path="res://Assets/Sprites/Icons/downloads.png" id="10_b3o00"]
 
 [node name="Main" type="Node2D"]
 texture_filter = 1
@@ -49,6 +50,11 @@ texture = ExtResource("4_hxmm1")
 position = Vector2(10, 160)
 app_name = 6
 texture = ExtResource("9_xs500")
+
+[node name="Icon_Downloads" parent="IconList" instance=ExtResource("4_r5ap7")]
+position = Vector2(10, 550)
+app_name = 7
+texture = ExtResource("10_b3o00")
 
 [node name="IconBubbleList" type="Node2D" parent="."]
 

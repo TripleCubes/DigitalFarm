@@ -31,6 +31,7 @@ App_Valley="*res://Scripts/Apps/Valley/app_valley.gd"
 App_Seed="*res://Scripts/Apps/Seed/app_seed.gd"
 App_ShowAllApps="*res://Scripts/Apps/ShowAllApps/app_show_all_apps.gd"
 App_Garden="*res://Scripts/Apps/Garden/app_garden.gd"
+App_Downloads="*res://Scripts/Apps/Downloads/app_downloads.gd"
 
 [display]
 
