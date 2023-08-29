@@ -41,6 +41,15 @@ func _update(_delta) -> void:
 			if button_dict[z][i].pressed() or button_dict[z][i].hovered():
 				return
 
+func _invisible_hover_update() -> void:
+	for z_list_index in range(button_z_list.size() - 1, -1, -1):
+		var z: int = button_z_list[z_list_index]
+		for i in range(button_dict[z].size() - 1, -1, -1):
+			if button_dict[z][i].is_queued_for_deletion():
+				continue
+				
+			button_dict[z][i]._invisible_hover_check()
+
 func toggle_draw_button_debug_frame() -> void:
 	if draw_button_debug_frame_enabled:
 		for z in button_z_list:

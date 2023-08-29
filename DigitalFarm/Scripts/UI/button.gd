@@ -21,6 +21,7 @@ const DOUBLE_CLICK_DELAY_SEC: float = 0.5
 @export var draw_debug_frame: bool
 @export var texture: Texture2D
 @export var hovered_texture: Texture2D
+@export var invisible_hover_enabled: bool
 @export var z: int
 @export var window_clip: UI_WindowClip
 
@@ -33,6 +34,7 @@ var enabled: bool = true:
 		return enabled
 
 var _hovered: = false
+var _invisible_hovered = false
 var _pressed: = false
 var _just_pressed: = false
 var _just_released: = false
@@ -75,7 +77,7 @@ func _draw():
 		draw_h = texture.get_height() * 2
 		
 	if texture != null:
-		if hovered_texture != null and hovered():
+		if hovered_texture != null and (hovered() or (invisible_hover_enabled and _invisible_hovered)):
 			draw_texture_rect(hovered_texture, Rect2(0, 0, draw_w, draw_h), false)
 		else:
 			draw_texture_rect(texture, Rect2(0, 0, draw_w, draw_h), false)
@@ -115,6 +117,7 @@ func _update(_delta) -> void:
 
 func _before_update(_delta) -> void:
 	_hovered = false
+	_invisible_hovered = false
 
 	_just_released = false
 	if Input.is_action_just_released("MOUSE_LEFT"):
@@ -134,6 +137,14 @@ func _notification(what):
 		ButtonUpdater.remove_button(self)
 
 func _hover_check() -> void:
+	if _mouse_on_button():
+		_hovered = true
+
+func _invisible_hover_check():
+	if _mouse_on_button():
+		_invisible_hovered = true
+
+func _mouse_on_button() -> bool:
 	var check_w: = w
 	var check_h: = h
 	if texture != null and (w == 0 or h == 0):
@@ -159,7 +170,9 @@ func _hover_check() -> void:
 	var mx = mouse_pos.x
 	var my = mouse_pos.y
 	if mx >= x0 and my >= y0 and mx <= x1 and my <= y1:
-		_hovered = true
+		return true
+
+	return false
 
 func _pressing_check() -> void:
 	if not Input.is_action_just_pressed("MOUSE_LEFT"):

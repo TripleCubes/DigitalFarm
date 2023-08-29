@@ -6,6 +6,7 @@ func _ready():
 func _process(_delta):
 	ButtonUpdater._before_update(_delta)
 	ButtonUpdater._update(_delta)
+	ButtonUpdater._invisible_hover_update()
 
 	if Input.is_action_just_pressed("KEY_1"):
 		ButtonUpdater.toggle_draw_button_debug_frame()

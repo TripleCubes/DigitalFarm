@@ -32,13 +32,13 @@ content_h = 1000.0
 script = ExtResource("4_3id44")
 
 [node name="DownloadItem" parent="Window/WindowClip/WindowClipContent/DownloadItemList" instance=ExtResource("4_7gn2x")]
+position = Vector2(0, 10)
 icon = ExtResource("6_5n6jp")
 title = "App 1"
+more_info = "This is app 1 This is app 1 This is app 1 This is app 1 "
 
 [node name="DownloadItem2" parent="Window/WindowClip/WindowClipContent/DownloadItemList" instance=ExtResource("4_7gn2x")]
-position = Vector2(0, 62)
-title = ""
+position = Vector2(0, 70)
 
 [node name="DownloadItem3" parent="Window/WindowClip/WindowClipContent/DownloadItemList" instance=ExtResource("4_7gn2x")]
-position = Vector2(0, 124)
-title = ""
+position = Vector2(0, 130)
