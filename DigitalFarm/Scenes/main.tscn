@@ -50,6 +50,8 @@ position = Vector2(10, 160)
 app_name = 6
 texture = ExtResource("9_xs500")
 
+[node name="IconBubbleList" type="Node2D" parent="."]
+
 [node name="WindowWrapperList" type="Node2D" parent="."]
 
 [node name="HiddenWindowWrapperList" type="Node2D" parent="."]

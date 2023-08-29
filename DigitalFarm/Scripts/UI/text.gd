@@ -6,6 +6,13 @@ const CHAR_SHOW_SPEED: float = 50 # Character per sec
 
 var char_shown: float = 0;
 
+func show_text(in_text: String) -> void:
+	text = in_text
+	char_shown = 0
+
+func show_all_text() -> void:
+	char_shown = get_total_character_count()
+
 func _ready():
 	scroll_active = false
 	theme = preload("res://Themes/theme.tres")
@@ -23,7 +30,3 @@ func _process(_delta):
 		char_shown = char_count
 
 	visible_characters = int(char_shown)
-
-func show_text(in_text: String) -> void:
-	text = in_text
-	char_shown = 0
