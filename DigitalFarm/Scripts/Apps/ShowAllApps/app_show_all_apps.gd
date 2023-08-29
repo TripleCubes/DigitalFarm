@@ -171,13 +171,13 @@ func _windows_pressing_check():
 				mouse_pos.y <= window.position.y + window.h / 2
 
 	var clicked_close: = func(window: Node2D) -> bool:
-		var x: float = window.position.x + (window.w - 19) / 2
-		var y: float = window.position.y - 10
+		var x: float = window.position.x + (window.w - 19) / 2 - 2
+		var y: float = window.position.y - 10 - 2
 		return Input.is_action_just_pressed("MOUSE_LEFT") and \
 				mouse_pos.x >= x and \
 				mouse_pos.y >= y and \
-				mouse_pos.x <= x + 7 and \
-				mouse_pos.y <= y + 7
+				mouse_pos.x <= x + 7 + 4 and \
+				mouse_pos.y <= y + 7 + 4
 
 	for window_pos in _prev_window_pos_list:
 		if not is_instance_valid(window_pos.window):
