@@ -74,7 +74,7 @@ func _process(_delta):
 	if not running:
 		return
 
-	if get_tree().get_nodes_in_group("Windows").size() == 0:
+	if _window_wrapper_list.get_child_count() == 0:
 		close_app()
 		return
 
