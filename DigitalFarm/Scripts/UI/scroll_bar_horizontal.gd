@@ -75,12 +75,6 @@ func set_page_length(page_length: float, view_length: float, page_length_resizin
 			_scrolled_percentage = 1
 	button.position.x = _scrolled_percentage * (length - _bar_length) + 4
 
-	if button.position.x < 4:
-		button.position.x = 4
-
-	if button.position.x + button.w > length - 4:
-		button.position.x = length - 4 - button.w
-
 var button: = UI_Button.new()
 
 func _ready():
