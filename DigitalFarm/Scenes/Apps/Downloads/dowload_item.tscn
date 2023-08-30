@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dueax3f8b5gbg"]
+[gd_scene load_steps=15 format=3 uid="uid://dueax3f8b5gbg"]
 
 [ext_resource type="Script" path="res://Scripts/Apps/Downloads/download_item.gd" id="1_7n83c"]
 [ext_resource type="Script" path="res://Scripts/UI/box.gd" id="1_w0vqs"]
@@ -8,14 +8,17 @@
 [ext_resource type="Script" path="res://Scripts/UI/button.gd" id="6_w0whe"]
 [ext_resource type="Texture2D" uid="uid://jy0p530xubkx" path="res://Assets/Sprites/Apps/Downloads/download.png" id="7_m58tj"]
 [ext_resource type="Texture2D" uid="uid://ck2cyybw82l38" path="res://Assets/Sprites/Apps/Downloads/download_hovered.png" id="8_7js5v"]
+[ext_resource type="Texture2D" uid="uid://bbu2ll8crvcjv" path="res://Assets/Sprites/Apps/Downloads/delete.png" id="9_erw0e"]
 [ext_resource type="Texture2D" uid="uid://b8k1idm4me5lr" path="res://Assets/Sprites/Apps/Downloads/more.png" id="9_hiolf"]
 [ext_resource type="Texture2D" uid="uid://6bo06mhfiltx" path="res://Assets/Sprites/Apps/Downloads/more_hovered.png" id="10_a1v4i"]
+[ext_resource type="Texture2D" uid="uid://bbuvbyq0gndw8" path="res://Assets/Sprites/Apps/Downloads/delete_hovered.png" id="10_fsitv"]
 [ext_resource type="Texture2D" uid="uid://bmgw0tprmoscf" path="res://Assets/Sprites/Apps/Downloads/less.png" id="11_uynjd"]
 [ext_resource type="Texture2D" uid="uid://dp3uiexvhdoe3" path="res://Assets/Sprites/Apps/Downloads/less_hovered.png" id="12_ab30r"]
 
 [node name="DownloadItem" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_7n83c")
+app_name = null
 
 [node name="Box" type="Node2D" parent="."]
 position = Vector2(10, 0)
@@ -48,15 +51,17 @@ h = 14.0
 draw_frame = true
 texture = ExtResource("7_m58tj")
 hovered_texture = ExtResource("8_7js5v")
+invisible_hover_enabled = true
 
-[node name="Button_Less" type="Node2D" parent="Box"]
-position = Vector2(148, 30)
+[node name="Button_Delete" type="Node2D" parent="Box"]
+visible = false
+position = Vector2(126, 30)
 script = ExtResource("6_w0whe")
 w = 14.0
 h = 14.0
 draw_frame = true
-texture = ExtResource("11_uynjd")
-hovered_texture = ExtResource("12_ab30r")
+texture = ExtResource("9_erw0e")
+hovered_texture = ExtResource("10_fsitv")
 invisible_hover_enabled = true
 
 [node name="Button_More" type="Node2D" parent="Box"]
@@ -67,6 +72,17 @@ h = 14.0
 draw_frame = true
 texture = ExtResource("9_hiolf")
 hovered_texture = ExtResource("10_a1v4i")
+invisible_hover_enabled = true
+
+[node name="Button_Less" type="Node2D" parent="Box"]
+visible = false
+position = Vector2(148, 30)
+script = ExtResource("6_w0whe")
+w = 14.0
+h = 14.0
+draw_frame = true
+texture = ExtResource("11_uynjd")
+hovered_texture = ExtResource("12_ab30r")
 invisible_hover_enabled = true
 
 [node name="ClipContent" type="ScrollContainer" parent="Box"]

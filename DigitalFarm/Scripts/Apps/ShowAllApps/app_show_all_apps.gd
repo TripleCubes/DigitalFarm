@@ -61,8 +61,8 @@ func close_app() -> void:
 	_running = false
 
 func _ready():
-	for icon in get_node(Consts.MAIN_NODE_PATH + "IconList").get_children():
-		_initial_icon_order.append(icon)
+	for icon_comp in get_node(Consts.MAIN_NODE_PATH + "IconList").get_children():
+		_initial_icon_order.append(icon_comp)
 
 	_scroll_bar.length = get_viewport().size.y
 	_scroll_bar.width = 20
@@ -97,10 +97,14 @@ func _update_prev_pos_lists() -> void:
 			window = window,
 			pos = Vector2(window.position.x, window.position.y),
 		})
-	for icon in _initial_icon_order:
+
+	for icon_comp in _initial_icon_order:
+		if not icon_comp.is_visible_in_tree():
+			continue
+
 		_prev_icon_pos_list.append({
-			icon = icon,
-			pos = Vector2(icon.position.x, icon.position.y),
+			icon = icon_comp,
+			pos = Vector2(icon_comp.position.x, icon_comp.position.y),
 		})
 
 func _move_icons_and_windows(tween: bool) -> float:
@@ -108,16 +112,19 @@ func _move_icons_and_windows(tween: bool) -> float:
 	var _cursor_x: float = WINDOW_PADDING_LEFT
 	var _cursor_y: float = PADDING_TOP + scrolled_pixel
 
-	for icon in _initial_icon_order:
+	for icon_comp in _initial_icon_order:
+		if not icon_comp.is_visible_in_tree():
+			continue
+
 		if tween:
 			var _tween_0: = get_tree().create_tween()
-			_tween_0.tween_property(icon, "position", Vector2(PADDING_LEFT, _cursor_y), 
+			_tween_0.tween_property(icon_comp, "position", Vector2(PADDING_LEFT, _cursor_y), 
 										Consts.TWEEN_TIME_SEC).set_trans(Tween.TRANS_SINE)
 		else:
-			icon.position.x = PADDING_LEFT
-			icon.position.y = _cursor_y
+			icon_comp.position.x = PADDING_LEFT
+			icon_comp.position.y = _cursor_y
 
-		var app_name: AppNames.Name = icon.app_name
+		var app_name: AppNames.Name = icon_comp.app_name
 		var max_window_h: float = 0
 		for window in get_tree().get_nodes_in_group("Windows"):
 			if window.is_queued_for_deletion():
@@ -219,6 +226,9 @@ func _return_icons_and_windows() -> void:
 								.set_trans(Tween.TRANS_SINE)
 
 	for icon_pos in _prev_icon_pos_list:
+		if not is_instance_valid(icon_pos.icon):
+			continue
+
 		var tween: = get_tree().create_tween()
 		tween.tween_property(icon_pos.icon, "position", icon_pos.pos, Consts.TWEEN_TIME_SEC) \
 								.set_trans(Tween.TRANS_SINE)

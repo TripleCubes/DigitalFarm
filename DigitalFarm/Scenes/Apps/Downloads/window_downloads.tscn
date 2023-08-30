@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctr06ga8g7bg1"]
+[gd_scene load_steps=8 format=3 uid="uid://ctr06ga8g7bg1"]
 
 [ext_resource type="Script" path="res://Scripts/Apps/Downloads/window_downloads.gd" id="1_kqp7b"]
 [ext_resource type="PackedScene" uid="uid://daxbag8xh0v2q" path="res://Scenes/window.tscn" id="1_q06a0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Apps/Downloads/download_item_list.gd" id="4_3id44"]
 [ext_resource type="PackedScene" uid="uid://dueax3f8b5gbg" path="res://Scenes/Apps/Downloads/dowload_item.tscn" id="4_7gn2x"]
 [ext_resource type="Texture2D" uid="uid://1jd6vm0anmbn" path="res://Assets/Sprites/Icons/pot.png" id="6_5n6jp"]
+[ext_resource type="Texture2D" uid="uid://dt6rgu28o4s1o" path="res://Assets/Sprites/Icons/garden.png" id="7_36pgi"]
 
 [node name="Window_Downloads" type="Node2D"]
 script = ExtResource("1_kqp7b")
@@ -36,9 +37,15 @@ position = Vector2(0, 10)
 icon = ExtResource("6_5n6jp")
 title = "App 1"
 more_info = "This is app 1 This is app 1 This is app 1 This is app 1 "
+app_name = 0
 
 [node name="DownloadItem2" parent="Window/WindowClip/WindowClipContent/DownloadItemList" instance=ExtResource("4_7gn2x")]
 position = Vector2(0, 70)
+icon = ExtResource("7_36pgi")
+title = "Garden"
+more_info = "This is garden app"
+app_name = 6
 
 [node name="DownloadItem3" parent="Window/WindowClip/WindowClipContent/DownloadItemList" instance=ExtResource("4_7gn2x")]
 position = Vector2(0, 130)
+app_name = 0

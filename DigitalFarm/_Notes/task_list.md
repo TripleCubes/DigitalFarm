@@ -6,8 +6,11 @@
 ## Apps
 
 - [ ] Download and delete apps
+    - [X] Added
+    - [ ] Polish
 - [ ] RAM
 - [X] Single window app save states when closed
+- [ ] Notifications
 
 ## Ship
 

@@ -21,6 +21,8 @@ const _font: = preload("res://Assets/Fonts/Munro/munro.ttf")
 		more_info = val
 		$Box/ClipContent/Node2D/MoreInfo.text = more_info
 
+@export var app_name: AppNames.Name
+
 var h: float:
 	get: 
 		if expanded: 
@@ -68,8 +70,14 @@ var expanded: bool:
 
 func setup_button_window_clips(window_clip: UI_WindowClip) -> void:
 	$Box/Button_Download.window_clip = window_clip
+	$Box/Button_Delete.window_clip = window_clip
 	$Box/Button_Less.window_clip = window_clip
 	$Box/Button_More.window_clip = window_clip
+
+func _ready():
+	if AppNames.app_list[app_name].downloaded():
+		$Box/Button_Download.hide()
+		$Box/Button_Delete.show()
 
 func _process(_delta):
 	if $Box/Button_More.just_pressed():
@@ -77,3 +85,17 @@ func _process(_delta):
 
 	if $Box/Button_Less.just_pressed():
 		expanded = false
+
+	if $Box/Button_Download.just_pressed():
+		$Box/Button_Download.hide()
+		$Box/Button_Delete.show()
+
+		if app_name != null:
+			AppNames.app_list[app_name].download_app()
+
+	if $Box/Button_Delete.just_pressed():
+		$Box/Button_Download.show()
+		$Box/Button_Delete.hide()
+
+		if app_name != null:
+			AppNames.app_list[app_name].delete_app()
