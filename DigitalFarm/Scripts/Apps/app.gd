@@ -35,6 +35,7 @@ func download_app() -> void:
 	_hidden_icon_list.remove_child(icon)
 	_icon_list.add_child(icon)
 	icon.show()
+	icon.place_on_top()
 
 func delete_app() -> void:
 	if not downloaded():

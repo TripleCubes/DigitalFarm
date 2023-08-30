@@ -17,6 +17,10 @@ var _prev_mouse_y: float = 0
 
 var _text_bubble: = UI_TextBubble.new()
 
+func place_on_top() -> void:
+	move_to_front()
+	$Button.place_on_top()
+
 func _ready():
 	$Button.texture = texture
 
@@ -44,8 +48,7 @@ func _process(_delta):
 		_prev_mouse_y = mouse_pos.y
 
 	if $Button.just_pressed():
-		move_to_front()
-		$Button.place_on_top()
+		place_on_top()
 	_move_icon()
 	_double_click_handle()
 

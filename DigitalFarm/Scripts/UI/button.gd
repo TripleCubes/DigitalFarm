@@ -77,7 +77,9 @@ func _draw():
 		draw_h = texture.get_height() * 2
 		
 	if texture != null:
-		if hovered_texture != null and not App_ShowAllApps.running \
+		if not Engine.is_editor_hint() \
+		and hovered_texture != null \
+		and not App_ShowAllApps.running \
 		and (hovered() or (invisible_hover_enabled and _invisible_hovered)):
 			draw_texture_rect(hovered_texture, Rect2(0, 0, draw_w, draw_h), false)
 		else:
